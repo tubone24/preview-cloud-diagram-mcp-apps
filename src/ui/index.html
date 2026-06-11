@@ -69,7 +69,8 @@
         border: none;
         border-radius: 0;
       }
-      svg#diagram {
+      svg#diagram,
+      svg#sequence {
         display: block;
         width: 100%;
         height: auto;
@@ -191,6 +192,13 @@
       .el.selected .sel-outline {
         visibility: visible;
       }
+      /* シーケンス図: 選択中メッセージの強調 */
+      .msg.selected .msg-line {
+        stroke: var(--accent);
+      }
+      .msg.selected .mlabel text {
+        fill: var(--accent);
+      }
     </style>
   </head>
   <body>
@@ -199,7 +207,8 @@
       <div id="warnings" hidden></div>
       <div id="canvas-wrap">
         <svg id="diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 160"></svg>
-        <div id="empty">構成図のデータを待機しています…</div>
+        <svg id="sequence" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 160" hidden></svg>
+        <div id="empty">図のデータを待機しています…</div>
         <div id="streaming" hidden><span class="dot"></span>描画中…</div>
         <div id="toolbar">
           <button id="btn-svg" type="button" title="SVGをダウンロード" aria-label="SVGをダウンロード">

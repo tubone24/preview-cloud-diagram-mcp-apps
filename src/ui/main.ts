@@ -9,8 +9,16 @@ import {
   type DiagramSpec,
   type GroupKind,
 } from "../shared/diagram-spec";
+import type {
+  MessageKind,
+  SequenceEvent,
+  SequenceParticipant,
+  SequenceSpec,
+} from "../shared/sequence-spec";
 import { layoutDiagram, type DiagramLayout } from "./layout";
 import { DiagramRenderer, type SelectionInfo } from "./render";
+import { layoutSequence, type SequenceLayout } from "./sequence-layout";
+import { SequenceRenderer, type SequenceSelection } from "./sequence-render";
 
 // ---- DOM ----
 const $ = <T extends HTMLElement>(id: string): T =>
@@ -21,10 +29,40 @@ const canvasWrap = $("canvas-wrap") as HTMLDivElement;
 const emptyEl = $("empty") as HTMLDivElement;
 const streamingEl = $("streaming") as HTMLDivElement;
 const svg = document.getElementById("diagram") as unknown as SVGSVGElement;
+const seqSvg = document.getElementById("sequence") as unknown as SVGSVGElement;
 
 const renderer = new DiagramRenderer(svg);
+const seqRenderer = new SequenceRenderer(seqSvg);
 let currentLayout: DiagramLayout | null = null;
+let currentSeqLayout: SequenceLayout | null = null;
 let connected = false;
+
+// ---- 描き分け（構成図 / シーケンス図） ----
+// toolinputpartial / toolinput の params にはツール名が含まれない（arguments のみ）ため、
+// ストリーミング中は引数の形（elements か participants+events か）で判定し、
+// toolresult では structuredContent.kind で確定切替する。
+type DiagramMode = "architecture" | "sequence";
+let mode: DiagramMode = "architecture";
+
+function setMode(m: DiagramMode): void {
+  if (mode === m) return;
+  mode = m;
+  if (m === "architecture") {
+    svg.removeAttribute("hidden");
+    seqSvg.setAttribute("hidden", "");
+  } else {
+    seqSvg.removeAttribute("hidden");
+    svg.setAttribute("hidden", "");
+  }
+}
+
+function detectKind(args: Record<string, unknown>): DiagramMode | null {
+  if (Array.isArray(args.elements)) return "architecture";
+  if (Array.isArray(args.participants) || Array.isArray(args.events)) {
+    return "sequence";
+  }
+  return null;
+}
 
 // ---- バリデーション ----
 // strict=true（ストリーミング中）は配列末尾の不完全要素を弾くため
@@ -115,6 +153,105 @@ function sanitizeElements(raw: unknown, strict: boolean): DiagramElement[] {
 function sanitizeSteps(raw: unknown): string[] {
   if (!Array.isArray(raw)) return [];
   return raw.map((s) => (typeof s === "string" ? s : "")).filter((s) => s !== "");
+}
+
+// ---- シーケンス図のバリデーション ----
+// strict=true（ストリーミング中）は配列末尾の不完全要素を弾く。
+// message の from/to、note の over は（その時点で）宣言済みの participant のみ受理する。
+const MESSAGE_KINDS = new Set<string>(["sync", "async", "return", "self"]);
+const FRAGMENT_KINDS = new Set<string>(["alt", "opt", "loop", "par", "break"]);
+
+interface CleanSequence {
+  participants: SequenceParticipant[];
+  events: SequenceEvent[];
+}
+
+function sanitizeSequence(
+  rawParticipants: unknown,
+  rawEvents: unknown,
+  strict: boolean,
+): CleanSequence {
+  const participants: SequenceParticipant[] = [];
+  const ids = new Set<string>();
+  if (Array.isArray(rawParticipants)) {
+    for (const item of rawParticipants) {
+      if (typeof item !== "object" || item === null) continue;
+      const p = item as Record<string, unknown>;
+      if (
+        typeof p.id !== "string" ||
+        p.id === "" ||
+        typeof p.icon !== "string" ||
+        p.icon === "" ||
+        ids.has(p.id)
+      ) {
+        continue;
+      }
+      participants.push({
+        id: p.id,
+        icon: p.icon,
+        ...(typeof p.name === "string" && p.name !== "" ? { name: p.name } : {}),
+      });
+      ids.add(p.id);
+    }
+  }
+  const events: SequenceEvent[] = [];
+  if (Array.isArray(rawEvents)) {
+    for (const item of rawEvents) {
+      if (typeof item !== "object" || item === null) continue;
+      const e = item as Record<string, unknown>;
+      if (e.type === "message") {
+        if (
+          typeof e.from !== "string" ||
+          typeof e.to !== "string" ||
+          typeof e.label !== "string"
+        ) {
+          continue;
+        }
+        if (!ids.has(e.from) || !ids.has(e.to)) continue;
+        let kind: MessageKind | undefined;
+        if (typeof e.kind === "string") {
+          if (MESSAGE_KINDS.has(e.kind)) {
+            kind = e.kind as MessageKind;
+          } else if (strict) {
+            continue; // kind が途中までしか届いていない可能性
+          }
+        }
+        events.push({
+          type: "message",
+          from: e.from,
+          to: e.to,
+          label: e.label,
+          ...(kind ? { kind } : {}),
+          ...(typeof e.activate === "boolean" ? { activate: e.activate } : {}),
+          ...(typeof e.deactivate === "boolean" ? { deactivate: e.deactivate } : {}),
+        });
+      } else if (e.type === "fragment") {
+        if (typeof e.kind !== "string" || !FRAGMENT_KINDS.has(e.kind)) continue;
+        events.push({
+          type: "fragment",
+          kind: e.kind as "alt" | "opt" | "loop" | "par" | "break",
+          ...(typeof e.label === "string" ? { label: e.label } : {}),
+        });
+      } else if (e.type === "else") {
+        events.push({
+          type: "else",
+          ...(typeof e.label === "string" ? { label: e.label } : {}),
+        });
+      } else if (e.type === "end") {
+        events.push({ type: "end" });
+      } else if (e.type === "note") {
+        if (typeof e.text !== "string" || e.text === "" || !Array.isArray(e.over)) {
+          continue;
+        }
+        const over = e.over.filter(
+          (o): o is string => typeof o === "string" && ids.has(o),
+        );
+        if (over.length === 0) continue;
+        events.push({ type: "note", over, text: e.text });
+      }
+    }
+  }
+  return { participants, events };
 }
 
 // ---- パン/ズーム ----
@@ -215,6 +352,8 @@ class PanZoom {
 
 const panZoom = new PanZoom(svg);
 renderer.isDragClick = () => panZoom.wasDrag;
+const seqPanZoom = new PanZoom(seqSvg);
+seqRenderer.isDragClick = () => seqPanZoom.wasDrag;
 
 // ---- 描画 ----
 function renderSpec(
@@ -232,6 +371,19 @@ function renderSpec(
   renderer.render(layout);
   panZoom.setBase(layout.width, layout.height);
   svg.style.aspectRatio = `${layout.width} / ${layout.height}`;
+}
+
+function renderSequenceSpec(title: string | undefined, clean: CleanSequence): void {
+  titleEl.textContent = title ?? "";
+  titleEl.hidden = !title;
+  const hasContent = clean.participants.length > 0;
+  emptyEl.hidden = hasContent;
+  if (!hasContent) return;
+  const layout = layoutSequence(clean.participants, clean.events);
+  currentSeqLayout = layout;
+  seqRenderer.render(layout);
+  seqPanZoom.setBase(layout.width, layout.height);
+  seqSvg.style.aspectRatio = `${layout.width} / ${layout.height}`;
 }
 
 function showWarnings(warnings: string[]): void {
@@ -254,47 +406,65 @@ function applyTheme(theme: string | undefined): void {
 // ---- App ライフサイクル ----
 const app = new App({ name: "aws-diagram", version: "0.1.0" }, {});
 
-interface RawArgs {
-  title?: unknown;
-  elements?: unknown;
-  steps?: unknown;
+// 入力がDiagramSpec形（elements）なら構成図、SequenceSpec形（participants+events）なら
+// シーケンス図として描画する。どちらとも判定できない段階（titleのみ等）は何もしない
+function handleToolArgs(args: Record<string, unknown>, strict: boolean): void {
+  const kind = detectKind(args);
+  if (kind === "architecture") {
+    setMode("architecture");
+    renderSpec(
+      typeof args.title === "string" ? args.title : undefined,
+      sanitizeElements(args.elements, strict),
+      sanitizeSteps(args.steps),
+    );
+  } else if (kind === "sequence") {
+    setMode("sequence");
+    renderSequenceSpec(
+      typeof args.title === "string" ? args.title : undefined,
+      sanitizeSequence(args.participants, args.events, strict),
+    );
+  }
 }
 
 app.addEventListener("toolinputpartial", (params) => {
-  const args = params.arguments as RawArgs | undefined;
+  const args = params.arguments as Record<string, unknown> | undefined;
   if (!args) return;
   setStreaming(true);
-  renderSpec(
-    typeof args.title === "string" ? args.title : undefined,
-    sanitizeElements(args.elements, true),
-    sanitizeSteps(args.steps),
-  );
+  handleToolArgs(args, true);
 });
 
 app.addEventListener("toolinput", (params) => {
-  const args = params.arguments as RawArgs | undefined;
+  const args = params.arguments as Record<string, unknown> | undefined;
   if (!args) return;
-  renderSpec(
-    typeof args.title === "string" ? args.title : undefined,
-    sanitizeElements(args.elements, false),
-    sanitizeSteps(args.steps),
-  );
+  handleToolArgs(args, false);
 });
 
 app.addEventListener("toolresult", (params) => {
   setStreaming(false);
   const sc = params.structuredContent as
-    | { spec?: DiagramSpec; warnings?: string[] }
+    | { kind?: unknown; spec?: unknown; warnings?: unknown }
     | undefined;
-  if (sc?.spec) {
-    // サーバー正規化済み（icon はエイリアス解決済み）を最終描画とする
-    renderSpec(
-      sc.spec.title,
-      sanitizeElements(sc.spec.elements, false),
-      sanitizeSteps(sc.spec.steps),
-    );
+  if (sc?.spec && typeof sc.spec === "object") {
+    // サーバー正規化済み（icon はエイリアス解決済み）を最終描画とする。
+    // kind 未付与のホスト/旧サーバーでは spec の形から判定する
+    const spec = sc.spec as Record<string, unknown>;
+    const isSequence =
+      sc.kind === "sequence" ||
+      (sc.kind !== "architecture" && Array.isArray(spec.participants));
+    const title = typeof spec.title === "string" ? spec.title : undefined;
+    if (isSequence) {
+      setMode("sequence");
+      renderSequenceSpec(title, sanitizeSequence(spec.participants, spec.events, false));
+    } else {
+      setMode("architecture");
+      renderSpec(title, sanitizeElements(spec.elements, false), sanitizeSteps(spec.steps));
+    }
   }
-  showWarnings(Array.isArray(sc?.warnings) ? sc.warnings : []);
+  showWarnings(
+    Array.isArray(sc?.warnings)
+      ? (sc.warnings as unknown[]).filter((w): w is string => typeof w === "string")
+      : [],
+  );
 });
 
 app.addEventListener("toolcancelled", () => {
@@ -306,25 +476,52 @@ app.addEventListener("hostcontextchanged", (ctx) => {
 });
 
 // ---- 選択 → モデルコンテキスト ----
-renderer.onselect = (sel: SelectionInfo | null) => {
+function pushModelContext(text: string): void {
   if (!connected) return;
-  const text = sel
-    ? sel.name
-      ? `ユーザーは構成図の ${sel.serviceName}（${sel.name}）を選択した`
-      : `ユーザーは構成図の ${sel.serviceName} を選択した`
-    : "ユーザーは構成図の選択を解除した";
   void app
     .updateModelContext({ content: [{ type: "text", text }] })
     .catch(() => undefined);
+}
+
+renderer.onselect = (sel: SelectionInfo | null) => {
+  pushModelContext(
+    sel
+      ? sel.name
+        ? `ユーザーは構成図の ${sel.serviceName}（${sel.name}）を選択した`
+        : `ユーザーは構成図の ${sel.serviceName} を選択した`
+      : "ユーザーは構成図の選択を解除した",
+  );
+};
+
+seqRenderer.onselect = (sel: SequenceSelection | null) => {
+  pushModelContext(
+    sel
+      ? sel.kind === "lifeline"
+        ? sel.name
+          ? `ユーザーはシーケンス図の ${sel.serviceName} (${sel.name}) を選択した`
+          : `ユーザーはシーケンス図の ${sel.serviceName} を選択した`
+        : `ユーザーはシーケンス図のメッセージ「${sel.label}」を選択した`
+      : "ユーザーはシーケンス図の選択を解除した",
+  );
 };
 
 // ---- エクスポート ----
-function buildSvgString(): string | null {
+// 表示中のモード（構成図/シーケンス図）に応じたレンダラとサイズを使う
+function activeExport(): { width: number; height: number; svg: string } | null {
+  if (mode === "sequence") {
+    if (!currentSeqLayout) return null;
+    const { width, height } = currentSeqLayout;
+    return { width, height, svg: seqRenderer.exportSvgString(width, height) };
+  }
   if (!currentLayout) return null;
-  return (
-    '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    renderer.exportSvgString(currentLayout.width, currentLayout.height)
-  );
+  const { width, height } = currentLayout;
+  return { width, height, svg: renderer.exportSvgString(width, height) };
+}
+
+function buildSvgString(): string | null {
+  const exp = activeExport();
+  if (!exp) return null;
+  return '<?xml version="1.0" encoding="UTF-8"?>\n' + exp.svg;
 }
 
 function fallbackDownload(url: string, filename: string): void {
@@ -364,9 +561,10 @@ async function downloadSvg(): Promise<void> {
 }
 
 async function renderPngDataUrl(): Promise<string | null> {
-  const text = buildSvgString();
-  if (!text || !currentLayout) return null;
-  const { width, height } = currentLayout;
+  const exp = activeExport();
+  if (!exp) return null;
+  const text = '<?xml version="1.0" encoding="UTF-8"?>\n' + exp.svg;
+  const { width, height } = exp;
   const img = new Image();
   const loaded = new Promise<void>((resolve, reject) => {
     img.onload = () => resolve();
@@ -446,12 +644,14 @@ $("btn-fs").addEventListener("click", () => void toggleFullscreen());
 const DEMO_SPEC: DiagramSpec = {
   title: "3層Webアプリケーション構成",
   elements: [
-    { type: "node", id: "user", icon: "user" },
-    { type: "group", id: "cloud", kind: "aws-cloud" },
+    // 実フィードバック再現ケース: 起点サービス（Route 53）を最初に宣言しても、
+    // エッジ（user → r53）から入口の user が最左になることを確認する
     { type: "node", id: "r53", icon: "amazon-route-53", parent: "cloud" },
+    { type: "node", id: "user", icon: "user" },
     { type: "edge", from: "user", to: "r53", label: "DNS", step: 1 },
+    { type: "group", id: "cloud", kind: "aws-cloud" },
     { type: "node", id: "cf", icon: "cloudfront", parent: "cloud" },
-    { type: "edge", from: "r53", to: "cf" },
+    { type: "edge", from: "r53", to: "cf", label: "alias" },
     { type: "group", id: "vpc", kind: "vpc", label: "VPC 10.0.0.0/16", parent: "cloud" },
     { type: "node", id: "alb", icon: "alb", name: "web-alb", parent: "vpc" },
     { type: "edge", from: "cf", to: "alb", label: "HTTPS", step: 2 },
@@ -468,7 +668,9 @@ const DEMO_SPEC: DiagramSpec = {
     { type: "group", id: "priv1", kind: "private-subnet", parent: "az1" },
     { type: "node", id: "rds", icon: "rds", name: "app-db", parent: "priv1" },
     { type: "edge", from: "ec2a", to: "rds", label: "SQL", step: 3 },
-    { type: "edge", from: "ec2b", to: "rds" },
+    { type: "edge", from: "ec2b", to: "rds", label: "SQL" },
+    { type: "node", id: "s3", icon: "s3", name: "assets-bucket", parent: "cloud" },
+    { type: "edge", from: "cf", to: "s3", label: "static assets", step: 4 },
     {
       type: "note",
       id: "note1",
@@ -480,6 +682,33 @@ const DEMO_SPEC: DiagramSpec = {
     "ユーザーがRoute 53でドメイン名を解決する",
     "CloudFront経由でALBにHTTPSリクエストが届く",
     "EC2のアプリケーションがRDSに読み書きする",
+    "静的アセットはCloudFrontがS3から取得する",
+  ],
+};
+
+// シーケンス図デモ: user → ALB → ECS → DynamoDB の PutItem フロー。
+// alt フラグメント（成功/条件チェック失敗）・note・self メッセージを含む
+const DEMO_SEQ_SPEC: SequenceSpec = {
+  title: "注文APIの書き込みフロー",
+  participants: [
+    { id: "user", icon: "user" },
+    { id: "alb", icon: "alb" },
+    { id: "api", icon: "ecs", name: "order-api" },
+    { id: "db", icon: "dynamodb", name: "orders-table" },
+  ],
+  events: [
+    { type: "message", from: "user", to: "alb", label: "POST /api/orders", kind: "sync", activate: false },
+    { type: "message", from: "alb", to: "api", label: "forward request", kind: "sync" },
+    { type: "message", from: "api", to: "api", label: "validate payload", kind: "self" },
+    { type: "message", from: "api", to: "db", label: "PutItem (orders)", kind: "sync" },
+    { type: "note", over: ["db"], text: "条件付き書き込みで注文IDの重複を防止" },
+    { type: "fragment", kind: "alt", label: "書き込み成功" },
+    { type: "message", from: "db", to: "api", label: "200 OK", kind: "return" },
+    { type: "message", from: "api", to: "user", label: "201 Created", kind: "return" },
+    { type: "else", label: "条件チェック失敗" },
+    { type: "message", from: "db", to: "api", label: "ConditionalCheckFailedException", kind: "return" },
+    { type: "message", from: "api", to: "user", label: "409 Conflict", kind: "return" },
+    { type: "end" },
   ],
 };
 
@@ -504,14 +733,37 @@ async function runDemo(): Promise<void> {
   showWarnings([]);
 }
 
+async function runSeqDemo(): Promise<void> {
+  setMode("sequence");
+  setStreaming(true);
+  const { title, participants, events } = DEMO_SEQ_SPEC;
+  // ライフラインが左から順に立つ
+  for (let i = 1; i <= participants.length; i++) {
+    renderSequenceSpec(title, sanitizeSequence(participants.slice(0, i), [], true));
+    await sleep(300);
+  }
+  // イベントが上から1つずつ出現
+  for (let i = 1; i <= events.length; i++) {
+    renderSequenceSpec(
+      title,
+      sanitizeSequence(participants, events.slice(0, i), true),
+    );
+    await sleep(300);
+  }
+  setStreaming(false);
+  renderSequenceSpec(title, sanitizeSequence(participants, events, false));
+  showWarnings([]);
+}
+
 // ---- 起動 ----
+const demoParam = new URLSearchParams(location.search).get("demo");
+const isSeqDemo = demoParam === "seq";
 const isDemo =
-  new URLSearchParams(location.search).get("demo") === "1" ||
-  location.protocol === "file:";
+  isSeqDemo || demoParam === "1" || location.protocol === "file:";
 
 async function start(): Promise<void> {
   if (isDemo) {
-    void runDemo();
+    void (isSeqDemo ? runSeqDemo() : runDemo());
     return;
   }
   try {

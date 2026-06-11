@@ -1,7 +1,10 @@
 // 自動レイアウトエンジン（左→右フロー）。
 // 1. parent による包含ツリーを構築（前方参照・未到達parent・循環はルート扱いでクラッシュしない）
-// 2. edge の from→to を DAG とみなし最長経路で列番号を計算（サイクルは打ち切り）
+// 2. コンテナ単位で「兄弟DAG」（エッジ端点をそのコンテナ直下の子へ射影）を Kahn法＋最長経路で列割当。
+//    宣言順（elements の並び＝流れの順）をタイブレークに使い、エッジの向きと矛盾したらエッジ優先
 // 3. 各コンテナは直下の子を列順に横配置、同列は縦積み。グループ枠は子を内包して自動拡大
+// 4. 接続線は直交ルーティング。配置済みボックスとのAABB交差を避けて列間/行間ガターを通し、
+//    同一チャネルを通る線はオフセットして並走。ラベルは白背景＋ラベル同士の重なり回避
 import {
   GROUP_STYLES,
   type DiagramElement,
@@ -31,6 +34,16 @@ const LEGEND_LINE_H = 20;
 const FONT_LABEL = "12px Arial, sans-serif";
 const FONT_NAME = "11px Arial, sans-serif";
 
+// 同種グループ同士のエッジ（例: AZ間レプリケーション、サブネット間通信）は
+// 並列構造とみなし、列の前後関係の制約にしない（縦に揃えて積む）
+const PARALLEL_GROUP_KINDS = new Set<string>([
+  "availability-zone",
+  "public-subnet",
+  "private-subnet",
+  "security-group",
+  "auto-scaling-group",
+]);
+
 let measureCtx: CanvasRenderingContext2D | null = null;
 export function textWidth(text: string, font: string): number {
   if (!measureCtx) {
@@ -41,7 +54,7 @@ export function textWidth(text: string, font: string): number {
   return measureCtx.measureText(text).width;
 }
 
-function ellipsize(text: string, maxW: number, font: string): string {
+export function ellipsize(text: string, maxW: number, font: string): string {
   if (textWidth(text, font) <= maxW) return text;
   let t = text;
   while (t.length > 1 && textWidth(t + "…", font) > maxW) t = t.slice(0, -1);
@@ -49,7 +62,7 @@ function ellipsize(text: string, maxW: number, font: string): string {
 }
 
 /** 単語折返しで最大 maxLines 行に。あふれは末尾省略 */
-function wrapLabel(text: string, maxW: number, font: string, maxLines = 2): string[] {
+export function wrapLabel(text: string, maxW: number, font: string, maxLines = 2): string[] {
   const words = text.split(/\s+/).filter(Boolean);
   if (words.length === 0) return [];
   const lines: string[] = [];
@@ -180,46 +193,15 @@ interface NoteItem extends BaseItem {
 }
 type Item = NodeItem | GroupItem | NoteItem;
 
-function computeColumns(allIds: Set<string>, edges: EdgeElement[]): Map<string, number> {
-  // DAGの頂点はエッジの端点のみ。エッジに関与しない要素に列0を与えると
-  // グループの実効列（子の最小列）を常に0へ引きずってしまうため
-  const ids = new Set<string>();
-  for (const e of edges) {
-    if (allIds.has(e.from) && allIds.has(e.to) && e.from !== e.to) {
-      ids.add(e.from);
-      ids.add(e.to);
-    }
-  }
-  const adj = new Map<string, string[]>();
-  const indeg = new Map<string, number>();
-  for (const id of ids) {
-    adj.set(id, []);
-    indeg.set(id, 0);
-  }
-  for (const e of edges) {
-    if (!ids.has(e.from) || !ids.has(e.to) || e.from === e.to) continue;
-    adj.get(e.from)!.push(e.to);
-    indeg.set(e.to, (indeg.get(e.to) ?? 0) + 1);
-  }
-  const col = new Map<string, number>();
-  const queue: string[] = [];
-  for (const id of ids) {
-    if (indeg.get(id) === 0) {
-      col.set(id, 0);
-      queue.push(id);
-    }
-  }
-  // Kahn法 + 最長経路。サイクル内の頂点はキューに入らず打ち切り（col未設定=0扱い）
-  while (queue.length > 0) {
-    const v = queue.shift()!;
-    const cv = col.get(v) ?? 0;
-    for (const w of adj.get(v) ?? []) {
-      col.set(w, Math.max(col.get(w) ?? 0, cv + 1));
-      indeg.set(w, (indeg.get(w) ?? 1) - 1);
-      if (indeg.get(w) === 0) queue.push(w);
-    }
-  }
-  return col;
+interface Box {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+interface Pt {
+  x: number;
+  y: number;
 }
 
 export function layoutDiagram(
@@ -293,45 +275,125 @@ export function layoutDiagram(
     }
     if (!attached) roots.push(item);
   }
-  // children を出現順に整列
+  // children を出現順（宣言順）に整列
   for (const item of itemById.values()) {
     if (item.type === "group") item.children.sort((a, b) => a.order - b.order);
   }
   roots.sort((a, b) => a.order - b.order);
 
-  // 列番号（グローバル）
-  const col = computeColumns(new Set(itemById.keys()), edges);
-  const effColCache = new Map<string, number>();
-  function effCol(item: Item): number {
-    const hit = effColCache.get(item.id);
-    if (hit !== undefined) return hit;
-    effColCache.set(item.id, 0); // 再帰保険
-    // note は attachTo の対象と同じ列に寄せる
-    if (item.type === "note" && item.el.attachTo) {
-      const target = itemById.get(item.el.attachTo);
-      if (target && target !== item) {
-        const v = effCol(target);
-        effColCache.set(item.id, v);
-        return v;
+  /** item を container 直下の子（祖先）へ射影する。container の子孫でなければ null */
+  function repIn(container: GroupItem | null, item: Item): Item | null {
+    let cur: Item | null = item;
+    while (cur && cur.parentItem !== container) cur = cur.parentItem;
+    return cur;
+  }
+
+  // ---- 列割当（コンテナ単位の兄弟DAG＋宣言順タイブレーク） ----
+  function assignColumns(container: GroupItem | null, children: Item[]): Map<Item, number> {
+    const col = new Map<Item, number>();
+    if (children.length === 0) return col;
+    const childSet = new Set(children);
+
+    // エッジ端点をこのコンテナ直下の子へ射影して兄弟DAGを作る
+    const adj = new Map<Item, Item[]>();
+    const indeg = new Map<Item, number>();
+    const verts = new Set<Item>();
+    const seenPair = new Set<string>();
+    for (const e of edges) {
+      const fi = itemById.get(e.from);
+      const ti = itemById.get(e.to);
+      if (!fi || !ti || fi === ti) continue;
+      const a = repIn(container, fi);
+      const b = repIn(container, ti);
+      if (!a || !b || a === b || !childSet.has(a) || !childSet.has(b)) continue;
+      // 同種の並列グループ（AZ/サブネット等）間のエッジは列制約にしない
+      if (
+        a.type === "group" &&
+        b.type === "group" &&
+        a.el.kind === b.el.kind &&
+        PARALLEL_GROUP_KINDS.has(a.el.kind)
+      ) {
+        continue;
+      }
+      const pair = `${a.id} ${b.id}`;
+      if (seenPair.has(pair)) continue;
+      seenPair.add(pair);
+      if (!adj.has(a)) adj.set(a, []);
+      adj.get(a)!.push(b);
+      indeg.set(b, (indeg.get(b) ?? 0) + 1);
+      verts.add(a);
+      verts.add(b);
+    }
+
+    // Kahn法 + 最長経路。サイクル内の頂点はキューに入らず打ち切り（後段の宣言順フォールバック）
+    const queue: Item[] = [];
+    for (const v of verts) {
+      if ((indeg.get(v) ?? 0) === 0) {
+        col.set(v, 0);
+        queue.push(v);
       }
     }
-    const candidates: number[] = [];
-    const own = col.get(item.id);
-    if (own !== undefined) candidates.push(own);
-    if (item.type === "group") {
-      for (const c of item.children) candidates.push(effCol(c));
+    const remaining = new Map(indeg);
+    while (queue.length > 0) {
+      const v = queue.shift()!;
+      const cv = col.get(v) ?? 0;
+      for (const w of adj.get(v) ?? []) {
+        col.set(w, Math.max(col.get(w) ?? 0, cv + 1));
+        const d = (remaining.get(w) ?? 1) - 1;
+        remaining.set(w, d);
+        if (d === 0) queue.push(w);
+      }
     }
-    const v = candidates.length > 0 ? Math.min(...candidates) : 0;
-    effColCache.set(item.id, v);
-    return v;
+
+    // 宣言順タイブレーク(a): 入次数0の頂点が複数あるとき、先頭宣言だけを列0に置き、
+    // それ以外の起点は自分の到達先の直前列まで右へ寄せる
+    const sources = [...verts]
+      .filter((v) => (indeg.get(v) ?? 0) === 0)
+      .sort((a, b) => a.order - b.order);
+    for (let i = 1; i < sources.length; i++) {
+      const s = sources[i];
+      const succ = adj.get(s) ?? [];
+      if (succ.length === 0) continue;
+      const target = Math.min(...succ.map((w) => col.get(w) ?? 0)) - 1;
+      if (target > (col.get(s) ?? 0)) col.set(s, target);
+    }
+
+    // 宣言順タイブレーク(b): エッジ無関与（とサイクル打ち切り）の子は
+    // 同一コンテナ内で直前に宣言された子の隣の列へ。note の attachTo は対象に寄せる
+    let prevCol: number | null = null;
+    for (const c of children) {
+      if (col.has(c)) {
+        prevCol = col.get(c)!;
+        continue;
+      }
+      let v: number | null = null;
+      if (c.type === "note" && c.el.attachTo) {
+        const t = itemById.get(c.el.attachTo);
+        if (t && t !== c) {
+          const r = repIn(container, t);
+          if (r && r !== c && childSet.has(r) && col.has(r)) {
+            // 対象自身が兄弟なら同じ列（縦に隣接）、グループ内部なら右隣の列
+            v = r === t ? col.get(r)! : col.get(r)! + 1;
+          }
+        }
+      }
+      if (v === null) v = prevCol === null ? 0 : prevCol + 1;
+      col.set(c, v);
+      prevCol = v;
+    }
+    return col;
   }
 
   // 子要素群を列順に配置し、コンテンツサイズを返す（rel は原点0,0基準）
-  function layoutChildren(children: Item[]): { w: number; h: number } {
+  function layoutChildren(
+    container: GroupItem | null,
+    children: Item[],
+  ): { w: number; h: number } {
     if (children.length === 0) return { w: 0, h: 0 };
+    const colOf = assignColumns(container, children);
     const buckets = new Map<number, Item[]>();
     for (const c of children) {
-      const k = effCol(c);
+      const k = colOf.get(c) ?? 0;
       const arr = buckets.get(k);
       if (arr) arr.push(c);
       else buckets.set(k, [c]);
@@ -379,7 +441,7 @@ export function layoutDiagram(
       return;
     }
     for (const c of item.children) sizeItem(c);
-    const content = layoutChildren(item.children);
+    const content = layoutChildren(item, item.children);
     const style = GROUP_STYLES[item.el.kind] ?? GROUP_STYLES.generic;
     const label = item.el.label ?? style.label;
     const headerW = (style.iconId ? 32 : 10) + textWidth(label, FONT_LABEL) + 12;
@@ -400,7 +462,7 @@ export function layoutDiagram(
   }
 
   for (const r of roots) sizeItem(r);
-  const rootContent = layoutChildren(roots);
+  const rootContent = layoutChildren(null, roots);
   const contentW = Math.ceil(rootContent.w + ROOT_MARGIN * 2);
   let height = Math.max(160, Math.ceil(rootContent.h + ROOT_MARGIN * 2));
 
@@ -417,7 +479,7 @@ export function layoutDiagram(
     );
     height += legendEntries.length * LEGEND_LINE_H + ROOT_MARGIN;
   }
-  const width = Math.max(280, contentW, legendW);
+  let width = Math.max(280, contentW, legendW);
 
   // 絶対座標 + グループ深さ
   function absPass(item: Item, px: number, py: number, depth: number): void {
@@ -431,11 +493,8 @@ export function layoutDiagram(
   for (const r of roots) absPass(r, ROOT_MARGIN, ROOT_MARGIN, 0);
 
   // ---- 接続線ルーティング（直交、AWS公式ルール: 黒1.25px・直線と直角のみ） ----
-  interface Box {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
+  function fullBox(item: Item): Box {
+    return { x: item.absX, y: item.absY, w: item.w, h: item.h };
   }
   function anchorBox(item: Item): Box {
     if (item.type === "node") {
@@ -447,72 +506,450 @@ export function layoutDiagram(
         h: ICON_SIZE,
       };
     }
-    return { x: item.absX, y: item.absY, w: item.w, h: item.h };
+    return fullBox(item);
   }
-
-  function route(a: Box, b: Box): Array<{ x: number; y: number }> {
-    const ay = a.y + a.h / 2;
-    const by = b.y + b.h / 2;
-    const sx = a.x + a.w;
-    if (b.x >= sx + 12) {
-      // 通常の左→右
-      if (Math.abs(ay - by) < 6) {
-        // 同一行は素直に水平線
-        return [
-          { x: sx, y: ay },
-          { x: b.x, y: ay },
-        ];
-      }
-      const mx = (sx + b.x) / 2;
-      return [
-        { x: sx, y: ay },
-        { x: mx, y: ay },
-        { x: mx, y: by },
-        { x: b.x, y: by },
-      ];
+  function ancestorsOf(item: Item): Set<Item> {
+    const s = new Set<Item>();
+    let cur = item.parentItem;
+    while (cur) {
+      s.add(cur);
+      cur = cur.parentItem;
     }
-    // 逆方向/重なり: 下を迂回する直交ループ
-    const detourY = Math.max(a.y + a.h, b.y + b.h) + 24;
-    return [
-      { x: sx, y: ay },
-      { x: sx + 16, y: ay },
-      { x: sx + 16, y: detourY },
-      { x: b.x - 16, y: detourY },
-      { x: b.x - 16, y: by },
-      { x: b.x, y: by },
-    ];
+    return s;
   }
 
-  const edgeLayouts: EdgeLayout[] = [];
+  const OBSTACLE_PAD = 3;
+  function segHitsBox(a: Pt, b: Pt, box: Box): boolean {
+    const lx = Math.min(a.x, b.x);
+    const hx = Math.max(a.x, b.x);
+    const ly = Math.min(a.y, b.y);
+    const hy = Math.max(a.y, b.y);
+    return (
+      hx > box.x - OBSTACLE_PAD &&
+      lx < box.x + box.w + OBSTACLE_PAD &&
+      hy > box.y - OBSTACLE_PAD &&
+      ly < box.y + box.h + OBSTACLE_PAD
+    );
+  }
+  function pathClear(pts: Pt[], obstacles: Box[]): boolean {
+    for (let i = 0; i < pts.length - 1; i++) {
+      for (const ob of obstacles) {
+        if (segHitsBox(pts[i], pts[i + 1], ob)) return false;
+      }
+    }
+    return true;
+  }
+
+  // 使用済みチャネル。同一直線上の完全重なり（4px未満の並走）を弾いてオフセットさせる
+  const usedV: Array<{ x: number; y0: number; y1: number }> = [];
+  const usedH: Array<{ y: number; x0: number; x1: number }> = [];
+  function channelConflict(pts: Pt[]): boolean {
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p = pts[i];
+      const q = pts[i + 1];
+      if (p.x === q.x && p.y !== q.y) {
+        const y0 = Math.min(p.y, q.y);
+        const y1 = Math.max(p.y, q.y);
+        for (const u of usedV) {
+          if (Math.abs(u.x - p.x) < 4 && Math.min(y1, u.y1) - Math.max(y0, u.y0) > 2) {
+            return true;
+          }
+        }
+      } else if (p.y === q.y && p.x !== q.x) {
+        const x0 = Math.min(p.x, q.x);
+        const x1 = Math.max(p.x, q.x);
+        for (const u of usedH) {
+          if (Math.abs(u.y - p.y) < 4 && Math.min(x1, u.x1) - Math.max(x0, u.x0) > 2) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+  function registerPath(pts: Pt[]): void {
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p = pts[i];
+      const q = pts[i + 1];
+      if (p.x === q.x && p.y !== q.y) {
+        usedV.push({ x: p.x, y0: Math.min(p.y, q.y), y1: Math.max(p.y, q.y) });
+      } else if (p.y === q.y && p.x !== q.x) {
+        usedH.push({ y: p.y, x0: Math.min(p.x, q.x), x1: Math.max(p.x, q.x) });
+      }
+    }
+  }
+
+  /** 区間 (lo, hi) の中央から外側へ向けて 8px 刻みで候補値を返す */
+  function* spread(lo: number, hi: number): Generator<number> {
+    if (hi <= lo) return;
+    const mid = (lo + hi) / 2;
+    yield mid;
+    for (let d = 8; d <= (hi - lo) / 2; d += 8) {
+      yield mid - d;
+      yield mid + d;
+    }
+  }
+
+  type Side = "left" | "right" | "top" | "bottom";
+  interface Pending {
+    e: EdgeElement;
+    idx: number;
+    aB: Box;
+    bB: Box;
+    mode: "R" | "L" | "D" | "U" | "loop";
+    aSide: Side;
+    bSide: Side;
+    start: Pt;
+    end: Pt;
+    obstacles: Box[];
+  }
+
+  const pendings: Pending[] = [];
   edges.forEach((e, i) => {
     const from = itemById.get(e.from);
     const to = itemById.get(e.to);
     if (!from || !to || from === to) return;
-    const points = route(anchorBox(from), anchorBox(to));
-    // ラベル位置: 最長の水平セグメントの中点
-    let best = 0;
-    let bestLen = -1;
-    for (let s = 0; s < points.length - 1; s++) {
-      if (points[s].y === points[s + 1].y) {
-        const len = Math.abs(points[s + 1].x - points[s].x);
-        if (len > bestLen) {
-          bestLen = len;
-          best = s;
+    const aB = anchorBox(from);
+    const bB = anchorBox(to);
+    let mode: Pending["mode"];
+    let aSide: Side;
+    let bSide: Side;
+    if (bB.x >= aB.x + aB.w + 24) {
+      mode = "R";
+      aSide = "right";
+      bSide = "left";
+    } else if (aB.x >= bB.x + bB.w + 24) {
+      mode = "L";
+      aSide = "left";
+      bSide = "right";
+    } else if (bB.y >= aB.y + aB.h + 16) {
+      mode = "D";
+      aSide = "bottom";
+      bSide = "top";
+    } else if (aB.y >= bB.y + bB.h + 16) {
+      mode = "U";
+      aSide = "top";
+      bSide = "bottom";
+    } else {
+      mode = "loop";
+      aSide = "right";
+      bSide = "left";
+    }
+    // 障害物 = 端点と（境界をまたぐ必要のある）祖先グループを除く全配置済みボックス
+    const exclude = new Set<Item>([from, to]);
+    for (const a of ancestorsOf(from)) exclude.add(a);
+    for (const a of ancestorsOf(to)) exclude.add(a);
+    const obstacles: Box[] = [];
+    for (const it of itemById.values()) {
+      if (!exclude.has(it)) obstacles.push(fullBox(it));
+    }
+    pendings.push({
+      e,
+      idx: i,
+      aB,
+      bB,
+      mode,
+      aSide,
+      bSide,
+      start: { x: 0, y: 0 },
+      end: { x: 0, y: 0 },
+      obstacles,
+    });
+  });
+
+  // 同じ辺に複数エッジが付く場合は辺上で等間隔に分散（矢じりがアイコン中央へ集中しない）
+  function sidePoint(b: Box, side: Side, t: number): Pt {
+    switch (side) {
+      case "right":
+        return { x: b.x + b.w, y: b.y + b.h * t };
+      case "left":
+        return { x: b.x, y: b.y + b.h * t };
+      case "bottom":
+        return { x: b.x + b.w * t, y: b.y + b.h };
+      default:
+        return { x: b.x + b.w * t, y: b.y };
+    }
+  }
+  const sideUsers = new Map<string, Array<{ p: Pending; which: "a" | "b"; key: number }>>();
+  for (const p of pendings) {
+    const entries: Array<[string, "a" | "b", Side, Box]> = [
+      [`${p.e.from}/${p.aSide}`, "a", p.aSide, p.bB],
+      [`${p.e.to}/${p.bSide}`, "b", p.bSide, p.aB],
+    ];
+    for (const [k, which, side, other] of entries) {
+      const key =
+        side === "left" || side === "right" ? other.y + other.h / 2 : other.x + other.w / 2;
+      let arr = sideUsers.get(k);
+      if (!arr) {
+        arr = [];
+        sideUsers.set(k, arr);
+      }
+      arr.push({ p, which, key });
+    }
+  }
+  for (const [k, arr] of sideUsers) {
+    arr.sort((u, v) => u.key - v.key || u.p.idx - v.p.idx);
+    const side = k.slice(k.lastIndexOf("/") + 1) as Side;
+    arr.forEach((entry, i) => {
+      const t = (i + 1) / (arr.length + 1);
+      const box = entry.which === "a" ? entry.p.aB : entry.p.bB;
+      const pt = sidePoint(box, side, t);
+      if (entry.which === "a") entry.p.start = pt;
+      else entry.p.end = pt;
+    });
+  }
+
+  // 各モードのルート探索: 直線 → Z字（ガター垂直/水平チャネル） → 5セグメント迂回 → 妥協Z
+  function routeRight(p: Pending): Pt[] {
+    const { start, end, obstacles } = p;
+    if (Math.abs(start.y - end.y) < 6) {
+      const yy = (start.y + end.y) / 2;
+      const pts = [
+        { x: start.x, y: yy },
+        { x: end.x, y: yy },
+      ];
+      if (pathClear(pts, obstacles) && !channelConflict(pts)) return pts;
+    }
+    let fallback: Pt[] | null = null;
+    for (const mx of spread(start.x + 8, end.x - 8)) {
+      const pts = [start, { x: mx, y: start.y }, { x: mx, y: end.y }, end];
+      if (!pathClear(pts, obstacles)) continue;
+      if (!channelConflict(pts)) return pts;
+      fallback ??= pts;
+    }
+    const top = Math.min(p.aB.y, p.bB.y);
+    const bot = Math.max(p.aB.y + p.aB.h, p.bB.y + p.bB.h);
+    for (const cy of [bot + 20, top - 20, bot + 44, top - 44, bot + 68, top - 68]) {
+      if (cy < 8) continue;
+      for (const d of [12, 24, 36]) {
+        const pts = [
+          start,
+          { x: start.x + d, y: start.y },
+          { x: start.x + d, y: cy },
+          { x: end.x - d, y: cy },
+          { x: end.x - d, y: end.y },
+          end,
+        ];
+        if (!pathClear(pts, obstacles)) continue;
+        if (!channelConflict(pts)) return pts;
+        fallback ??= pts;
+      }
+    }
+    const mx = (start.x + end.x) / 2;
+    return fallback ?? [start, { x: mx, y: start.y }, { x: mx, y: end.y }, end];
+  }
+
+  function routeLeft(p: Pending): Pt[] {
+    const { start, end, obstacles } = p;
+    if (Math.abs(start.y - end.y) < 6) {
+      const yy = (start.y + end.y) / 2;
+      const pts = [
+        { x: start.x, y: yy },
+        { x: end.x, y: yy },
+      ];
+      if (pathClear(pts, obstacles) && !channelConflict(pts)) return pts;
+    }
+    let fallback: Pt[] | null = null;
+    for (const mx of spread(end.x + 8, start.x - 8)) {
+      const pts = [start, { x: mx, y: start.y }, { x: mx, y: end.y }, end];
+      if (!pathClear(pts, obstacles)) continue;
+      if (!channelConflict(pts)) return pts;
+      fallback ??= pts;
+    }
+    const top = Math.min(p.aB.y, p.bB.y);
+    const bot = Math.max(p.aB.y + p.aB.h, p.bB.y + p.bB.h);
+    for (const cy of [bot + 20, top - 20, bot + 44, top - 44, bot + 68, top - 68]) {
+      if (cy < 8) continue;
+      for (const d of [12, 24, 36]) {
+        const pts = [
+          start,
+          { x: start.x - d, y: start.y },
+          { x: start.x - d, y: cy },
+          { x: end.x + d, y: cy },
+          { x: end.x + d, y: end.y },
+          end,
+        ];
+        if (!pathClear(pts, obstacles)) continue;
+        if (!channelConflict(pts)) return pts;
+        fallback ??= pts;
+      }
+    }
+    const mx = (start.x + end.x) / 2;
+    return fallback ?? [start, { x: mx, y: start.y }, { x: mx, y: end.y }, end];
+  }
+
+  function routeVertical(p: Pending, down: boolean): Pt[] {
+    const { start, end, obstacles } = p;
+    if (Math.abs(start.x - end.x) < 6) {
+      const xx = (start.x + end.x) / 2;
+      const pts = [
+        { x: xx, y: start.y },
+        { x: xx, y: end.y },
+      ];
+      if (pathClear(pts, obstacles) && !channelConflict(pts)) return pts;
+    }
+    let fallback: Pt[] | null = null;
+    const lo = down ? start.y + 8 : end.y + 8;
+    const hi = down ? end.y - 8 : start.y - 8;
+    for (const my of spread(lo, hi)) {
+      const pts = [start, { x: start.x, y: my }, { x: end.x, y: my }, end];
+      if (!pathClear(pts, obstacles)) continue;
+      if (!channelConflict(pts)) return pts;
+      fallback ??= pts;
+    }
+    const left = Math.min(p.aB.x, p.bB.x);
+    const right = Math.max(p.aB.x + p.aB.w, p.bB.x + p.bB.w);
+    const sgn = down ? 1 : -1;
+    for (const cx of [right + 20, left - 20, right + 44, left - 44]) {
+      if (cx < 8) continue;
+      for (const d of [12, 24, 36]) {
+        const pts = [
+          start,
+          { x: start.x, y: start.y + sgn * d },
+          { x: cx, y: start.y + sgn * d },
+          { x: cx, y: end.y - sgn * d },
+          { x: end.x, y: end.y - sgn * d },
+          end,
+        ];
+        if (!pathClear(pts, obstacles)) continue;
+        if (!channelConflict(pts)) return pts;
+        fallback ??= pts;
+      }
+    }
+    const my = (start.y + end.y) / 2;
+    return fallback ?? [start, { x: start.x, y: my }, { x: end.x, y: my }, end];
+  }
+
+  function routeLoop(p: Pending): Pt[] {
+    const { start, end, obstacles } = p;
+    let fallback: Pt[] | null = null;
+    const bot = Math.max(p.aB.y + p.aB.h, p.bB.y + p.bB.h);
+    for (const k of [24, 36, 48, 60, 72]) {
+      for (const d of [16, 28, 40]) {
+        const pts = [
+          start,
+          { x: start.x + d, y: start.y },
+          { x: start.x + d, y: bot + k },
+          { x: end.x - d, y: bot + k },
+          { x: end.x - d, y: end.y },
+          end,
+        ];
+        fallback ??= pts;
+        if (!pathClear(pts, obstacles)) continue;
+        if (!channelConflict(pts)) return pts;
+      }
+    }
+    return fallback!;
+  }
+
+  // ---- ラベル配置（白背景の重なり回避: 線に沿って位置をずらす） ----
+  const labelBoxes: Box[] = [];
+  function placeLabel(
+    points: Pt[],
+    label: string | null,
+    step: number | null,
+  ): { labelX: number; labelY: number } {
+    // 最長の水平セグメント（なければ最長の垂直セグメント）の中点が基準
+    let segI = 0;
+    let segLen = -1;
+    let horizontal = true;
+    for (let i = 0; i < points.length - 1; i++) {
+      if (points[i].y === points[i + 1].y) {
+        const len = Math.abs(points[i + 1].x - points[i].x);
+        if (len > segLen) {
+          segLen = len;
+          segI = i;
+          horizontal = true;
         }
       }
     }
-    const labelX = (points[best].x + points[best + 1].x) / 2;
-    const labelY = (points[best].y + points[best + 1].y) / 2;
+    if (segLen < 0) {
+      for (let i = 0; i < points.length - 1; i++) {
+        const len = Math.abs(points[i + 1].y - points[i].y);
+        if (len > segLen) {
+          segLen = len;
+          segI = i;
+          horizontal = false;
+        }
+      }
+    }
+    const p0 = points[segI];
+    const p1 = points[Math.min(segI + 1, points.length - 1)];
+    const baseX = (p0.x + p1.x) / 2;
+    const baseY = (p0.y + p1.y) / 2;
+    if (!label && step === null) return { labelX: baseX, labelY: baseY };
+
+    const lw = label ? textWidth(label, FONT_NAME) + 8 : 0;
+    const mkBox = (cx: number, cy: number): Box =>
+      label
+        ? { x: cx - lw / 2 - (step !== null ? 28 : 0), y: cy - 9, w: lw + (step !== null ? 28 : 0), h: 18 }
+        : { x: cx - 9, y: cy - 9, w: 18, h: 18 };
+    const overlaps = (b: Box): boolean =>
+      labelBoxes.some(
+        (o) =>
+          b.x < o.x + o.w + 2 &&
+          b.x + b.w > o.x - 2 &&
+          b.y < o.y + o.h + 2 &&
+          b.y + b.h > o.y - 2,
+      );
+    const lo = horizontal ? Math.min(p0.x, p1.x) : Math.min(p0.y, p1.y);
+    const hi = horizontal ? Math.max(p0.x, p1.x) : Math.max(p0.y, p1.y);
+    for (const off of [0, 14, -14, 28, -28, 42, -42]) {
+      const c = (horizontal ? baseX : baseY) + off;
+      if (off !== 0 && (c < lo + 8 || c > hi - 8)) continue;
+      const cx = horizontal ? c : baseX;
+      const cy = horizontal ? baseY : c;
+      const b = mkBox(cx, cy);
+      if (!overlaps(b)) {
+        labelBoxes.push(b);
+        return { labelX: cx, labelY: cy };
+      }
+    }
+    labelBoxes.push(mkBox(baseX, baseY));
+    return { labelX: baseX, labelY: baseY };
+  }
+
+  const edgeLayouts: EdgeLayout[] = [];
+  for (const p of pendings) {
+    let points: Pt[];
+    switch (p.mode) {
+      case "R":
+        points = routeRight(p);
+        break;
+      case "L":
+        points = routeLeft(p);
+        break;
+      case "D":
+        points = routeVertical(p, true);
+        break;
+      case "U":
+        points = routeVertical(p, false);
+        break;
+      default:
+        points = routeLoop(p);
+    }
+    registerPath(points);
+    const e = p.e;
+    const step = typeof e.step === "number" && e.step >= 1 ? Math.floor(e.step) : null;
+    const { labelX, labelY } = placeLabel(points, e.label ?? null, step);
     edgeLayouts.push({
-      key: e.id ?? `${e.from}->${e.to}#${i}`,
+      key: e.id ?? `${e.from}->${e.to}#${p.idx}`,
       points,
       label: e.label ?? null,
       direction: e.direction ?? "forward",
-      step: typeof e.step === "number" && e.step >= 1 ? Math.floor(e.step) : null,
+      step,
       labelX,
       labelY,
     });
-  });
+  }
+
+  // 迂回ルートがコンテンツ枠の外を通る場合はキャンバスを広げる
+  for (const el of edgeLayouts) {
+    for (const pt of el.points) {
+      width = Math.max(width, Math.ceil(pt.x) + 8);
+      height = Math.max(height, Math.ceil(pt.y) + 8);
+    }
+  }
 
   const nodes: NodeLayout[] = [];
   const groups: GroupLayout[] = [];

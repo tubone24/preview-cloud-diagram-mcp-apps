@@ -48,11 +48,13 @@ export class DiagramRenderer {
   private readonly gEdges: SVGGElement;
   private readonly gNodes: SVGGElement;
   private readonly gNotes: SVGGElement;
+  private readonly gEdgeLabels: SVGGElement;
   private readonly gLegend: SVGGElement;
   private readonly groupEls = new Map<string, KeyedEl>();
   private readonly nodeEls = new Map<string, KeyedEl>();
   private readonly noteEls = new Map<string, KeyedEl>();
   private readonly edgeEls = new Map<string, SVGGElement>();
+  private readonly edgeLabelEls = new Map<string, SVGGElement>();
   private selectedId: string | null = null;
   /** 選択変更コールバック（null = 選択解除） */
   onselect: ((sel: SelectionInfo | null) => void) | null = null;
@@ -74,12 +76,15 @@ export class DiagramRenderer {
     this.gEdges = svgEl("g", { class: "layer-edges" });
     this.gNodes = svgEl("g", { class: "layer-nodes" });
     this.gNotes = svgEl("g", { class: "layer-notes" });
+    // エッジラベル/番号は全エッジ・ノードより後（最前面）に描き、白背景で可読性を保つ
+    this.gEdgeLabels = svgEl("g", { class: "layer-edge-labels" });
     this.gLegend = svgEl("g", { class: "layer-legend" });
     // workers-types の HTMLRewriter Element と DOM の append が衝突するため appendChild を使う
     svg.appendChild(this.gGroups);
     svg.appendChild(this.gEdges);
     svg.appendChild(this.gNodes);
     svg.appendChild(this.gNotes);
+    svg.appendChild(this.gEdgeLabels);
     svg.appendChild(this.gLegend);
     svg.addEventListener("click", (ev) => {
       if (ev.target === svg && !this.isDragClick?.()) this.select(null, null);
@@ -499,48 +504,65 @@ export class DiagramRenderer {
       if (el.direction === "both") path.setAttribute("marker-start", "url(#arrow-open)");
       else path.removeAttribute("marker-start");
 
-      // 番号コールアウト（線の中点）。ラベル併用時はバッジをラベル左に置く
-      g.querySelector(".step-badge")?.remove();
-      if (el.step !== null) {
-        const lw = el.label ? textWidth(el.label, "11px Arial, sans-serif") + 8 : 0;
-        const badgeX = el.label ? el.labelX - lw / 2 - 14 : el.labelX;
-        g.appendChild(DiagramRenderer.stepBadge(badgeX, el.labelY, el.step));
-      }
-
-      let labelG = g.querySelector<SVGGElement>(".elabel");
-      if (el.label) {
-        if (!labelG) {
-          labelG = svgEl("g", { class: "elabel" });
-          labelG.appendChild(svgEl("rect", { fill: "#FFFFFF" }));
-          const t = svgEl("text", {
-            "text-anchor": "middle",
-            "font-family": "Arial, sans-serif",
-            "font-size": "11",
-            fill: "#16191F",
-            "dominant-baseline": "central",
-          });
-          labelG.appendChild(t);
-          g.appendChild(labelG);
+      // ラベルと番号コールアウトは最前面レイヤー（gEdgeLabels）に描く
+      let lg = this.edgeLabelEls.get(el.key);
+      if (el.label || el.step !== null) {
+        if (!lg) {
+          lg = svgEl("g", { class: "el edge-label" });
+          this.gEdgeLabels.appendChild(lg);
+          this.edgeLabelEls.set(el.key, lg);
         }
-        const t = labelG.querySelector("text")!;
-        t.textContent = el.label;
-        t.setAttribute("x", String(el.labelX));
-        t.setAttribute("y", String(el.labelY));
-        const w = textWidth(el.label, "11px Arial, sans-serif") + 8;
-        const rect = labelG.querySelector("rect")!;
-        rect.setAttribute("x", String(el.labelX - w / 2));
-        rect.setAttribute("y", String(el.labelY - 8));
-        rect.setAttribute("width", String(w));
-        rect.setAttribute("height", "16");
-      } else if (labelG) {
-        labelG.remove();
+      } else if (lg) {
+        lg.remove();
+        this.edgeLabelEls.delete(el.key);
+        lg = undefined;
+      }
+      if (lg) {
+        let labelG = lg.querySelector<SVGGElement>(".elabel");
+        if (el.label) {
+          if (!labelG) {
+            labelG = svgEl("g", { class: "elabel" });
+            // 白背景の矩形（パディング3px・わずかに角丸）で文字を読めるようにする
+            labelG.appendChild(svgEl("rect", { fill: "#FFFFFF", rx: "2" }));
+            const t = svgEl("text", {
+              "text-anchor": "middle",
+              "font-family": "Arial, sans-serif",
+              "font-size": "11",
+              fill: "#16191F",
+              "dominant-baseline": "central",
+            });
+            labelG.appendChild(t);
+            lg.appendChild(labelG);
+          }
+          const t = labelG.querySelector("text")!;
+          t.textContent = el.label;
+          t.setAttribute("x", String(el.labelX));
+          t.setAttribute("y", String(el.labelY));
+          const w = textWidth(el.label, "11px Arial, sans-serif") + 8;
+          const rect = labelG.querySelector("rect")!;
+          rect.setAttribute("x", String(el.labelX - w / 2));
+          rect.setAttribute("y", String(el.labelY - 9));
+          rect.setAttribute("width", String(w));
+          rect.setAttribute("height", "18");
+        } else if (labelG) {
+          labelG.remove();
+        }
+        // 番号コールアウト（線の中点）。ラベル併用時はバッジをラベル左に置く
+        lg.querySelector(".step-badge")?.remove();
+        if (el.step !== null) {
+          const lw = el.label ? textWidth(el.label, "11px Arial, sans-serif") + 8 : 0;
+          const badgeX = el.label ? el.labelX - lw / 2 - 14 : el.labelX;
+          lg.appendChild(DiagramRenderer.stepBadge(badgeX, el.labelY, el.step));
+        }
       }
     }
-    // 消えた線を除去
+    // 消えた線（とそのラベル）を除去
     for (const [key, g] of this.edgeEls) {
       if (!seen.has(key)) {
         g.remove();
         this.edgeEls.delete(key);
+        this.edgeLabelEls.get(key)?.remove();
+        this.edgeLabelEls.delete(key);
       }
     }
   }
