@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AWS構成図</title>
+    <style>
+      :root {
+        --chrome-bg: #ffffff;
+        --chrome-fg: #16191f;
+        --chrome-border: #e3e6ea;
+        --chrome-muted: #687078;
+        --accent: #0972d3;
+      }
+      :root[data-theme="dark"] {
+        --chrome-bg: #1b1e23;
+        --chrome-fg: #f1f3f5;
+        --chrome-border: #3a4049;
+        --chrome-muted: #aab3bc;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      /* display:flex 等の指定が hidden 属性に勝たないようにする */
+      [hidden] {
+        display: none !important;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--chrome-bg);
+        color: var(--chrome-fg);
+      }
+      #root {
+        position: relative;
+        padding: 10px 12px 12px;
+      }
+      #title {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 0 8px;
+        padding-right: 120px;
+        min-height: 17px;
+      }
+      #warnings {
+        font-size: 11px;
+        color: #7a5c00;
+        background: #fff8e6;
+        border: 1px solid #f2d680;
+        border-radius: 4px;
+        padding: 4px 8px;
+        margin: 0 0 8px;
+        white-space: pre-line;
+      }
+      :root[data-theme="dark"] #warnings {
+        background: #3a3320;
+        color: #f2d680;
+        border-color: #6b5b1e;
+      }
+      /* キャンバスはダークテーマでも白のまま（AWSライト背景アイコン前提） */
+      #canvas-wrap {
+        position: relative;
+        background: #ffffff;
+        border: 1px solid var(--chrome-border);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      #canvas-wrap:fullscreen {
+        border: none;
+        border-radius: 0;
+      }
+      svg#diagram {
+        display: block;
+        width: 100%;
+        height: auto;
+        touch-action: none;
+      }
+      #empty {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: #687078;
+        pointer-events: none;
+      }
+      #streaming {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        color: #687078;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid #e3e6ea;
+        border-radius: 999px;
+        padding: 3px 10px;
+        pointer-events: none;
+      }
+      #streaming .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse 1s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.25;
+          transform: scale(0.8);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      #toolbar {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        display: flex;
+        gap: 4px;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+        z-index: 5;
+      }
+      #canvas-wrap:hover #toolbar,
+      #toolbar:focus-within {
+        opacity: 1;
+      }
+      #toolbar button {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid #d5dbdb;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #414d5c;
+        padding: 0;
+      }
+      #toolbar button:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      #toolbar svg {
+        width: 15px;
+        height: 15px;
+        display: block;
+      }
+      /* --- 図要素のアニメーション --- */
+      .el {
+        transition:
+          transform 0.25s ease,
+          opacity 0.25s ease;
+      }
+      .el .inner {
+        transition:
+          transform 0.25s ease,
+          opacity 0.25s ease;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      .el.enter,
+      .el.exit {
+        opacity: 0;
+      }
+      .el.enter .inner {
+        transform: scale(0.92);
+      }
+      .el .frame {
+        transition:
+          width 0.25s ease,
+          height 0.25s ease;
+      }
+      .hit {
+        cursor: pointer;
+      }
+      .sel-outline {
+        visibility: hidden;
+        stroke: var(--accent);
+        stroke-width: 1.5;
+        stroke-dasharray: 4 3;
+      }
+      .el.selected .sel-outline {
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div id="title" hidden></div>
+      <div id="warnings" hidden></div>
+      <div id="canvas-wrap">
+        <svg id="diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 160"></svg>
+        <div id="empty">構成図のデータを待機しています…</div>
+        <div id="streaming" hidden><span class="dot"></span>描画中…</div>
+        <div id="toolbar">
+          <button id="btn-svg" type="button" title="SVGをダウンロード" aria-label="SVGをダウンロード">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M8 2v8m0 0 3-3M8 10 5 7" />
+              <path d="M2 11v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-2" />
+            </svg>
+          </button>
+          <button id="btn-png" type="button" title="PNGをダウンロード (2x)" aria-label="PNGをダウンロード">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="2" width="12" height="12" rx="1.5" />
+              <circle cx="6" cy="6" r="1.2" />
+              <path d="M2 11.5 6 8l3 2.5 2.5-2L14 11" />
+            </svg>
+          </button>
+          <button id="btn-fs" type="button" title="フルスクリーン切替" aria-label="フルスクリーン切替">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

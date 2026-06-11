@@ -1,0 +1,4863 @@
+{
+  "services": [
+    {
+      "id": "aws-clean-rooms",
+      "name": "AWS Clean Rooms",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-data-exchange",
+      "name": "AWS Data Exchange",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-entity-resolution",
+      "name": "AWS Entity Resolution",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-glue-databrew",
+      "name": "AWS Glue DataBrew",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-glue",
+      "name": "AWS Glue",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-lake-formation",
+      "name": "AWS Lake Formation",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-athena",
+      "name": "Amazon Athena",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-cloudsearch",
+      "name": "Amazon CloudSearch",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-data-firehose",
+      "name": "Amazon Data Firehose",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-datazone",
+      "name": "Amazon DataZone",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-emr",
+      "name": "Amazon EMR",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-finspace",
+      "name": "Amazon FinSpace",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-kinesis-data-streams",
+      "name": "Amazon Kinesis Data Streams",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-kinesis-video-streams",
+      "name": "Amazon Kinesis Video Streams",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-kinesis",
+      "name": "Amazon Kinesis",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-managed-service-for-apache-flink",
+      "name": "Amazon Managed Service for Apache Flink",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-managed-streaming-for-apache-kafka",
+      "name": "Amazon Managed Streaming for Apache Kafka",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service",
+      "name": "Amazon OpenSearch Service",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-quicksight",
+      "name": "Amazon QuickSight",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift",
+      "name": "Amazon Redshift",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-sagemaker",
+      "name": "Amazon SageMaker",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-appsync",
+      "name": "AWS AppSync",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-b2b-data-interchange",
+      "name": "AWS B2B Data Interchange",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-express-workflows",
+      "name": "AWS Express Workflows",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-step-functions",
+      "name": "AWS Step Functions",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-appflow",
+      "name": "Amazon AppFlow",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge",
+      "name": "Amazon EventBridge",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-mq",
+      "name": "Amazon MQ",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-managed-workflows-for-apache-airflow",
+      "name": "Amazon Managed Workflows for Apache Airflow",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-simple-notification-service",
+      "name": "Amazon Simple Notification Service",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-simple-queue-service",
+      "name": "Amazon Simple Queue Service",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-app-studio",
+      "name": "AWS App Studio",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-deep-learning-amis",
+      "name": "AWS Deep Learning AMIs",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-deep-learning-containers",
+      "name": "AWS Deep Learning Containers",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-deepcomposer",
+      "name": "AWS DeepComposer",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-deepracer",
+      "name": "AWS DeepRacer",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-healthimaging",
+      "name": "AWS HealthImaging",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-healthlake",
+      "name": "AWS HealthLake",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-healthomics",
+      "name": "AWS HealthOmics",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-healthscribe",
+      "name": "AWS HealthScribe",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-neuron",
+      "name": "AWS Neuron",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-panorama",
+      "name": "AWS Panorama",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-augmented-ai-a2i",
+      "name": "Amazon Augmented AI A2I",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-bedrock",
+      "name": "Amazon Bedrock",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-codeguru",
+      "name": "Amazon CodeGuru",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-codewhisperer",
+      "name": "Amazon CodeWhisperer",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-comprehend-medical",
+      "name": "Amazon Comprehend Medical",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-comprehend",
+      "name": "Amazon Comprehend",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-devops-guru",
+      "name": "Amazon DevOps Guru",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-elastic-inference",
+      "name": "Amazon Elastic Inference",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-forecast",
+      "name": "Amazon Forecast",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-fraud-detector",
+      "name": "Amazon Fraud Detector",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-kendra",
+      "name": "Amazon Kendra",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-lex",
+      "name": "Amazon Lex",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-lookout-for-equipment",
+      "name": "Amazon Lookout for Equipment",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-lookout-for-metrics",
+      "name": "Amazon Lookout for Metrics",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-lookout-for-vision",
+      "name": "Amazon Lookout for Vision",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-monitron",
+      "name": "Amazon Monitron",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-nova",
+      "name": "Amazon Nova",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-personalize",
+      "name": "Amazon Personalize",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-polly",
+      "name": "Amazon Polly",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-q",
+      "name": "Amazon Q",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-rekognition",
+      "name": "Amazon Rekognition",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-ai",
+      "name": "Amazon SageMaker AI",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-ground-truth",
+      "name": "Amazon SageMaker Ground Truth",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-studio-lab",
+      "name": "Amazon SageMaker Studio Lab",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-textract",
+      "name": "Amazon Textract",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-transcribe",
+      "name": "Amazon Transcribe",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-translate",
+      "name": "Amazon Translate",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "apache-mxnet-on-aws",
+      "name": "Apache MXNet on AWS",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "pytorch-on-aws",
+      "name": "PyTorch on AWS",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "tensorflow-on-aws",
+      "name": "TensorFlow on AWS",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-managed-blockchain",
+      "name": "Amazon Managed Blockchain",
+      "category": "Blockchain",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-quantum-ledger-database",
+      "name": "Amazon Quantum Ledger Database",
+      "category": "Blockchain",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-appfabric",
+      "name": "AWS AppFabric",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-end-user-messaging",
+      "name": "AWS End User Messaging",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-supply-chain",
+      "name": "AWS Supply Chain",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-wickr",
+      "name": "AWS Wickr",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "alexa-for-business",
+      "name": "Alexa For Business",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-chime-sdk",
+      "name": "Amazon Chime SDK",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-chime",
+      "name": "Amazon Chime",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-connect",
+      "name": "Amazon Connect",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-pinpoint-apis",
+      "name": "Amazon Pinpoint APIs",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-pinpoint",
+      "name": "Amazon Pinpoint",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-simple-email-service",
+      "name": "Amazon Simple Email Service",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-workdocs-sdk",
+      "name": "Amazon WorkDocs SDK",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-workdocs",
+      "name": "Amazon WorkDocs",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-workmail",
+      "name": "Amazon WorkMail",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-billing-conductor",
+      "name": "AWS Billing Conductor",
+      "category": "Cloud Financial Management",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-budgets",
+      "name": "AWS Budgets",
+      "category": "Cloud Financial Management",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-cost-explorer",
+      "name": "AWS Cost Explorer",
+      "category": "Cloud Financial Management",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-cost-and-usage-report",
+      "name": "AWS Cost and Usage Report",
+      "category": "Cloud Financial Management",
+      "color": "#7AA116"
+    },
+    {
+      "id": "reserved-instance-reporting",
+      "name": "Reserved Instance Reporting",
+      "category": "Cloud Financial Management",
+      "color": "#7AA116"
+    },
+    {
+      "id": "savings-plans",
+      "name": "Savings Plans",
+      "category": "Cloud Financial Management",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-app-runner",
+      "name": "AWS App Runner",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-batch",
+      "name": "AWS Batch",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-compute-optimizer",
+      "name": "AWS Compute Optimizer",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elastic-beanstalk",
+      "name": "AWS Elastic Beanstalk",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-lambda",
+      "name": "AWS Lambda",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-local-zones",
+      "name": "AWS Local Zones",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-nitro-enclaves",
+      "name": "AWS Nitro Enclaves",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-outposts-family",
+      "name": "AWS Outposts family",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-outposts-rack",
+      "name": "AWS Outposts rack",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-outposts-servers",
+      "name": "AWS Outposts servers",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-parallel-cluster",
+      "name": "AWS Parallel Cluster",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-parallel-computing-service",
+      "name": "AWS Parallel Computing Service",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-serverless-application-repository",
+      "name": "AWS Serverless Application Repository",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-simspace-weaver",
+      "name": "AWS SimSpace Weaver",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-wavelength",
+      "name": "AWS Wavelength",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-dcv",
+      "name": "Amazon DCV",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-auto-scaling",
+      "name": "Amazon EC2 Auto Scaling",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-image-builder",
+      "name": "Amazon EC2 Image Builder",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2",
+      "name": "Amazon EC2",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-vmware-service",
+      "name": "Amazon Elastic VMware Service",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-lightsail-for-research",
+      "name": "Amazon Lightsail for Research",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-lightsail",
+      "name": "Amazon Lightsail",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "bottlerocket",
+      "name": "Bottlerocket",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "elastic-fabric-adapter",
+      "name": "Elastic Fabric Adapter",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "nice-enginframe",
+      "name": "NICE EnginFrame",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-fargate",
+      "name": "AWS Fargate",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ecs-anywhere",
+      "name": "Amazon ECS Anywhere",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-eks-anywhere",
+      "name": "Amazon EKS Anywhere",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-eks-cloud",
+      "name": "Amazon EKS Cloud",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-eks-distro",
+      "name": "Amazon EKS Distro",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-registry",
+      "name": "Amazon Elastic Container Registry",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-service",
+      "name": "Amazon Elastic Container Service",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-kubernetes-service",
+      "name": "Amazon Elastic Kubernetes Service",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "red-hat-openshift-service-on-aws",
+      "name": "Red Hat OpenShift Service on AWS",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-activate",
+      "name": "AWS Activate",
+      "category": "Customer Enablement",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-iq",
+      "name": "AWS IQ",
+      "category": "Customer Enablement",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-managed-services",
+      "name": "AWS Managed Services",
+      "category": "Customer Enablement",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-professional-services",
+      "name": "AWS Professional Services",
+      "category": "Customer Enablement",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-support",
+      "name": "AWS Support",
+      "category": "Customer Enablement",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-training-certification",
+      "name": "AWS Training Certification",
+      "category": "Customer Enablement",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-repost-private",
+      "name": "AWS rePost Private",
+      "category": "Customer Enablement",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-repost",
+      "name": "AWS rePost",
+      "category": "Customer Enablement",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-database-migration-service",
+      "name": "AWS Database Migration Service",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora",
+      "name": "Amazon Aurora",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-documentdb",
+      "name": "Amazon DocumentDB",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb",
+      "name": "Amazon DynamoDB",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-elasticache",
+      "name": "Amazon ElastiCache",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-keyspaces",
+      "name": "Amazon Keyspaces",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-memorydb",
+      "name": "Amazon MemoryDB",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-neptune",
+      "name": "Amazon Neptune",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-rds",
+      "name": "Amazon RDS",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-timestream",
+      "name": "Amazon Timestream",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "oracle-database-at-aws",
+      "name": "Oracle Database at AWS",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-cloud-control-api",
+      "name": "AWS Cloud Control API",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-cloud-development-kit",
+      "name": "AWS Cloud Development Kit",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-cloud9",
+      "name": "AWS Cloud9",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-cloudshell",
+      "name": "AWS CloudShell",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-codeartifact",
+      "name": "AWS CodeArtifact",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-codebuild",
+      "name": "AWS CodeBuild",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-codecommit",
+      "name": "AWS CodeCommit",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-codedeploy",
+      "name": "AWS CodeDeploy",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-codepipeline",
+      "name": "AWS CodePipeline",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-command-line-interface",
+      "name": "AWS Command Line Interface",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-fault-injection-service",
+      "name": "AWS Fault Injection Service",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-infrastructure-composer",
+      "name": "AWS Infrastructure Composer",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-tools-and-sdks",
+      "name": "AWS Tools and SDKs",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-x-ray",
+      "name": "AWS X Ray",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-codecatalyst",
+      "name": "Amazon CodeCatalyst",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-corretto",
+      "name": "Amazon Corretto",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-appstream-2",
+      "name": "Amazon AppStream 2",
+      "category": "End User Computing",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-workspaces-family",
+      "name": "Amazon WorkSpaces Family",
+      "category": "End User Computing",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-amplify",
+      "name": "AWS Amplify",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-device-farm",
+      "name": "AWS Device Farm",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-location-service",
+      "name": "Amazon Location Service",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-gamelift-servers",
+      "name": "Amazon GameLift Servers",
+      "category": "Games",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-gamelift-streams",
+      "name": "Amazon GameLift Streams",
+      "category": "Games",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "open-3d-engine",
+      "name": "Open 3D Engine",
+      "category": "Games",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-marketplace",
+      "name": "AWS Marketplace",
+      "category": "General",
+      "color": "#232F3E"
+    },
+    {
+      "id": "aws-iot-analytics",
+      "name": "AWS IoT Analytics",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-button",
+      "name": "AWS IoT Button",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-core",
+      "name": "AWS IoT Core",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-device-defender",
+      "name": "AWS IoT Device Defender",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-device-management",
+      "name": "AWS IoT Device Management",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-events",
+      "name": "AWS IoT Events",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-expresslink",
+      "name": "AWS IoT ExpressLink",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-fleetwise",
+      "name": "AWS IoT FleetWise",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass",
+      "name": "AWS IoT Greengrass",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-sitewise",
+      "name": "AWS IoT SiteWise",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-twinmaker",
+      "name": "AWS IoT TwinMaker",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "freertos",
+      "name": "FreeRTOS",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-appconfig",
+      "name": "AWS AppConfig",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-application-auto-scaling",
+      "name": "AWS Application Auto Scaling",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-auto-scaling",
+      "name": "AWS Auto Scaling",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-backint-agent",
+      "name": "AWS Backint Agent",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-chatbot",
+      "name": "AWS Chatbot",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-cloudformation",
+      "name": "AWS CloudFormation",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-cloudtrail",
+      "name": "AWS CloudTrail",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-config",
+      "name": "AWS Config",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-console-mobile-application",
+      "name": "AWS Console Mobile Application",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-control-tower",
+      "name": "AWS Control Tower",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-distro-for-opentelemetry",
+      "name": "AWS Distro for OpenTelemetry",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-health-dashboard",
+      "name": "AWS Health Dashboard",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-launch-wizard",
+      "name": "AWS Launch Wizard",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-license-manager",
+      "name": "AWS License Manager",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-management-console",
+      "name": "AWS Management Console",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-organizations",
+      "name": "AWS Organizations",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-proton",
+      "name": "AWS Proton",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-resilience-hub",
+      "name": "AWS Resilience Hub",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-resource-explorer",
+      "name": "AWS Resource Explorer",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-service-catalog",
+      "name": "AWS Service Catalog",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-service-management-connector",
+      "name": "AWS Service Management Connector",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager",
+      "name": "AWS Systems Manager",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-telco-network-builder",
+      "name": "AWS Telco Network Builder",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-trusted-advisor",
+      "name": "AWS Trusted Advisor",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-user-notifications",
+      "name": "AWS User Notifications",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-well-architected-tool",
+      "name": "AWS Well Architected Tool",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch",
+      "name": "Amazon CloudWatch",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-managed-grafana",
+      "name": "Amazon Managed Grafana",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-managed-service-for-prometheus",
+      "name": "Amazon Managed Service for Prometheus",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-deadline-cloud",
+      "name": "AWS Deadline Cloud",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-appliances-&-software",
+      "name": "AWS Elemental Appliances & Software",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-conductor",
+      "name": "AWS Elemental Conductor",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-delta",
+      "name": "AWS Elemental Delta",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-link",
+      "name": "AWS Elemental Link",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-live",
+      "name": "AWS Elemental Live",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-mediaconnect",
+      "name": "AWS Elemental MediaConnect",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-mediaconvert",
+      "name": "AWS Elemental MediaConvert",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-medialive",
+      "name": "AWS Elemental MediaLive",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-mediapackage",
+      "name": "AWS Elemental MediaPackage",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-mediastore",
+      "name": "AWS Elemental MediaStore",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-mediatailor",
+      "name": "AWS Elemental MediaTailor",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-server",
+      "name": "AWS Elemental Server",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-thinkbox-deadline",
+      "name": "AWS Thinkbox Deadline",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-thinkbox-frost",
+      "name": "AWS Thinkbox Frost",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-thinkbox-krakatoa",
+      "name": "AWS Thinkbox Krakatoa",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-thinkbox-sequoia",
+      "name": "AWS Thinkbox Sequoia",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-thinkbox-stoke",
+      "name": "AWS Thinkbox Stoke",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-thinkbox-xmesh",
+      "name": "AWS Thinkbox XMesh",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-transcoder",
+      "name": "Amazon Elastic Transcoder",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-interactive-video-service",
+      "name": "Amazon Interactive Video Service",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-application-discovery-service",
+      "name": "AWS Application Discovery Service",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-application-migration-service",
+      "name": "AWS Application Migration Service",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-data-transfer-terminal",
+      "name": "AWS Data Transfer Terminal",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-datasync",
+      "name": "AWS DataSync",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-mainframe-modernization",
+      "name": "AWS Mainframe Modernization",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-migration-evaluator",
+      "name": "AWS Migration Evaluator",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-migration-hub",
+      "name": "AWS Migration Hub",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-transfer-family",
+      "name": "AWS Transfer Family",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-transform",
+      "name": "AWS Transform",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-app-mesh",
+      "name": "AWS App Mesh",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-client-vpn",
+      "name": "AWS Client VPN",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-cloud-map",
+      "name": "AWS Cloud Map",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-cloud-wan",
+      "name": "AWS Cloud WAN",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-direct-connect",
+      "name": "AWS Direct Connect",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-global-accelerator",
+      "name": "AWS Global Accelerator",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-private-5g",
+      "name": "AWS Private 5G",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-privatelink",
+      "name": "AWS PrivateLink",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-site-to-site-vpn",
+      "name": "AWS Site to Site VPN",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-transit-gateway",
+      "name": "AWS Transit Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-verified-access",
+      "name": "AWS Verified Access",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-api-gateway",
+      "name": "Amazon API Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-application-recovery-controller",
+      "name": "Amazon Application Recovery Controller",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-cloudfront",
+      "name": "Amazon CloudFront",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-route-53",
+      "name": "Amazon Route 53",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-lattice",
+      "name": "Amazon VPC Lattice",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-virtual-private-cloud",
+      "name": "Amazon Virtual Private Cloud",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "elastic-load-balancing",
+      "name": "Elastic Load Balancing",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-braket",
+      "name": "Amazon Braket",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-ground-station",
+      "name": "AWS Ground Station",
+      "category": "Satellite",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-artifact",
+      "name": "AWS Artifact",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-audit-manager",
+      "name": "AWS Audit Manager",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-certificate-manager",
+      "name": "AWS Certificate Manager",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-cloudhsm",
+      "name": "AWS CloudHSM",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-directory-service",
+      "name": "AWS Directory Service",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-firewall-manager",
+      "name": "AWS Firewall Manager",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-iam-identity-center",
+      "name": "AWS IAM Identity Center",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-and-access-management",
+      "name": "AWS Identity and Access Management",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-key-management-service",
+      "name": "AWS Key Management Service",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-network-firewall",
+      "name": "AWS Network Firewall",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-payment-cryptography",
+      "name": "AWS Payment Cryptography",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-private-certificate-authority",
+      "name": "AWS Private Certificate Authority",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-resource-access-manager",
+      "name": "AWS Resource Access Manager",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-secrets-manager",
+      "name": "AWS Secrets Manager",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-security-hub",
+      "name": "AWS Security Hub",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-security-incident-response",
+      "name": "AWS Security Incident Response",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-shield",
+      "name": "AWS Shield",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-signer",
+      "name": "AWS Signer",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-waf",
+      "name": "AWS WAF",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-cloud-directory",
+      "name": "Amazon Cloud Directory",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-cognito",
+      "name": "Amazon Cognito",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-detective",
+      "name": "Amazon Detective",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-guardduty",
+      "name": "Amazon GuardDuty",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-inspector",
+      "name": "Amazon Inspector",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-macie",
+      "name": "Amazon Macie",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-security-lake",
+      "name": "Amazon Security Lake",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-verified-permissions",
+      "name": "Amazon Verified Permissions",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-backup",
+      "name": "AWS Backup",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-elastic-disaster-recovery",
+      "name": "AWS Elastic Disaster Recovery",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-snowball-edge",
+      "name": "AWS Snowball Edge",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-snowball",
+      "name": "AWS Snowball",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway",
+      "name": "AWS Storage Gateway",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-efs",
+      "name": "Amazon EFS",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-block-store",
+      "name": "Amazon Elastic Block Store",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-fsx-for-lustre",
+      "name": "Amazon FSx for Lustre",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-fsx-for-netapp-ontap",
+      "name": "Amazon FSx for NetApp ONTAP",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-fsx-for-openzfs",
+      "name": "Amazon FSx for OpenZFS",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-fsx-for-wfs",
+      "name": "Amazon FSx for WFS",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-fsx",
+      "name": "Amazon FSx",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-file-cache",
+      "name": "Amazon File Cache",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-s3-on-outposts",
+      "name": "Amazon S3 on Outposts",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-glacier",
+      "name": "Amazon Simple Storage Service Glacier",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service",
+      "name": "Amazon Simple Storage Service",
+      "category": "Storage",
+      "color": "#7AA116"
+    }
+  ],
+  "resources": [
+    {
+      "id": "general-aws-management-console",
+      "name": "AWS Management Console",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "alert",
+      "name": "Alert",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "authenticated-user",
+      "name": "Authenticated User",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "camera",
+      "name": "Camera",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "chat",
+      "name": "Chat",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "client",
+      "name": "Client",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "cold-storage",
+      "name": "Cold Storage",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "credentials",
+      "name": "Credentials",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "data-stream",
+      "name": "Data Stream",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "data-table",
+      "name": "Data Table",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "database",
+      "name": "Database",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "disk",
+      "name": "Disk",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "document",
+      "name": "Document",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "documents",
+      "name": "Documents",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "email",
+      "name": "Email",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "firewall",
+      "name": "Firewall",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "folder",
+      "name": "Folder",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "folders",
+      "name": "Folders",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "forums",
+      "name": "Forums",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "gear",
+      "name": "Gear",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "generic-application",
+      "name": "Generic Application",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "git-repository",
+      "name": "Git Repository",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "globe",
+      "name": "Globe",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "internet-alt1",
+      "name": "Internet alt1",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "internet-alt2",
+      "name": "Internet alt2",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "internet",
+      "name": "Internet",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "json-script",
+      "name": "JSON Script",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "logs",
+      "name": "Logs",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "magnifying-glass",
+      "name": "Magnifying Glass",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "metrics",
+      "name": "Metrics",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "mobile-client",
+      "name": "Mobile client",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "multimedia",
+      "name": "Multimedia",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "office-building",
+      "name": "Office building",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "programming-language",
+      "name": "Programming Language",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "question",
+      "name": "Question",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "recover",
+      "name": "Recover",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "saml-token",
+      "name": "SAML token",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "sdk",
+      "name": "SDK",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "ssl-padlock",
+      "name": "SSL padlock",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "server",
+      "name": "Server",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "servers",
+      "name": "Servers",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "shield",
+      "name": "Shield",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "source-code",
+      "name": "Source Code",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "tape-storage",
+      "name": "Tape storage",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "toolkit",
+      "name": "Toolkit",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "user",
+      "name": "User",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "users",
+      "name": "Users",
+      "category": "General",
+      "color": "#7D8998"
+    },
+    {
+      "id": "aws-data-exchange-for-apis",
+      "name": "AWS Data Exchange for APIs",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-glue-aws-glue-for-ray",
+      "name": "AWS Glue AWS Glue for Ray",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-glue-crawler",
+      "name": "AWS Glue Crawler",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-glue-data-catalog",
+      "name": "AWS Glue Data Catalog",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-glue-data-quality",
+      "name": "AWS Glue Data Quality",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-lake-formation-data-lake",
+      "name": "AWS Lake Formation Data Lake",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-athena-data-source-connectors",
+      "name": "Amazon Athena Data Source Connectors",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-cloudsearch-search-documents",
+      "name": "Amazon CloudSearch Search Documents",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-datazone-business-data-catalog",
+      "name": "Amazon DataZone Business Data Catalog",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-datazone-data-portal",
+      "name": "Amazon DataZone Data Portal",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-datazone-data-projects",
+      "name": "Amazon DataZone Data Projects",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-emr-cluster",
+      "name": "Amazon EMR Cluster",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-emr-emr-engine",
+      "name": "Amazon EMR EMR Engine",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-emr-hdfs-cluster",
+      "name": "Amazon EMR HDFS Cluster",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-msk-amazon-msk-connect",
+      "name": "Amazon MSK Amazon MSK Connect",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service-cluster-administrator-node",
+      "name": "Amazon OpenSearch Service Cluster Administrator Node",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service-data-node",
+      "name": "Amazon OpenSearch Service Data Node",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service-index",
+      "name": "Amazon OpenSearch Service Index",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service-observability",
+      "name": "Amazon OpenSearch Service Observability",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service-opensearch-dashboards",
+      "name": "Amazon OpenSearch Service OpenSearch Dashboards",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service-opensearch-ingestion",
+      "name": "Amazon OpenSearch Service OpenSearch Ingestion",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service-traces",
+      "name": "Amazon OpenSearch Service Traces",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-opensearch-service-ultrawarm-node",
+      "name": "Amazon OpenSearch Service UltraWarm Node",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-quicksight-paginated-reports",
+      "name": "Amazon Quicksight Paginated Reports",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift-auto-copy",
+      "name": "Amazon Redshift Auto copy",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift-data-sharing-governance",
+      "name": "Amazon Redshift Data Sharing Governance",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift-dense-compute-node",
+      "name": "Amazon Redshift Dense Compute Node",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift-dense-storage-node",
+      "name": "Amazon Redshift Dense Storage Node",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift-ml",
+      "name": "Amazon Redshift ML",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift-query-editor-v2.0",
+      "name": "Amazon Redshift Query Editor v2.0",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift-ra3",
+      "name": "Amazon Redshift RA3",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-redshift-streaming-ingestion",
+      "name": "Amazon Redshift Streaming Ingestion",
+      "category": "Analytics",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-eventbridge-event",
+      "name": "Amazon EventBridge Event",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge-custom-event-bus",
+      "name": "Amazon EventBridge Custom Event Bus",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge-default-event-bus",
+      "name": "Amazon EventBridge Default Event Bus",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge-pipes",
+      "name": "Amazon EventBridge Pipes",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge-rule",
+      "name": "Amazon EventBridge Rule",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge-saas-partner-event",
+      "name": "Amazon EventBridge Saas Partner Event",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge-scheduler",
+      "name": "Amazon EventBridge Scheduler",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge-schema-registry",
+      "name": "Amazon EventBridge Schema Registry",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-eventbridge-schema",
+      "name": "Amazon EventBridge Schema",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-mq-broker",
+      "name": "Amazon MQ Broker",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-simple-notification-service-email-notification",
+      "name": "Amazon Simple Notification Service Email Notification",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-simple-notification-service-http-notification",
+      "name": "Amazon Simple Notification Service HTTP Notification",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-simple-notification-service-topic",
+      "name": "Amazon Simple Notification Service Topic",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-simple-queue-service-message",
+      "name": "Amazon Simple Queue Service Message",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-simple-queue-service-queue",
+      "name": "Amazon Simple Queue Service Queue",
+      "category": "Application Integration",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-devops-guru-insights",
+      "name": "Amazon DevOps Guru Insights",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-rekognition-image",
+      "name": "Amazon Rekognition Image",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-rekognition-video",
+      "name": "Amazon Rekognition Video",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-ai-canvas",
+      "name": "Amazon SageMaker AI Canvas",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-ai-geospatial-ml",
+      "name": "Amazon SageMaker AI Geospatial ML",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-ai-model",
+      "name": "Amazon SageMaker AI Model",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-ai-notebook",
+      "name": "Amazon SageMaker AI Notebook",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-ai-shadow-testing",
+      "name": "Amazon SageMaker AI Shadow Testing",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-sagemaker-ai-train",
+      "name": "Amazon SageMaker AI Train",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-textract-analyze-lending",
+      "name": "Amazon Textract Analyze Lending",
+      "category": "Artificial Intelligence",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-managed-blockchain-blockchain",
+      "name": "Amazon Managed Blockchain Blockchain",
+      "category": "Blockchain",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-pinpoint-journey",
+      "name": "Amazon Pinpoint Journey",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-simple-email-service-email",
+      "name": "Amazon Simple Email Service Email",
+      "category": "Business Applications",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-elastic-beanstalk-application",
+      "name": "AWS Elastic Beanstalk Application",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elastic-beanstalk-deployment",
+      "name": "AWS Elastic Beanstalk Deployment",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-lambda-lambda-function",
+      "name": "AWS Lambda Lambda Function",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-ami",
+      "name": "Amazon EC2 AMI",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-aws-microservice-extractor-for-.net",
+      "name": "Amazon EC2 AWS Microservice Extractor for .NET",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "resource-amazon-ec2-auto-scaling",
+      "name": "Amazon EC2 Auto Scaling",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-db-instance",
+      "name": "Amazon EC2 DB Instance",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-elastic-ip-address",
+      "name": "Amazon EC2 Elastic IP Address",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-instance-with-cloudwatch",
+      "name": "Amazon EC2 Instance with CloudWatch",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-instance",
+      "name": "Amazon EC2 Instance",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-instances",
+      "name": "Amazon EC2 Instances",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-rescue",
+      "name": "Amazon EC2 Rescue",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-ec2-spot-instance",
+      "name": "Amazon EC2 Spot Instance",
+      "category": "Compute",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-registry-image",
+      "name": "Amazon Elastic Container Registry Image",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-registry-registry",
+      "name": "Amazon Elastic Container Registry Registry",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-service-container-1",
+      "name": "Amazon Elastic Container Service Container 1",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-service-container-2",
+      "name": "Amazon Elastic Container Service Container 2",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-service-container-3",
+      "name": "Amazon Elastic Container Service Container 3",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-service-copiiot-cli",
+      "name": "Amazon Elastic Container Service CopiIoT CLI",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-service-ecs-service-connect",
+      "name": "Amazon Elastic Container Service ECS Service Connect",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-service-service",
+      "name": "Amazon Elastic Container Service Service",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-container-service-task",
+      "name": "Amazon Elastic Container Service Task",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-elastic-kubernetes-service-eks-on-outposts",
+      "name": "Amazon Elastic Kubernetes Service EKS on Outposts",
+      "category": "Containers",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-database-migration-service-database-migration-workflow-or-job",
+      "name": "AWS Database Migration Service Database migration workflow or job",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-instance",
+      "name": "Amazon Aurora Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-mariadb-instance-alternate",
+      "name": "Amazon Aurora MariaDB Instance Alternate",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-mariadb-instance",
+      "name": "Amazon Aurora MariaDB Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-mysql-instance-alternate",
+      "name": "Amazon Aurora MySQL Instance Alternate",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-mysql-instance",
+      "name": "Amazon Aurora MySQL Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-oracle-instance-alternate",
+      "name": "Amazon Aurora Oracle Instance Alternate",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-oracle-instance",
+      "name": "Amazon Aurora Oracle Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-piops-instance",
+      "name": "Amazon Aurora PIOPS Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-postgresql-instance-alternate",
+      "name": "Amazon Aurora PostgreSQL Instance Alternate",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-postgresql-instance",
+      "name": "Amazon Aurora PostgreSQL Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-sql-server-instance-alternate",
+      "name": "Amazon Aurora SQL Server Instance Alternate",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-sql-server-instance",
+      "name": "Amazon Aurora SQL Server Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-amazon-aurora-instance-alternate",
+      "name": "Amazon Aurora Amazon Aurora Instance alternate",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-amazon-rds-instance-aternate",
+      "name": "Amazon Aurora Amazon RDS Instance Aternate",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-amazon-rds-instance",
+      "name": "Amazon Aurora Amazon RDS Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-aurora-trusted-language-extensions-for-postgresql",
+      "name": "Amazon Aurora Trusted Language Extensions for PostgreSQL",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-documentdb-elastic-clusters",
+      "name": "Amazon DocumentDB Elastic Clusters",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-amazon-dynamodb-accelerator",
+      "name": "Amazon DynamoDB Amazon DynamoDB Accelerator",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-attribute",
+      "name": "Amazon DynamoDB Attribute",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-attributes",
+      "name": "Amazon DynamoDB Attributes",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-global-secondary-index",
+      "name": "Amazon DynamoDB Global secondary index",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-item",
+      "name": "Amazon DynamoDB Item",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-items",
+      "name": "Amazon DynamoDB Items",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-standard-access-table-class",
+      "name": "Amazon DynamoDB Standard Access Table Class",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-standard-infrequent-access-table-class",
+      "name": "Amazon DynamoDB Standard Infrequent Access Table Class",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-stream",
+      "name": "Amazon DynamoDB Stream",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-dynamodb-table",
+      "name": "Amazon DynamoDB Table",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-elasticache-cache-node",
+      "name": "Amazon ElastiCache Cache Node",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-elasticache-elasticache-for-memcached",
+      "name": "Amazon ElastiCache ElastiCache for Memcached",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-elasticache-elasticache-for-redis",
+      "name": "Amazon ElastiCache ElastiCache for Redis",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-elasticache-elasticache-for-valkey",
+      "name": "Amazon ElastiCache ElastiCache for Valkey",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-rds-proxy-instance-alternate",
+      "name": "Amazon RDS Proxy Instance Alternate",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-rds-proxy-instance",
+      "name": "Amazon RDS Proxy Instance",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-rds-blue-green-deployments",
+      "name": "Amazon RDS Blue Green Deployments",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-rds-multi-az-db-cluster",
+      "name": "Amazon RDS Multi AZ DB Cluster",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-rds-multi-az",
+      "name": "Amazon RDS Multi AZ",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-rds-optimized-writes",
+      "name": "Amazon RDS Optimized Writes",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-rds-trusted-language-extensions-for-postgresql",
+      "name": "Amazon RDS Trusted Language Extensions for PostgreSQL",
+      "category": "Database",
+      "color": "#C925D1"
+    },
+    {
+      "id": "aws-cloud9-cloud9",
+      "name": "AWS Cloud9 Cloud9",
+      "category": "Developer Tools",
+      "color": "#C925D1"
+    },
+    {
+      "id": "amazon-workspaces-family-amazon-workspaces-core",
+      "name": "Amazon WorkSpaces Family Amazon WorkSpaces Core",
+      "category": "End User Computing",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-workspaces-family-amazon-workspaces-secure-browser",
+      "name": "Amazon WorkSpaces Family Amazon WorkSpaces Secure Browser",
+      "category": "End User Computing",
+      "color": "#01A88D"
+    },
+    {
+      "id": "amazon-workspaces-family-amazon-workspaces",
+      "name": "Amazon WorkSpaces Family Amazon WorkSpaces",
+      "category": "End User Computing",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-amplify-aws-amplify-studio",
+      "name": "AWS Amplify AWS Amplify Studio",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-location-service-geofence",
+      "name": "Amazon Location Service Geofence",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-location-service-map ",
+      "name": "Amazon Location Service Map ",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-location-service-place",
+      "name": "Amazon Location Service Place",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-location-service-routes",
+      "name": "Amazon Location Service Routes",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-location-service-track ",
+      "name": "Amazon Location Service Track ",
+      "category": "Front-End Web & Mobile",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-iot-analytics-channel",
+      "name": "AWS IoT Analytics Channel",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-analytics-data-store",
+      "name": "AWS IoT Analytics Data Store",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-analytics-dataset",
+      "name": "AWS IoT Analytics Dataset",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-analytics-notebook",
+      "name": "AWS IoT Analytics Notebook",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-analytics-pipeline",
+      "name": "AWS IoT Analytics Pipeline",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-core-device-advisor",
+      "name": "AWS IoT Core Device Advisor",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-core-device-location",
+      "name": "AWS IoT Core Device Location",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-device-defender-iot-device-jobs",
+      "name": "AWS IoT Device Defender IoT Device Jobs",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-device-management-fleet-hub",
+      "name": "AWS IoT Device Management Fleet Hub",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-device-tester",
+      "name": "AWS IoT Device Tester",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-artifact",
+      "name": "AWS IoT Greengrass Artifact",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-component-machine-learning",
+      "name": "AWS IoT Greengrass Component Machine Learning",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-component-nucleus",
+      "name": "AWS IoT Greengrass Component Nucleus",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-component-private",
+      "name": "AWS IoT Greengrass Component Private",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-component-public",
+      "name": "AWS IoT Greengrass Component Public",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-component",
+      "name": "AWS IoT Greengrass Component",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-connector",
+      "name": "AWS IoT Greengrass Connector",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-interprocess-communication",
+      "name": "AWS IoT Greengrass Interprocess Communication",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-protocol",
+      "name": "AWS IoT Greengrass Protocol",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-recipe",
+      "name": "AWS IoT Greengrass Recipe",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-greengrass-stream-manager",
+      "name": "AWS IoT Greengrass Stream Manager",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-hardware-board",
+      "name": "AWS IoT Hardware Board",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-rule",
+      "name": "AWS IoT Rule",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-sitewise-asset-hierarchy",
+      "name": "AWS IoT SiteWise Asset Hierarchy",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-sitewise-asset-model",
+      "name": "AWS IoT SiteWise Asset Model",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-sitewise-asset-properties",
+      "name": "AWS IoT SiteWise Asset Properties",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-sitewise-asset",
+      "name": "AWS IoT SiteWise Asset",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-sitewise-data-streams",
+      "name": "AWS IoT SiteWise Data Streams",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-action",
+      "name": "AWS IoT Action",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-actuator",
+      "name": "AWS IoT Actuator",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-alexa-enabled-device",
+      "name": "AWS IoT Alexa Enabled Device",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-alexa-skill",
+      "name": "AWS IoT Alexa Skill",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-alexa-voice-service",
+      "name": "AWS IoT Alexa Voice Service",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-certificate",
+      "name": "AWS IoT Certificate",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-desired-state",
+      "name": "AWS IoT Desired State",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-device-gateway",
+      "name": "AWS IoT Device Gateway",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-echo",
+      "name": "AWS IoT Echo",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-fire-tv-stick",
+      "name": "AWS IoT Fire TV Stick",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-fire-tv",
+      "name": "AWS IoT Fire TV",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-http2-protocol",
+      "name": "AWS IoT HTTP2 Protocol",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-http-protocol",
+      "name": "AWS IoT HTTP Protocol",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-lambda-function",
+      "name": "AWS IoT Lambda Function",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-lorawan-protocol",
+      "name": "AWS IoT LoRaWAN Protocol",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-mqtt-protocol",
+      "name": "AWS IoT MQTT Protocol",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-over-air-update",
+      "name": "AWS IoT Over Air Update",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-policy",
+      "name": "AWS IoT Policy",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-reported-state",
+      "name": "AWS IoT Reported State",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-sailboat",
+      "name": "AWS IoT Sailboat",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-sensor",
+      "name": "AWS IoT Sensor",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-servo",
+      "name": "AWS IoT Servo",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-shadow",
+      "name": "AWS IoT Shadow",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-simulator",
+      "name": "AWS IoT Simulator",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-bank",
+      "name": "AWS IoT Thing Bank",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-bicycle",
+      "name": "AWS IoT Thing Bicycle",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-camera",
+      "name": "AWS IoT Thing Camera",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-car",
+      "name": "AWS IoT Thing Car",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-cart",
+      "name": "AWS IoT Thing Cart",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-coffee-pot",
+      "name": "AWS IoT Thing Coffee Pot",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-door-lock",
+      "name": "AWS IoT Thing Door Lock",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-factory",
+      "name": "AWS IoT Thing Factory",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-freertos-device",
+      "name": "AWS IoT Thing FreeRTOS Device",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-generic",
+      "name": "AWS IoT Thing Generic",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-house",
+      "name": "AWS IoT Thing House",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-humidity-sensor",
+      "name": "AWS IoT Thing Humidity Sensor",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-industrial-pc",
+      "name": "AWS IoT Thing Industrial PC",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-lightbulb",
+      "name": "AWS IoT Thing Lightbulb",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-medical-emergency",
+      "name": "AWS IoT Thing Medical Emergency",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-plc",
+      "name": "AWS IoT Thing PLC",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-police-emergency",
+      "name": "AWS IoT Thing Police Emergency",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-relay",
+      "name": "AWS IoT Thing Relay",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-stacklight",
+      "name": "AWS IoT Thing Stacklight",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-temperature-humidity-sensor",
+      "name": "AWS IoT Thing Temperature Humidity Sensor",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-temperature-sensor",
+      "name": "AWS IoT Thing Temperature Sensor",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-temperature-vibration-sensor",
+      "name": "AWS IoT Thing Temperature Vibration Sensor",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-thermostat",
+      "name": "AWS IoT Thing Thermostat",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-travel",
+      "name": "AWS IoT Thing Travel",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-utility",
+      "name": "AWS IoT Thing Utility",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-vibration-sensor",
+      "name": "AWS IoT Thing Vibration Sensor",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-thing-windfarm",
+      "name": "AWS IoT Thing Windfarm",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-iot-topic",
+      "name": "AWS IoT Topic",
+      "category": "Internet of Things",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-cloudformation-change-set",
+      "name": "AWS CloudFormation Change Set",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-cloudformation-stack",
+      "name": "AWS CloudFormation Stack",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-cloudformation-template",
+      "name": "AWS CloudFormation Template",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-cloudtrail-cloudtrail-lake",
+      "name": "AWS CloudTrail CloudTrail Lake",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-license-manager-application-discovery",
+      "name": "AWS License Manager Application Discovery",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-license-manager-license-blending",
+      "name": "AWS License Manager License Blending",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-organizations-account",
+      "name": "AWS Organizations Account",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-organizations-management-account",
+      "name": "AWS Organizations Management Account",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-organizations-organizational-unit",
+      "name": "AWS Organizations Organizational Unit",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-application-manager",
+      "name": "AWS Systems Manager Application Manager",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-automation",
+      "name": "AWS Systems Manager Automation",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-change-calendar",
+      "name": "AWS Systems Manager Change Calendar",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-change-manager",
+      "name": "AWS Systems Manager Change Manager",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-compliance",
+      "name": "AWS Systems Manager Compliance",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-distributor",
+      "name": "AWS Systems Manager Distributor",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-documents",
+      "name": "AWS Systems Manager Documents",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-incident-manager",
+      "name": "AWS Systems Manager Incident Manager",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-inventory",
+      "name": "AWS Systems Manager Inventory",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-maintenance-windows",
+      "name": "AWS Systems Manager Maintenance Windows",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-opscenter",
+      "name": "AWS Systems Manager OpsCenter",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-parameter-store",
+      "name": "AWS Systems Manager Parameter Store",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-patch-manager",
+      "name": "AWS Systems Manager Patch Manager",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-run-command",
+      "name": "AWS Systems Manager Run Command",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-session-manager",
+      "name": "AWS Systems Manager Session Manager",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-systems-manager-state-manager",
+      "name": "AWS Systems Manager State Manager",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-trusted-advisor-checklist-cost",
+      "name": "AWS Trusted Advisor Checklist Cost",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-trusted-advisor-checklist-fault-tolerant",
+      "name": "AWS Trusted Advisor Checklist Fault Tolerant",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-trusted-advisor-checklist-performance",
+      "name": "AWS Trusted Advisor Checklist Performance",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-trusted-advisor-checklist-security",
+      "name": "AWS Trusted Advisor Checklist Security",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-trusted-advisor-checklist",
+      "name": "AWS Trusted Advisor Checklist",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-alarm",
+      "name": "Amazon CloudWatch Alarm",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-cross-account-observability",
+      "name": "Amazon CloudWatch Cross account Observability",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-data-protection",
+      "name": "Amazon CloudWatch Data Protection",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-event-event-based",
+      "name": "Amazon CloudWatch Event Event Based",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-event-time-based",
+      "name": "Amazon CloudWatch Event Time Based",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-evidently",
+      "name": "Amazon CloudWatch Evidently",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-logs",
+      "name": "Amazon CloudWatch Logs",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-metrics-insights",
+      "name": "Amazon CloudWatch Metrics Insights",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-rum",
+      "name": "Amazon CloudWatch RUM",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-rule",
+      "name": "Amazon CloudWatch Rule",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "amazon-cloudwatch-synthetics",
+      "name": "Amazon CloudWatch Synthetics",
+      "category": "Management & Governance",
+      "color": "#E7157B"
+    },
+    {
+      "id": "aws-cloud-digital-interface",
+      "name": "AWS Cloud Digital Interface",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-elemental-mediaconnect-mediaconnect-gateway",
+      "name": "AWS Elemental MediaConnect MediaConnect Gateway",
+      "category": "Media Services",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-application-discovery-service-aws-agentless-collector",
+      "name": "AWS Application Discovery Service AWS Agentless Collector",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-application-discovery-service-aws-discovery-agent",
+      "name": "AWS Application Discovery Service AWS Discovery Agent",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-application-discovery-service-migration-evaluator-collector",
+      "name": "AWS Application Discovery Service Migration Evaluator Collector",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-datasync-discovery",
+      "name": "AWS DataSync Discovery",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-datasync-agent",
+      "name": "AWS Datasync Agent",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-mainframe-modernization-analyzer",
+      "name": "AWS Mainframe Modernization Analyzer",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-mainframe-modernization-compiler",
+      "name": "AWS Mainframe Modernization Compiler",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-mainframe-modernization-converter",
+      "name": "AWS Mainframe Modernization Converter",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-mainframe-modernization-developer",
+      "name": "AWS Mainframe Modernization Developer",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-mainframe-modernization-runtime",
+      "name": "AWS Mainframe Modernization Runtime",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-migration-hub-refactor-spaces-applications",
+      "name": "AWS Migration Hub Refactor Spaces Applications",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-migration-hub-refactor-spaces-environments",
+      "name": "AWS Migration Hub Refactor Spaces Environments",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-migration-hub-refactor-spaces-services",
+      "name": "AWS Migration Hub Refactor Spaces Services",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-transfer-family-aws-as2",
+      "name": "AWS Transfer Family AWS AS2",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-transfer-family-aws-ftps",
+      "name": "AWS Transfer Family AWS FTPS",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-transfer-family-aws-ftp",
+      "name": "AWS Transfer Family AWS FTP",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-transfer-family-aws-sftp",
+      "name": "AWS Transfer Family AWS SFTP",
+      "category": "Migration & Modernization",
+      "color": "#01A88D"
+    },
+    {
+      "id": "aws-app-mesh-mesh",
+      "name": "AWS App Mesh Mesh",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-app-mesh-virtual-gateway",
+      "name": "AWS App Mesh Virtual Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-app-mesh-virtual-node",
+      "name": "AWS App Mesh Virtual Node",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-app-mesh-virtual-router",
+      "name": "AWS App Mesh Virtual Router",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-app-mesh-virtual-service",
+      "name": "AWS App Mesh Virtual Service",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-cloud-map-namespace",
+      "name": "AWS Cloud Map Namespace",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-cloud-map-resource",
+      "name": "AWS Cloud Map Resource",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-cloud-map-service",
+      "name": "AWS Cloud Map Service",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-cloud-wan-core-network-edge",
+      "name": "AWS Cloud WAN Core Network Edge",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-cloud-wan-segment-network",
+      "name": "AWS Cloud WAN Segment Network",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-cloud-wan-transit-gateway-route-table-attachment",
+      "name": "AWS Cloud WAN Transit Gateway Route Table Attachment",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-direct-connect-gateway",
+      "name": "AWS Direct Connect Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "aws-transit-gateway-attachment",
+      "name": "AWS Transit Gateway Attachment",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-api-gateway-endpoint",
+      "name": "Amazon API Gateway Endpoint",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-cloudfront-download-distribution",
+      "name": "Amazon CloudFront Download Distribution",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-cloudfront-edge-location",
+      "name": "Amazon CloudFront Edge Location",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-cloudfront-functions",
+      "name": "Amazon CloudFront Functions",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-cloudfront-streaming-distribution",
+      "name": "Amazon CloudFront Streaming Distribution",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-route-53-hosted-zone",
+      "name": "Amazon Route 53 Hosted Zone",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-route-53-readiness-checks",
+      "name": "Amazon Route 53 Readiness Checks",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-route-53-resolver-dns-firewall",
+      "name": "Amazon Route 53 Resolver DNS Firewall",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-route-53-resolver-query-logging",
+      "name": "Amazon Route 53 Resolver Query Logging",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-route-53-resolver",
+      "name": "Amazon Route 53 Resolver",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-route-53-route-table",
+      "name": "Amazon Route 53 Route Table",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-route-53-routing-controls",
+      "name": "Amazon Route 53 Routing Controls",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-carrier-gateway",
+      "name": "Amazon VPC Carrier Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-customer-gateway",
+      "name": "Amazon VPC Customer Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-elastic-network-adapter",
+      "name": "Amazon VPC Elastic Network Adapter",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-elastic-network-interface",
+      "name": "Amazon VPC Elastic Network Interface",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-endpoints",
+      "name": "Amazon VPC Endpoints",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-flow-logs",
+      "name": "Amazon VPC Flow Logs",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-internet-gateway",
+      "name": "Amazon VPC Internet Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-nat-gateway",
+      "name": "Amazon VPC NAT Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-network-access-analyzer",
+      "name": "Amazon VPC Network Access Analyzer",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-network-access-control-list",
+      "name": "Amazon VPC Network Access Control List",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-peering-connection",
+      "name": "Amazon VPC Peering Connection",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-reachability-analyzer",
+      "name": "Amazon VPC Reachability Analyzer",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-router",
+      "name": "Amazon VPC Router",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-traffic-mirroring",
+      "name": "Amazon VPC Traffic Mirroring",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-vpn-connection",
+      "name": "Amazon VPC VPN Connection",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-vpn-gateway",
+      "name": "Amazon VPC VPN Gateway",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-vpc-virtual-private-cloud-vpc",
+      "name": "Amazon VPC Virtual private cloud VPC",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "elastic-load-balancing-application-load-balancer",
+      "name": "Elastic Load Balancing Application Load Balancer",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "elastic-load-balancing-classic-load-balancer",
+      "name": "Elastic Load Balancing Classic Load Balancer",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "elastic-load-balancing-gateway-load-balancer",
+      "name": "Elastic Load Balancing Gateway Load Balancer",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "elastic-load-balancing-network-load-balancer",
+      "name": "Elastic Load Balancing Network Load Balancer",
+      "category": "Networking & Content Delivery",
+      "color": "#8C4FFF"
+    },
+    {
+      "id": "amazon-braket-chandelier",
+      "name": "Amazon Braket Chandelier",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-chip",
+      "name": "Amazon Braket Chip",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-embedded-simulator",
+      "name": "Amazon Braket Embedded Simulator",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-managed-simulator",
+      "name": "Amazon Braket Managed Simulator",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-noise-simulator",
+      "name": "Amazon Braket Noise Simulator",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-qpu",
+      "name": "Amazon Braket QPU",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-simulator-1",
+      "name": "Amazon Braket Simulator 1",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-simulator-2",
+      "name": "Amazon Braket Simulator 2",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-simulator-3",
+      "name": "Amazon Braket Simulator 3",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-simulator-4",
+      "name": "Amazon Braket Simulator 4",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-simulator",
+      "name": "Amazon Braket Simulator",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-state-vector",
+      "name": "Amazon Braket State Vector",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "amazon-braket-tensor-network",
+      "name": "Amazon Braket Tensor Network",
+      "category": "Quantum Technologies",
+      "color": "#ED7100"
+    },
+    {
+      "id": "aws-certificate-manager-certificate-authority",
+      "name": "AWS Certificate Manager Certificate Authority",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-directory-service-ad-connector",
+      "name": "AWS Directory Service AD Connector",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-directory-service-aws-managed-microsoft-ad",
+      "name": "AWS Directory Service AWS Managed Microsoft AD",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-directory-service-simple-ad",
+      "name": "AWS Directory Service Simple AD",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-aws-sts-alternate",
+      "name": "AWS Identity Access Management AWS STS Alternate",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-aws-sts",
+      "name": "AWS Identity Access Management AWS STS",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-add-on",
+      "name": "AWS Identity Access Management Add on",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-data-encryption-key",
+      "name": "AWS Identity Access Management Data Encryption Key",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-encrypted-data",
+      "name": "AWS Identity Access Management Encrypted Data",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-iam-access-analyzer",
+      "name": "AWS Identity Access Management IAM Access Analyzer",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-iam-roles-anywhere",
+      "name": "AWS Identity Access Management IAM Roles Anywhere",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-long-term-security-credential",
+      "name": "AWS Identity Access Management Long Term Security Credential",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-mfa-token",
+      "name": "AWS Identity Access Management MFA Token",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-permissions",
+      "name": "AWS Identity Access Management Permissions",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-role",
+      "name": "AWS Identity Access Management Role",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-identity-access-management-temporary-security-credential",
+      "name": "AWS Identity Access Management Temporary Security Credential",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-key-management-service-external-key-store",
+      "name": "AWS Key Management Service External Key Store",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-network-firewall-endpoints",
+      "name": "AWS Network Firewall Endpoints",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-security-hub-finding",
+      "name": "AWS Security Hub Finding",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-shield-aws-shield-advanced",
+      "name": "AWS Shield AWS Shield Advanced",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-waf-bad-bot",
+      "name": "AWS WAF Bad Bot",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-waf-bot-control",
+      "name": "AWS WAF Bot Control",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-waf-bot",
+      "name": "AWS WAF Bot",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-waf-filtering-rule",
+      "name": "AWS WAF Filtering Rule",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-waf-labels",
+      "name": "AWS WAF Labels",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-waf-managed-rule",
+      "name": "AWS WAF Managed Rule",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-waf-rule",
+      "name": "AWS WAF Rule",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "amazon-inspector-agent",
+      "name": "Amazon Inspector Agent",
+      "category": "Security, Identity & Compliance",
+      "color": "#DD344C"
+    },
+    {
+      "id": "aws-backup-aws-backup-support-for-vmware-workloads",
+      "name": "AWS Backup AWS Backup Support for VMware Workloads",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-aws-backup-for-aws-cloudformation",
+      "name": "AWS Backup AWS Backup for AWS CloudFormation",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-aws-backup-support-for-amazon-fsx-for-netapp-ontap",
+      "name": "AWS Backup AWS Backup support for Amazon FSx for NetApp ONTAP",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-aws-backup-support-for-amazon-s3",
+      "name": "AWS Backup AWS Backup support for Amazon S3",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-audit-manager",
+      "name": "AWS Backup Audit Manager",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-backup-plan",
+      "name": "AWS Backup Backup Plan",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-backup-restore",
+      "name": "AWS Backup Backup Restore",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-backup-vault",
+      "name": "AWS Backup Backup Vault",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-compliance-reporting",
+      "name": "AWS Backup Compliance Reporting",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-compute",
+      "name": "AWS Backup Compute",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-database",
+      "name": "AWS Backup Database",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-gateway",
+      "name": "AWS Backup Gateway",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-legal-hold",
+      "name": "AWS Backup Legal Hold",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-recovery-point-objective",
+      "name": "AWS Backup Recovery Point Objective",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-recovery-time-objective",
+      "name": "AWS Backup Recovery Time Objective",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-storage",
+      "name": "AWS Backup Storage",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-vault-lock",
+      "name": "AWS Backup Vault Lock",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-virtual-machine-monitor",
+      "name": "AWS Backup Virtual Machine Monitor",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-backup-virtual-machine",
+      "name": "AWS Backup Virtual Machine",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-snowball-snowball-import-export",
+      "name": "AWS Snowball Snowball Import Export",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway-amazon-fsx-file-gateway",
+      "name": "AWS Storage Gateway Amazon FSx File Gateway",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway-amazon-s3-file-gateway",
+      "name": "AWS Storage Gateway Amazon S3 File Gateway",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway-cached-volume",
+      "name": "AWS Storage Gateway Cached Volume",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway-file-gateway",
+      "name": "AWS Storage Gateway File Gateway",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway-noncached-volume",
+      "name": "AWS Storage Gateway Noncached Volume",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway-tape-gateway",
+      "name": "AWS Storage Gateway Tape Gateway",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway-virtual-tape-library",
+      "name": "AWS Storage Gateway Virtual Tape Library",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "aws-storage-gateway-volume-gateway",
+      "name": "AWS Storage Gateway Volume Gateway",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-block-store-amazon-data-lifecycle-manager",
+      "name": "Amazon Elastic Block Store Amazon Data Lifecycle Manager",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-block-store-multiple-volumes",
+      "name": "Amazon Elastic Block Store Multiple Volumes",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-block-store-snapshot",
+      "name": "Amazon Elastic Block Store Snapshot",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-block-store-volume-gp3",
+      "name": "Amazon Elastic Block Store Volume gp3",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-block-store-volume",
+      "name": "Amazon Elastic Block Store Volume",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-file-system-efs-intelligent-tiering",
+      "name": "Amazon Elastic File System EFS Intelligent Tiering",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-file-system-efs-one-zone-infrequent-access",
+      "name": "Amazon Elastic File System EFS One Zone Infrequent Access",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-file-system-efs-one-zone",
+      "name": "Amazon Elastic File System EFS One Zone",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-file-system-efs-standard-infrequent-access",
+      "name": "Amazon Elastic File System EFS Standard Infrequent Access",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-file-system-efs-standard",
+      "name": "Amazon Elastic File System EFS Standard",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-file-system-elastic-throughput",
+      "name": "Amazon Elastic File System Elastic Throughput",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-elastic-file-system-file-system",
+      "name": "Amazon Elastic File System File System",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-file-cache-hybrid-nfs-linked-datasets",
+      "name": "Amazon File Cache Hybrid NFS linked datasets",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-file-cache-on-premises-nfs-linked-datasets",
+      "name": "Amazon File Cache On premises NFS linked datasets",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-file-cache-s3-linked-datasets",
+      "name": "Amazon File Cache S3 linked datasets",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-glacier-archive",
+      "name": "Amazon Simple Storage Service Glacier Archive",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-glacier-vault",
+      "name": "Amazon Simple Storage Service Glacier Vault",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-bucket-with-objects",
+      "name": "Amazon Simple Storage Service Bucket With Objects",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-bucket",
+      "name": "Amazon Simple Storage Service Bucket",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-directory-bucket",
+      "name": "Amazon Simple Storage Service Directory bucket",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-general-access-points",
+      "name": "Amazon Simple Storage Service General Access Points",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-object",
+      "name": "Amazon Simple Storage Service Object",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-batch-operations",
+      "name": "Amazon Simple Storage Service S3 Batch Operations",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-express-one-zone",
+      "name": "Amazon Simple Storage Service S3 Express One Zone",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-glacier-deep-archive",
+      "name": "Amazon Simple Storage Service S3 Glacier Deep Archive",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-glacier-flexible-retrieval",
+      "name": "Amazon Simple Storage Service S3 Glacier Flexible Retrieval",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-glacier-instant-retrieval",
+      "name": "Amazon Simple Storage Service S3 Glacier Instant Retrieval",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-intelligent-tiering",
+      "name": "Amazon Simple Storage Service S3 Intelligent Tiering",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-multi-region-access-points",
+      "name": "Amazon Simple Storage Service S3 Multi Region Access Points",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-object-lambda-access-points",
+      "name": "Amazon Simple Storage Service S3 Object Lambda Access Points",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-object-lambda",
+      "name": "Amazon Simple Storage Service S3 Object Lambda",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-object-lock",
+      "name": "Amazon Simple Storage Service S3 Object Lock",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-on-outposts",
+      "name": "Amazon Simple Storage Service S3 On Outposts",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-one-zone-ia",
+      "name": "Amazon Simple Storage Service S3 One Zone IA",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-replication-time-control",
+      "name": "Amazon Simple Storage Service S3 Replication Time Control",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-replication",
+      "name": "Amazon Simple Storage Service S3 Replication",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-select",
+      "name": "Amazon Simple Storage Service S3 Select",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-standard-ia",
+      "name": "Amazon Simple Storage Service S3 Standard IA",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-standard",
+      "name": "Amazon Simple Storage Service S3 Standard",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-storage-lens",
+      "name": "Amazon Simple Storage Service S3 Storage Lens",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-tables",
+      "name": "Amazon Simple Storage Service S3 Tables",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-s3-vectors",
+      "name": "Amazon Simple Storage Service S3 Vectors",
+      "category": "Storage",
+      "color": "#7AA116"
+    },
+    {
+      "id": "amazon-simple-storage-service-vpc-access-points",
+      "name": "Amazon Simple Storage Service VPC Access Points",
+      "category": "Storage",
+      "color": "#7AA116"
+    }
+  ],
+  "groups": [
+    {
+      "id": "aws-account",
+      "name": "AWS Account",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "aws-cloud-logo",
+      "name": "AWS Cloud logo",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "aws-cloud",
+      "name": "AWS Cloud",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "aws-iot-greengrass-deployment",
+      "name": "AWS IoT Greengrass Deployment",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "auto-scaling-group",
+      "name": "Auto Scaling group",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "corporate-data-center",
+      "name": "Corporate data center",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "ec2-instance-contents",
+      "name": "EC2 instance contents",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "private-subnet",
+      "name": "Private subnet",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "public-subnet",
+      "name": "Public subnet",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "region",
+      "name": "Region",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "server-contents",
+      "name": "Server contents",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "spot-fleet",
+      "name": "Spot Fleet",
+      "category": "Group",
+      "color": "#7D8998"
+    },
+    {
+      "id": "virtual-private-cloud-vpc",
+      "name": "Virtual private cloud VPC",
+      "category": "Group",
+      "color": "#7D8998"
+    }
+  ],
+  "aliases": {
+    "s3": "amazon-simple-storage-service",
+    "ec2": "amazon-ec2",
+    "lambda": "aws-lambda",
+    "rds": "amazon-rds",
+    "dynamodb": "amazon-dynamodb",
+    "cloudfront": "amazon-cloudfront",
+    "api-gateway": "amazon-api-gateway",
+    "apigateway": "amazon-api-gateway",
+    "elb": "elastic-load-balancing",
+    "alb": "elastic-load-balancing",
+    "nlb": "elastic-load-balancing",
+    "ecs": "amazon-elastic-container-service",
+    "eks": "amazon-elastic-kubernetes-service",
+    "fargate": "aws-fargate",
+    "sqs": "amazon-simple-queue-service",
+    "sns": "amazon-simple-notification-service",
+    "route53": "amazon-route-53",
+    "route-53": "amazon-route-53",
+    "cloudwatch": "amazon-cloudwatch",
+    "iam": "aws-identity-and-access-management",
+    "cognito": "amazon-cognito",
+    "elasticache": "amazon-elasticache",
+    "aurora": "amazon-aurora",
+    "step-functions": "aws-step-functions",
+    "eventbridge": "amazon-eventbridge",
+    "kinesis": "amazon-kinesis",
+    "athena": "amazon-athena",
+    "glue": "aws-glue",
+    "redshift": "amazon-redshift",
+    "sagemaker": "amazon-sagemaker-ai",
+    "bedrock": "amazon-bedrock",
+    "ecr": "amazon-elastic-container-registry",
+    "codebuild": "aws-codebuild",
+    "codepipeline": "aws-codepipeline",
+    "kms": "aws-key-management-service",
+    "waf": "aws-waf",
+    "secrets-manager": "aws-secrets-manager",
+    "cloudtrail": "aws-cloudtrail",
+    "efs": "amazon-efs",
+    "opensearch": "amazon-opensearch-service",
+    "amplify": "aws-amplify",
+    "appsync": "aws-appsync",
+    "batch": "aws-batch",
+    "lightsail": "amazon-lightsail",
+    "direct-connect": "aws-direct-connect",
+    "vpn": "aws-site-to-site-vpn",
+    "transit-gateway": "aws-transit-gateway",
+    "ses": "amazon-simple-email-service",
+    "mq": "amazon-mq",
+    "msk": "amazon-managed-streaming-for-apache-kafka",
+    "neptune": "amazon-neptune",
+    "documentdb": "amazon-documentdb",
+    "memorydb": "amazon-memorydb",
+    "backup": "aws-backup",
+    "organizations": "aws-organizations",
+    "control-tower": "aws-control-tower",
+    "quicksight": "amazon-quicksight",
+    "ecs-task": "amazon-elastic-container-service-task",
+    "ecs-service": "amazon-elastic-container-service-service",
+    "ecs-service-connect": "amazon-elastic-container-service-ecs-service-connect",
+    "ecs-container": "amazon-elastic-container-service-container-1",
+    "ecr-image": "amazon-elastic-container-registry-image",
+    "ec2-instance": "amazon-ec2-instance",
+    "ec2-instances": "amazon-ec2-instances",
+    "ec2-ami": "amazon-ec2-ami",
+    "lambda-function": "aws-lambda-lambda-function",
+    "s3-bucket": "amazon-simple-storage-service-bucket",
+    "s3-bucket-with-objects": "amazon-simple-storage-service-bucket-with-objects",
+    "dynamodb-table": "amazon-dynamodb-table",
+    "sqs-queue": "amazon-simple-queue-service-queue",
+    "sqs-message": "amazon-simple-queue-service-message",
+    "sns-topic": "amazon-simple-notification-service-topic",
+    "nat-gateway": "amazon-vpc-nat-gateway",
+    "internet-gateway": "amazon-vpc-internet-gateway",
+    "vpc-endpoints": "amazon-vpc-endpoints",
+    "route53-hosted-zone": "amazon-route-53-hosted-zone",
+    "eventbridge-event": "amazon-eventbridge-event"
+  }
+}
