@@ -72,23 +72,33 @@ Ask Claude to design an architecture and it generates diagrams for each cloud pr
 
 ## Architecture
 
-```
-+------------------+         +---------------------------------------------+
-|   MCP Client     |  HTTPS  |  Cloudflare Worker (preview-cloud-diagram-mcp) |
-|  (Claude.ai etc) +-------->|                                             |
-|                  |  /mcp   |  src/server/index.ts                        |
-|  +------------+  |         |   +-- McpServer (created per request)       |
-|  | iframe UI  |<-----------|   |    +-- tool: render_diagram (with UI)   |
-|  | (diagram)  |  ui://...  |   |    +-- tool: render_sequence (with UI)  |
-|  +------------+  |         |   |    +-- tool: list_icons                |
-+------------------+         |   |    +-- resource: ui://cloud-diagram/   |
-                             |   |         app.html (public/index.html)   |
-                             |   +-- other paths --> env.ASSETS (public/) |
-                             +---------------------------------------------+
+**Request flow**
 
-Build pipeline:
-  assets/aws-icons/** --build:icons--> src/generated/icon-manifest.json etc.
-  src/ui/**           --build:ui----> public/index.html (vite, single HTML)
+```mermaid
+flowchart LR
+    subgraph Client["MCP Client (Claude.ai etc)"]
+        UI["iframe UI<br/>(diagram)"]
+    end
+
+    subgraph Worker["Cloudflare Worker (preview-cloud-diagram-mcp)<br/>src/server/index.ts"]
+        Mcp["McpServer<br/>(created per request)"]
+        Mcp --> T1["tool: render_diagram (with UI)"]
+        Mcp --> T2["tool: render_sequence (with UI)"]
+        Mcp --> T3["tool: list_icons"]
+        Mcp --> Res["resource: ui://cloud-diagram/app.html<br/>(public/index.html)"]
+        Assets["other paths &rarr; env.ASSETS (public/)"]
+    end
+
+    Client -- "HTTPS /mcp" --> Mcp
+    Res -- "ui://..." --> UI
+```
+
+**Build pipeline**
+
+```mermaid
+flowchart LR
+    A["assets/aws-icons/**"] -- "build:icons" --> B["src/generated/icon-manifest.json etc."]
+    C["src/ui/**"] -- "build:ui" --> D["public/index.html<br/>(vite, single HTML)"]
 ```
 
 - `src/shared/diagram-spec.ts` — DiagramSpec type (shared contract between server and UI)

@@ -12,3 +12,4 @@ terraform/.terraform/
 *.tfstate.*
 lambda.zip
 .terraform.tfstate.lock.info
+terraform.log

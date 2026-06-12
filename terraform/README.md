@@ -2,6 +2,8 @@
 
 Deploy the MCP server using AWS Lambda + Function URL. It is compatible with the same MCP endpoint as the Cloudflare Workers version and can be used directly from clients such as Claude.ai and Claude Code.
 
+![diagram](../docs/images/cloud-diagram.svg)
+
 ## Prerequisites
 
 | Tool | Version |
