@@ -1,15 +1,18 @@
-name: Deploy to Cloudflare Workers
+name: Test
 
+# リリースは AWS へ terraform で手動実行するため、CI はデプロイせず
+# 型チェックとエンドポイント結合テストのみを回す。
 on:
   push:
     branches:
       - main
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -24,12 +27,5 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Build UI
-        run: npm run build:ui
-
-      - name: Deploy Worker
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+      - name: Test (endpoint integration)
+        run: npm test

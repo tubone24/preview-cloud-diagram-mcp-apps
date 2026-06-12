@@ -17,13 +17,20 @@ import { createServer } from "./create-server";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
 
-// ── UI HTML を起動時に一度だけキャッシュ ──────────────────────────────────────
+// ── UI HTML を fs から遅延ロード（初回のみ読み込み、以降はメモ化） ──────────────
 // esbuild --outfile=dist/lambda/index.js でバンドルするため __dirname は dist/lambda/ を指す。
 // cp コマンドで index.html を同ディレクトリに配置済み。
-const uiHtml = readFileSync(join(__dirname, "index.html"), "utf-8");
+// NOTE: 以前は module top-level で readFileSync していたが、それだと import するだけで
+//       ファイルが必須になりテストから読み込めない。遅延化して import を副作用フリーにした。
+let cachedUiHtml: string | undefined;
 
-/** fs キャッシュから HTML を返す loadUiHtml 実装（Lambda 専用） */
-const fsLoadUiHtml = async (): Promise<string> => uiHtml;
+/** fs から HTML を返す loadUiHtml 実装（Lambda 専用 / 初回のみ読み込み） */
+const fsLoadUiHtml = async (): Promise<string> => {
+  if (cachedUiHtml === undefined) {
+    cachedUiHtml = readFileSync(join(__dirname, "index.html"), "utf-8");
+  }
+  return cachedUiHtml;
+};
 
 /** Lambda Function URL イベント（payload v2.0）を Web 標準 Request に変換する */
 function eventToRequest(event: APIGatewayProxyEventV2): Request {
@@ -57,44 +64,57 @@ async function responseToResult(response: Response): Promise<APIGatewayProxyResu
   return { statusCode: response.status, headers, body };
 }
 
+/**
+ * Lambda ハンドラを生成するファクトリ。
+ *
+ * UI HTML の読み込み方法を loadUiHtml として注入できるようにすることで、
+ * 本番（fs 読み込み）とテスト（スタブ HTML）の両方から同じ経路をエンドツーエンドで検証できる。
+ *
+ * @param loadUiHtml - UI HTML を返す非同期関数。省略時は fs から読み込む本番実装。
+ */
+export function createHandler(loadUiHtml: () => Promise<string> = fsLoadUiHtml) {
+  return async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
+    const path = event.rawPath ?? "/";
+
+    // /mcp 以外はすべて UI HTML を返す
+    if (path !== "/mcp") {
+      return {
+        statusCode: 200,
+        headers: { "content-type": "text/html; charset=utf-8" },
+        body: await loadUiHtml(),
+      };
+    }
+
+    // リクエストごとに transport / server を生成（stateless）
+    const transport = new WebStandardStreamableHTTPServerTransport({
+      sessionIdGenerator: undefined, // stateless モード
+      enableJsonResponse: true, // Function URL はバッファ応答のため単一 JSON を返す
+    });
+    const server = createServer(loadUiHtml);
+
+    try {
+      await server.connect(transport);
+      const response = await transport.handleRequest(eventToRequest(event));
+      return await responseToResult(response);
+    } catch (err) {
+      console.error("[lambda] MCP handler error:", err);
+      return {
+        statusCode: 500,
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          error: { code: -32603, message: "Internal server error" },
+          id: null,
+        }),
+      };
+    } finally {
+      // 使い捨ての transport / server を確実に破棄する
+      await transport.close();
+      await server.close();
+    }
+  };
+}
+
 // ── Lambda ハンドラ export（handler 設定は "index.handler" を指定） ───────────────
-export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
-  const path = event.rawPath ?? "/";
-
-  // /mcp 以外はすべて UI HTML を返す
-  if (path !== "/mcp") {
-    return {
-      statusCode: 200,
-      headers: { "content-type": "text/html; charset=utf-8" },
-      body: uiHtml,
-    };
-  }
-
-  // リクエストごとに transport / server を生成（stateless）
-  const transport = new WebStandardStreamableHTTPServerTransport({
-    sessionIdGenerator: undefined, // stateless モード
-    enableJsonResponse: true, // Function URL はバッファ応答のため単一 JSON を返す
-  });
-  const server = createServer(fsLoadUiHtml);
-
-  try {
-    await server.connect(transport);
-    const response = await transport.handleRequest(eventToRequest(event));
-    return await responseToResult(response);
-  } catch (err) {
-    console.error("[lambda] MCP handler error:", err);
-    return {
-      statusCode: 500,
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        jsonrpc: "2.0",
-        error: { code: -32603, message: "Internal server error" },
-        id: null,
-      }),
-    };
-  } finally {
-    // 使い捨ての transport / server を確実に破棄する
-    await transport.close();
-    await server.close();
-  }
-};
+// 本番エントリ。fs から UI HTML を読み込む既定のハンドラ。
+export const handler = createHandler();

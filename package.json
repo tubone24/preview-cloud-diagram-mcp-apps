@@ -14,6 +14,8 @@
     "dev": "npm run build:ui && wrangler dev",
     "deploy": "npm run build:ui && wrangler deploy",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "build:lambda": "esbuild src/server/lambda.ts --bundle --platform=node --target=node20 --format=cjs --outfile=dist/lambda/index.js && cp public/index.html dist/lambda/index.html",
     "package:lambda": "cd dist/lambda && zip -r ../../lambda.zip ."
   },
@@ -31,6 +33,7 @@
     "typescript": "^5.7.0",
     "vite": "^6.3.0",
     "vite-plugin-singlefile": "^2.3.3",
+    "vitest": "^4.1.8",
     "wrangler": "^4.0.0"
   }
 }
