@@ -1,74 +1,115 @@
-# クラウド構成図 MCP App（AWS / Azure / Google Cloud）
+# Cloud Diagram MCP App (AWS / Azure / Google Cloud)
 
-AWS・Azure・Google Cloud 公式アーキテクチャアイコンを使ってクラウド構成図をインタラクティブに描画する [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) サーバーです。Cloudflare Workers 上で動作し、Claude.ai / Claude Code などのMCPクライアントから利用できます。
+An [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) server that renders interactive cloud architecture diagrams using official AWS, Azure, and Google Cloud icons. Runs on Cloudflare Workers and is accessible from MCP clients such as Claude.ai and Claude Code.
 
-Claudeが構成を説明・提案するときに `render_diagram` ツールを呼ぶと、会話内にUI（構成図）がインライン表示されます。要素はトラフィックの入口側から順に並べる契約になっており、ツール引数のストリーミングに合わせてUIが先頭からプログレッシブに描画します。
+When Claude explains or proposes a cloud architecture, calling the `render_diagram` tool displays the diagram inline in the conversation. Elements are ordered from the traffic ingress side, and the UI renders progressively from the top as tool arguments stream in.
 
-## アーキテクチャ
+## Quick Start
+
+A live instance is deployed at AWS Lambda Function URL. No setup required — just connect your MCP client.
+
+**MCP Endpoint:**
+```
+https://ylomp4fr6ke2jrweklwzahf6gy0sryec.lambda-url.ap-northeast-1.on.aws/mcp
+```
+
+### Claude.ai
+
+1. Open **Settings > Connectors**
+2. Click **Add custom connector**
+3. Paste the MCP endpoint URL above (no authentication required)
+4. Ask Claude about a cloud architecture — it will call `render_diagram` and display the diagram inline
+
+### Claude Code
+
+Add to your MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "cloud-diagram": {
+      "url": "https://ylomp4fr6ke2jrweklwzahf6gy0sryec.lambda-url.ap-northeast-1.on.aws/mcp"
+    }
+  }
+}
+```
+
+### Verify the endpoint
+
+```bash
+curl -X POST https://ylomp4fr6ke2jrweklwzahf6gy0sryec.lambda-url.ap-northeast-1.on.aws/mcp \
+  -H 'content-type: application/json' \
+  -H 'accept: application/json, text/event-stream' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"curl","version":"0"}}}'
+```
+
+---
+
+## Architecture
 
 ```
 +------------------+         +---------------------------------------------+
-|  MCPクライアント  |  HTTPS  |  Cloudflare Worker (aws-diagram-mcp)        |
-|  (Claude.ai等)   +-------->|                                             |
+|   MCP Client     |  HTTPS  |  Cloudflare Worker (preview-cloud-diagram-mcp) |
+|  (Claude.ai etc) +-------->|                                             |
 |                  |  /mcp   |  src/server/index.ts                        |
-|  +------------+  |         |   +-- McpServer (リクエストごとに生成)       |
-|  | iframe UI  |<-----------|   |    +-- tool: render_diagram (UI付き)    |
-|  | (構成図)    |  ui://...  |   |    +-- tool: render_sequence (UI付き)  |
+|  +------------+  |         |   +-- McpServer (created per request)       |
+|  | iframe UI  |<-----------|   |    +-- tool: render_diagram (with UI)   |
+|  | (diagram)  |  ui://...  |   |    +-- tool: render_sequence (with UI)  |
 |  +------------+  |         |   |    +-- tool: list_icons                |
 +------------------+         |   |    +-- resource: ui://cloud-diagram/   |
                              |   |         app.html (public/index.html)   |
-                             |   +-- それ以外のパス --> env.ASSETS (public/)|
+                             |   +-- other paths --> env.ASSETS (public/) |
                              +---------------------------------------------+
 
-ビルドパイプライン:
-  assets/aws-icons/** --build:icons--> src/generated/icon-manifest.json ほか
-  src/ui/**           --build:ui----> public/index.html (vite, 単一HTML)
+Build pipeline:
+  assets/aws-icons/** --build:icons--> src/generated/icon-manifest.json etc.
+  src/ui/**           --build:ui----> public/index.html (vite, single HTML)
 ```
 
-- `src/shared/diagram-spec.ts` … DiagramSpec型（サーバー・UI共通の契約）
-- `src/server/` … MCPサーバー（Worker本体）
-- `src/ui/` … 構成図レンダラ（viteで単一HTMLにビルドされ `public/index.html` になる）
-- `src/generated/{aws,azure,gcp}/icon-manifest.json` … アイコンカタログ（AWS 796件・Azure 619件・GCP 249件）
+- `src/shared/diagram-spec.ts` — DiagramSpec type (shared contract between server and UI)
+- `src/server/` — MCP server (Worker entry point)
+- `src/ui/` — Diagram renderer (built into a single HTML by Vite → `public/index.html`)
+- `src/generated/{aws,azure,gcp}/icon-manifest.json` — Icon catalogs (AWS: 796, Azure: 619, GCP: 249)
 
-## セットアップ
+## Setup
 
 ```bash
 npm install
 
-# アイコンマニフェスト生成（assets/aws-icons から src/generated/ を生成）
+# Generate icon manifests (from assets/aws-icons to src/generated/)
 npm run build:icons
 
-# UIビルド（vite → public/index.html）
+# Build UI (vite → public/index.html)
 npm run build:ui
 
-# ローカル起動（http://localhost:8787/mcp がMCPエンドポイント）
+# Start local dev server (MCP endpoint: http://localhost:8787/mcp)
 npx wrangler dev
 ```
 
-`npm run dev` で build:ui と wrangler dev をまとめて実行できます。
+Run `npm run dev` to execute `build:ui` and `wrangler dev` together.
 
-## Cloudflareへのデプロイ
+## Deploy to Cloudflare
 
-GitHub Actions により、`main` ブランチへの push で自動デプロイされます。事前にリポジトリの **Settings > Secrets and variables > Actions** で以下のSecretsを設定してください。
+GitHub Actions automatically deploys on push to the `main` branch. Before that, configure the following Secrets under **Settings > Secrets and variables > Actions** in your repository.
 
-| Secret | 取得方法 |
-|--------|---------|
-| `CLOUDFLARE_API_TOKEN` | [Cloudflareダッシュボード](https://dash.cloudflare.com/profile/api-tokens) > Create Token > 「Edit Cloudflare Workers」テンプレートで作成 |
-| `CLOUDFLARE_ACCOUNT_ID` | CloudflareダッシュボードのWorkers & Pages画面右側に表示されるAccount ID |
+| Secret | How to obtain |
+|--------|--------------|
+| `CLOUDFLARE_API_TOKEN` | [Cloudflare Dashboard](https://dash.cloudflare.com/profile/api-tokens) > Create Token > use the "Edit Cloudflare Workers" template |
+| `CLOUDFLARE_ACCOUNT_ID` | Account ID shown on the right side of the Workers & Pages page in the Cloudflare Dashboard |
 
-手動デプロイする場合:
+To deploy manually:
 
 ```bash
 npm run deploy
 ```
 
-デプロイ後のMCPエンドポイントは `https://aws-diagram-mcp.<account>.workers.dev/mcp` です。
+After deployment, the MCP endpoint is `https://preview-cloud-diagram-mcp.<account>.workers.dev/mcp`.
 
-## AWS (Lambda Function URL) へのデプロイ
+## Deploy to AWS (Lambda Function URL)
 
-Cloudflare Workers 版と並行して、AWS Lambda Function URL へのデプロイにも対応しています。MCP エンドポイントの互換性は同じです。
+In addition to Cloudflare Workers, deployment to AWS Lambda Function URL is also supported. MCP endpoint compatibility is the same.
 
-詳細な手順は [`terraform/README.md`](terraform/README.md) を参照してください。
+See [`terraform/README.md`](terraform/README.md) for detailed instructions.
 
 ```bash
 cd terraform
@@ -77,98 +118,98 @@ terraform plan
 terraform apply
 ```
 
-apply 完了後に出力される `mcp_endpoint`（例: `https://xxxx.lambda-url.ap-northeast-1.on.aws/mcp`）を MCP クライアントに登録して使用します。
+After `apply` completes, register the output `mcp_endpoint` (e.g. `https://xxxx.lambda-url.ap-northeast-1.on.aws/mcp`) in your MCP client.
 
-## Claude.aiへの登録（カスタムコネクタ）
+## Register with Claude.ai (Custom Connector)
 
-1. Claude.ai の **Settings > Connectors** を開く
-2. **Add custom connector** をクリック
-3. URLに `https://aws-diagram-mcp.<account>.workers.dev/mcp` を入力（認証は不要）
-4. 追加後、チャットでクラウド構成について質問すると、Claudeが `render_diagram` を呼び出して構成図を表示します
+1. Open **Settings > Connectors** in Claude.ai
+2. Click **Add custom connector**
+3. Enter `https://preview-cloud-diagram-mcp.<account>.workers.dev/mcp` as the URL (no authentication required)
+4. After adding, ask Claude about a cloud architecture and it will call `render_diagram` to display the diagram
 
-例: 「CloudFront + ALB + ECSの一般的なWeb構成を図で説明して」
+Example: "Show me a typical web architecture with CloudFront + ALB + ECS"
 
-## ツール仕様
+## Tool Specification
 
-全ツールに **`provider`** 引数（`"aws"` / `"azure"` / `"gcp"`）が必須です。ストリーミングレンダリングのため、引数の先頭に書いてください。
+All tools require a **`provider`** argument (`"aws"` / `"azure"` / `"gcp"`). Write it first in the arguments for streaming rendering.
 
-### render_diagram（UI付きツール）
+### render_diagram (UI-enabled tool)
 
-クラウド構成図（AWS / Azure / Google Cloud）を描画します。結果は `ui://cloud-diagram/app.html` のUIにインライン表示されます。
+Renders a cloud architecture diagram (AWS / Azure / Google Cloud). The result is displayed inline in the UI at `ui://cloud-diagram/app.html`.
 
-入力:
+Input:
 
-| フィールド | 型 | 説明 |
-|-----------|----|------|
-| `provider` | `"aws"\|"azure"\|"gcp"` | クラウドプロバイダー（**先頭に記述**） |
-| `title` | `string?` | 図のタイトル |
-| `elements` | `DiagramElement[]` | 構成要素。**入口側（user/client）から処理の流れの順**に並べる。groupは中の要素より先に宣言する |
+| Field | Type | Description |
+|-------|------|-------------|
+| `provider` | `"aws"\|"azure"\|"gcp"` | Cloud provider (**write first**) |
+| `title` | `string?` | Diagram title |
+| `elements` | `DiagramElement[]` | Components. **Order from ingress (user/client) following the traffic flow.** Declare groups before their children |
 
-`DiagramElement`（`type` による discriminated union）:
+`DiagramElement` (discriminated union by `type`):
 
 - **group** — `{ type: "group", id, kind, label?, parent? }`
-  - AWS `kind`: `aws-cloud` / `region` / `vpc` / `availability-zone` / `public-subnet` / `private-subnet` / `security-group` / `auto-scaling-group` など
-  - Azure `kind`: `azure-cloud` / `azure-subscription` / `azure-resource-group` / `azure-vnet` / `azure-subnet` など
-  - GCP `kind`: `gcp-cloud` / `gcp-project` / `gcp-vpc` / `gcp-region` / `gcp-zone` / `gcp-subnet` など
-  - 入れ子例（Azure）: `azure-subscription > azure-resource-group > azure-vnet > azure-subnet`
-  - 入れ子例（GCP）: `gcp-project > gcp-vpc > gcp-region > gcp-zone`
+  - AWS `kind`: `aws-cloud` / `region` / `vpc` / `availability-zone` / `public-subnet` / `private-subnet` / `security-group` / `auto-scaling-group` etc.
+  - Azure `kind`: `azure-cloud` / `azure-subscription` / `azure-resource-group` / `azure-vnet` / `azure-subnet` etc.
+  - GCP `kind`: `gcp-cloud` / `gcp-project` / `gcp-vpc` / `gcp-region` / `gcp-zone` / `gcp-subnet` etc.
+  - Nesting example (Azure): `azure-subscription > azure-resource-group > azure-vnet > azure-subnet`
+  - Nesting example (GCP): `gcp-project > gcp-vpc > gcp-region > gcp-zone`
 - **node** — `{ type: "node", id, icon, name?, parent? }`
-  - `icon`: アイコンID またはエイリアス
-    - AWS: `amazon-ec2`、`aws-lambda`、エイリアス `s3` / `alb` / `rds` など
-    - Azure: `azure-virtual-machine`、エイリアス `vm` / `aks` / `cosmos` など
-    - GCP: `gcp-compute-engine`、エイリアス `gke` / `gcs` / `bq` / `pubsub` など
-  - `name`: リソース固有名（任意）。サービス名ラベルはアイコンから自動付与
+  - `icon`: icon ID or alias
+    - AWS: `amazon-ec2`, `aws-lambda`, aliases `s3` / `alb` / `rds` etc.
+    - Azure: `azure-virtual-machine`, aliases `vm` / `aks` / `cosmos` etc.
+    - GCP: `gcp-compute-engine`, aliases `gke` / `gcs` / `bq` / `pubsub` etc.
+  - `name`: resource-specific name (optional). Service label is auto-applied from the icon
 - **edge** — `{ type: "edge", from, to, label?, direction? }`
-  - `direction`: `forward`（既定）/ `both` / `none`
+  - `direction`: `forward` (default) / `both` / `none`
 
-出力: `content` に日本語サマリ、`structuredContent` に `{ kind: "architecture", spec: 正規化済みDiagramSpec, warnings: string[] }`。アイコンIDはエイリアス解決・プレフィックス補完・部分一致で正規化され、解決できないアイコンや存在しないIDを参照するedgeは `warnings` に記録されます（要素自体は残ります）。
+Output: `content` contains a summary, `structuredContent` contains `{ kind: "architecture", spec: normalizedDiagramSpec, warnings: string[] }`. Icon IDs are normalized via alias resolution, prefix completion, and partial matching. Unresolvable icons or edges referencing non-existent IDs are recorded in `warnings` (elements themselves are preserved).
 
-### render_sequence（UI付きツール）
+### render_sequence (UI-enabled tool)
 
-クラウドサービス間の通信フロー・処理シーケンスをUML準拠のシーケンス図として描画します。結果は構成図と同じ `ui://cloud-diagram/app.html` のUIにインライン表示され、UI側は `structuredContent.kind` で構成図とシーケンス図を描き分けます。構成図（`render_diagram`）で静的な構造を、本ツールで動的なメッセージフローを示す使い分けです。
+Renders communication flows and processing sequences between cloud services as a UML-compliant sequence diagram. The result is displayed inline in the same UI at `ui://cloud-diagram/app.html`. The UI distinguishes between architecture and sequence diagrams based on `structuredContent.kind`. Use `render_diagram` for static structure and this tool for dynamic message flows.
 
-入力:
+Input:
 
-| フィールド | 型 | 説明 |
-|-----------|----|------|
-| `provider` | `"aws"\|"azure"\|"gcp"` | クラウドプロバイダー（**先頭に記述**） |
-| `title` | `string?` | 図のタイトル |
-| `participants` | `SequenceParticipant[]` | ライフライン。**左からトラフィック入口順**（user/client が最左）に並べる |
-| `events` | `SequenceEvent[]` | **上から時系列順**のイベント列 |
+| Field | Type | Description |
+|-------|------|-------------|
+| `provider` | `"aws"\|"azure"\|"gcp"` | Cloud provider (**write first**) |
+| `title` | `string?` | Diagram title |
+| `participants` | `SequenceParticipant[]` | Lifelines. **Order from left to right, traffic ingress first** (user/client at far left) |
+| `events` | `SequenceEvent[]` | Event sequence **in chronological order from top** |
 
 `SequenceParticipant` — `{ id, icon, name? }`
-- `icon`: クラウドサービスのアイコンIDまたはエイリアス（`list_icons` で検索可能）。AWS以外は `user`・`client`・`internet` 等の汎用アイコンも使用可
-- `name`: リソース固有名（任意）。サービス名ラベルはアイコンから自動付与
+- `icon`: cloud service icon ID or alias (searchable via `list_icons`). Generic icons like `user`, `client`, `internet` are also available for non-AWS providers
+- `name`: resource-specific name (optional). Service label is auto-applied from the icon
 
-`SequenceEvent`（`type` による discriminated union）:
+`SequenceEvent` (discriminated union by `type`):
 
 - **message** — `{ type: "message", from, to, label, kind?, activate?, deactivate? }`
-  - `kind`: `sync`（既定、同期呼び出し・塗り矢じり）/ `async`（非同期・開き矢じり）/ `return`（応答・破線）/ `self`（自己処理）
-  - `label` には具体的な処理内容を書く（例 `"PutItem (orders table)"`、`"POST /api/orders"`）
-- **fragment / else / end** — 複合フラグメント。`{ type: "fragment", kind: "alt" | "opt" | "loop" | "par" | "break", label? }` で開始し、対応する `{ type: "end" }` で閉じる。`alt` の分岐は `{ type: "else", label? }` で区切る
-- **note** — `{ type: "note", over: string[], text }`。ライフラインをまたぐ補足ノート
+  - `kind`: `sync` (default, synchronous call / filled arrowhead) / `async` (asynchronous / open arrowhead) / `return` (response / dashed line) / `self` (self-call)
+  - `label` should describe the specific operation (e.g. `"PutItem (orders table)"`, `"POST /api/orders"`)
+- **fragment / else / end** — combined fragments. Open with `{ type: "fragment", kind: "alt" | "opt" | "loop" | "par" | "break", label? }` and close with `{ type: "end" }`. Separate `alt` branches with `{ type: "else", label? }`
+- **note** — `{ type: "note", over: string[], text }`. Supplementary note spanning multiple lifelines
 
-出力: `content` に日本語サマリ（参加者数・メッセージ数・警告）、`structuredContent` に `{ kind: "sequence", spec: 正規化済みSequenceSpec, warnings: string[] }`。participantのアイコンIDは構成図と同じ規則で正規化され、解決できないアイコン・未宣言participantへの参照・フラグメントの対応不整合（`end` 過多、閉じ忘れ、`alt` 外の `else`）は `warnings` に記録されます（要素自体は残ります）。
+Output: `content` contains a summary (participant count, message count, warnings), `structuredContent` contains `{ kind: "sequence", spec: normalizedSequenceSpec, warnings: string[] }`. Participant icon IDs are normalized by the same rules as `render_diagram`. Unresolvable icons, references to undeclared participants, and fragment mismatches (extra `end`, unclosed, `else` outside `alt`) are recorded in `warnings` (elements themselves are preserved).
 
 ### list_icons
 
-`render_diagram` / `render_sequence` の `icon` に使えるアイコンIDを検索します。AWS 796件・Azure 619件・GCP 249件のカタログを収録。
+Searches for icon IDs usable in `render_diagram` / `render_sequence` `icon` fields. Includes catalogs of AWS (796), Azure (619), and GCP (249) icons.
 
-| 引数 | 型 | 説明 |
-|------|----|------|
-| `provider` | `"aws"\|"azure"\|"gcp"` | 検索対象のクラウドプロバイダー |
-| `query` | `string?` | ID・名前・エイリアスへの部分一致（大文字小文字無視） |
-| `category` | `string?` | カテゴリ絞り込み（例 `Compute`、`Database`） |
+| Argument | Type | Description |
+|----------|------|-------------|
+| `provider` | `"aws"\|"azure"\|"gcp"` | Cloud provider to search |
+| `query` | `string?` | Partial match on ID, name, or alias (case-insensitive) |
+| `category` | `string?` | Filter by category (e.g. `Compute`, `Database`) |
 
-結果は `{id, name, category}` を最大50件。`query`/`category` なしで呼ぶとカテゴリ一覧と件数サマリを返します。
+Returns up to 50 results as `{id, name, category}`. Calling without `query`/`category` returns a category list with counts.
 
-## 開発メモ
+## Development
 
 ```bash
-npm run typecheck   # 型チェック
+npm run typecheck   # type check
 ```
 
-ローカルでの動作確認（MCPハンドシェイク）:
+Local verification (MCP handshake):
 
 ```bash
 curl -s http://localhost:8787/mcp \

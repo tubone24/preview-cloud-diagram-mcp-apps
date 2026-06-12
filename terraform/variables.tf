@@ -9,7 +9,7 @@ variable "region" {
 variable "function_name" {
   type        = string
   description = "Lambda 関数名（CloudWatch ロググループ名にも使用される）"
-  default     = "aws-diagram-mcp"
+  default     = "preview-cloud-diagram-mcp"
 }
 
 # Lambda に割り当てるメモリサイズ（MB）

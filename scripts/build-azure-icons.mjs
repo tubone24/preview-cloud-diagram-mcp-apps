@@ -250,6 +250,12 @@ const ALIASES = {
   // Storage
   'storage-account':  'azure-storage-accounts',
   'blob':             'azure-blob-block',
+  'blob-storage':     'azure-blob-block',
+  'azure-blob-storage': 'azure-blob-block',
+  // Cache
+  'redis':            'azure-cache-redis',
+  'cache-for-redis':  'azure-cache-redis',
+  'azure-cache-for-redis': 'azure-cache-redis',
   // Networking
   'vnet':             'azure-virtual-networks',
   'nsg':              'azure-network-security-groups',

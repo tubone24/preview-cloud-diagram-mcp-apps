@@ -3754,6 +3754,11 @@
     "bastion": "azure-bastions",
     "expressroute": "azure-expressroute-circuits",
     "devops": "azure-devops",
-    "monitor": "azure-monitor"
+    "monitor": "azure-monitor",
+    "azure-blob-storage": "azure-blob-block",
+    "blob-storage": "azure-blob-block",
+    "azure-cache-for-redis": "azure-cache-redis",
+    "cache-for-redis": "azure-cache-redis",
+    "redis": "azure-cache-redis"
   }
 }

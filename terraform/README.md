@@ -1,68 +1,68 @@
-# AWS Lambda Function URL へのデプロイ
+# Deploy to AWS Lambda Function URL
 
-AWS Lambda + Function URL を使って MCP サーバーをデプロイします。Cloudflare Workers 版と同じ MCP エンドポイント互換があり、Claude.ai / Claude Code などのクライアントからそのまま利用できます。
+Deploy the MCP server using AWS Lambda + Function URL. It is compatible with the same MCP endpoint as the Cloudflare Workers version and can be used directly from clients such as Claude.ai and Claude Code.
 
-## 前提条件
+## Prerequisites
 
-| ツール | バージョン |
-|--------|-----------|
-| Node.js | 20 以上 |
-| npm | （Node に同梱） |
-| Terraform | 1.5 以上 |
-| AWS CLI | 設定済み（`aws configure` 済み） |
+| Tool | Version |
+|------|---------|
+| Node.js | 20 or later |
+| npm | (bundled with Node) |
+| Terraform | 1.5 or later |
+| AWS CLI | Configured (`aws configure` done) |
 
-> **重要:** `terraform apply` はビルドコマンド（`npm ci` / `npm run build:ui` / `npm run build:lambda`）をローカルで実行します。Node.js と npm が使えるビルド環境から apply を実行してください。
+> **Important:** `terraform apply` runs build commands (`npm ci` / `npm run build:ui` / `npm run build:lambda`) locally. Run apply from a build environment where Node.js and npm are available.
 
-## デプロイ手順
+## Deployment Steps
 
 ```bash
-# 1. terraform ディレクトリへ移動
+# 1. Navigate to the terraform directory
 cd terraform
 
-# 2. プロバイダーとモジュールを初期化
+# 2. Initialize providers and modules
 terraform init
 
-# 3. 変更内容を確認
+# 3. Preview changes
 terraform plan
 
-# 4. デプロイ（ビルド → Lambda 更新を自動実行）
+# 4. Deploy (automatically runs build → Lambda update)
 terraform apply
 ```
 
-`terraform apply` を実行すると、null_resource が以下を自動的に行います。
+When `terraform apply` is run, the null_resource automatically performs the following:
 
-1. `npm ci` — 依存関係インストール
-2. `npm run build:ui` — Vite で `public/index.html` を生成
-3. `npm run build:lambda` — esbuild で `dist/lambda/index.js` を生成し、`public/index.html` を `dist/lambda/index.html` へコピー
+1. `npm ci` — install dependencies
+2. `npm run build:ui` — generate `public/index.html` with Vite
+3. `npm run build:lambda` — generate `dist/lambda/index.js` with esbuild and copy `public/index.html` to `dist/lambda/index.html`
 
-手動でビルドする必要はありません。
+No manual build is required.
 
-## 変数一覧
+## Variables
 
-| 変数名 | デフォルト値 | 説明 |
-|--------|-------------|------|
-| `region` | `ap-northeast-1` | デプロイ先 AWS リージョン |
-| `function_name` | `aws-diagram-mcp` | Lambda 関数名 |
-| `memory_size` | `512` | メモリサイズ（MB） |
-| `timeout` | `30` | タイムアウト（秒） |
-| `log_retention_days` | `7` | CloudWatch Logs の保持日数 |
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `region` | `ap-northeast-1` | AWS region to deploy to |
+| `function_name` | `preview-cloud-diagram-mcp` | Lambda function name |
+| `memory_size` | `512` | Memory size (MB) |
+| `timeout` | `30` | Timeout (seconds) |
+| `log_retention_days` | `7` | CloudWatch Logs retention period (days) |
 
-変数を上書きする場合は `terraform apply -var="function_name=my-mcp"` のように指定するか、`terraform.tfvars` ファイルを作成してください。
+To override variables, use `terraform apply -var="function_name=my-mcp"` or create a `terraform.tfvars` file.
 
-## 出力値
+## Outputs
 
-`terraform apply` 完了後、以下の値が出力されます。
+After `terraform apply` completes, the following values are output.
 
-| 出力名 | 説明 |
-|--------|------|
-| `function_url` | Lambda Function URL のベース URL（末尾 `/`） |
-| `mcp_endpoint` | MCP エンドポイント（`<function_url>mcp`） |
+| Output | Description |
+|--------|-------------|
+| `function_url` | Lambda Function URL base URL (trailing `/`) |
+| `mcp_endpoint` | MCP endpoint (`<function_url>mcp`) |
 
-ルート `GET <function_url>` にアクセスすると構成図 UI の HTML が返ります。
+Accessing `GET <function_url>` at the root returns the architecture diagram UI HTML.
 
-## 接続確認
+## Verify Connection
 
-デプロイ後、以下のコマンドで MCP ハンドシェイクを確認できます。
+After deployment, verify the MCP handshake with the following command:
 
 ```bash
 curl -X POST <mcp_endpoint> \
@@ -71,17 +71,17 @@ curl -X POST <mcp_endpoint> \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"curl","version":"0"}}}'
 ```
 
-`<mcp_endpoint>` は `terraform apply` の出力値（例: `https://xxxx.lambda-url.ap-northeast-1.on.aws/mcp`）に置き換えてください。
+Replace `<mcp_endpoint>` with the output value from `terraform apply` (e.g. `https://xxxx.lambda-url.ap-northeast-1.on.aws/mcp`).
 
-## MCP クライアントへの登録
+## Register with MCP Clients
 
-### Claude.ai（カスタムコネクタ）
+### Claude.ai (Custom Connector)
 
-1. **Settings > Connectors** を開く
-2. **Add custom connector** をクリック
-3. URL に `mcp_endpoint` の値を入力（認証は不要）
+1. Open **Settings > Connectors**
+2. Click **Add custom connector**
+3. Enter the `mcp_endpoint` value as the URL (no authentication required)
 
-### Claude Code（MCP 設定）
+### Claude Code (MCP Configuration)
 
 ```json
 {
@@ -93,19 +93,19 @@ curl -X POST <mcp_endpoint> \
 }
 ```
 
-登録後、チャットで AWS / Azure / GCP 構成について質問すると `render_diagram` が呼び出されて構成図がインライン表示されます。
+After registering, ask about AWS / Azure / GCP configurations in chat and `render_diagram` will be called to display the diagram inline.
 
-## 注意事項
+## Notes
 
-- **認証なし公開:** Function URL は認証なし（`NONE`）で公開されます。URL が漏れると第三者が無制限に利用できます。不要になったら `terraform destroy` で削除するか、Lambda コンソールで関数を無効化してください。
-- **レスポンスサイズ上限:** Lambda のペイロード上限は 6 MB です。UI HTML が約 3 MB あるため、残り約 3 MB が実質的な応答サイズの上限となります。
-- **ステートレス限定:** Lambda はリクエストをまたいで状態を保持しません。セッション状態が必要なユースケースには対応していません。
+- **Public without authentication:** The Function URL is public with no authentication (`NONE`). If the URL is leaked, third parties can use it without restriction. When no longer needed, delete with `terraform destroy` or disable the function in the Lambda console.
+- **Response size limit:** Lambda's payload limit is 6 MB. Since the UI HTML is approximately 3 MB, the effective response size limit is approximately 3 MB.
+- **Stateless only:** Lambda does not maintain state across requests. Use cases requiring session state are not supported.
 
-## 後始末
+## Cleanup
 
 ```bash
 cd terraform
 terraform destroy
 ```
 
-すべての AWS リソース（Lambda 関数、IAM ロール、CloudWatch Logs グループ、Function URL）が削除されます。
+All AWS resources (Lambda function, IAM role, CloudWatch Logs group, Function URL) will be deleted.

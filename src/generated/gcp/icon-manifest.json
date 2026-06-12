@@ -1337,6 +1337,12 @@
       "name": "Workload Identity Pool",
       "category": "Security",
       "color": "#4285F4"
+    },
+    {
+      "id": "gcp-firebase",
+      "name": "Firebase",
+      "category": "Other",
+      "color": "#4285F4"
     }
   ],
   "resources": [],
@@ -1529,6 +1535,13 @@
     "gcp-compute-engine": "gcp-compute-engine",
     "gcp-looker": "gcp-looker",
     "gcp-security-command-center": "gcp-security-command-center",
-    "gcp-vertexai": "gcp-vertex-ai"
+    "gcp-vertexai": "gcp-vertex-ai",
+    "firebase": "gcp-firebase",
+    "firebase-auth": "gcp-firebase",
+    "firebase-authentication": "gcp-firebase",
+    "gcp-firebase-authentication": "gcp-firebase",
+    "vision-ai": "gcp-cloud-vision-api",
+    "gcp-vision-ai": "gcp-cloud-vision-api",
+    "vision": "gcp-cloud-vision-api"
   }
 }
