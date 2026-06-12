@@ -50,7 +50,8 @@ const resolveCache = new Map<string, ResolvedIcon>();
 
 /**
  * 解決順: そのまま → aliases → 小文字化 → amazon-/aws- プレフィックス付与 →
- * manifest 内の部分一致（id/name） → null（フォールバック）
+ * amazon-/aws- プレフィックス除去（例: "amazon-s3" → alias "s3"） →
+ * manifest 内の部分一致（id/name、最短id優先） → null（フォールバック）
  */
 export function resolveIcon(query: string): ResolvedIcon {
   const cached = resolveCache.get(query);
@@ -59,15 +60,23 @@ export function resolveIcon(query: string): ResolvedIcon {
   let id = tryDirect(query);
   if (!id) {
     const lower = query.trim().toLowerCase();
+    const stripped = lower.replace(/^(amazon-|aws-)/, "");
     id =
       tryDirect(lower) ??
       tryDirect(`amazon-${lower}`) ??
-      tryDirect(`aws-${lower}`);
+      tryDirect(`aws-${lower}`) ??
+      (stripped !== lower ? tryDirect(stripped) : null);
     if (!id && lower.length >= 2) {
-      const hit = ALL_ENTRIES.find(
-        (e) => e.id.includes(lower) || e.name.toLowerCase().includes(lower),
+      // 部分一致は最短idを採用（"amazon-s3" が S3 on Outposts 等の派生サービスに化けるのを防ぐ）
+      const hits = ALL_ENTRIES.filter(
+        (e) =>
+          (e.id.includes(lower) ||
+            e.id.includes(stripped) ||
+            e.name.toLowerCase().includes(lower)) &&
+          Object.prototype.hasOwnProperty.call(SVGS, e.id),
       );
-      if (hit && Object.prototype.hasOwnProperty.call(SVGS, hit.id)) id = hit.id;
+      hits.sort((a, b) => a.id.length - b.id.length);
+      if (hits.length > 0) id = hits[0].id;
     }
   }
 

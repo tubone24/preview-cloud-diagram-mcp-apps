@@ -686,6 +686,55 @@ const DEMO_SPEC: DiagramSpec = {
   ],
 };
 
+// 実ユーザーのツールコールを再現したデモ（?demo=2）。
+// 入口（user）から多数のエッジが奥のノードへ刺さる・user への戻りエッジ（サイクル）・
+// generic グループのチェーン、という難しいケース
+const DEMO_SPEC2: DiagramSpec = {
+  title: "犬画像投稿アプリ - AWSマネージドサービス構成",
+  elements: [
+    { type: "node", id: "user", icon: "users" },
+    { type: "group", id: "cloud", kind: "aws-cloud" },
+    { type: "group", id: "region", kind: "region", label: "ap-northeast-1", parent: "cloud" },
+    { type: "group", id: "grp-front", kind: "generic", label: "フロントエンド", parent: "region" },
+    { type: "node", id: "cf-frontend", icon: "cloudfront", name: "Frontend CDN", parent: "grp-front" },
+    { type: "node", id: "s3-frontend", icon: "amazon-s3", name: "SPA Hosting", parent: "grp-front" },
+    { type: "node", id: "cognito", icon: "amazon-cognito", parent: "region" },
+    { type: "group", id: "grp-api", kind: "generic", label: "API層", parent: "region" },
+    { type: "node", id: "appsync", icon: "aws-appsync", parent: "grp-api" },
+    { type: "node", id: "lambda-api", icon: "aws-lambda", name: "API Resolver", parent: "grp-api" },
+    { type: "group", id: "grp-storage", kind: "generic", label: "ストレージ・配信", parent: "region" },
+    { type: "node", id: "s3-images", icon: "amazon-s3", name: "Image Storage", parent: "grp-storage" },
+    { type: "node", id: "cf-images", icon: "cloudfront", name: "Image CDN", parent: "grp-storage" },
+    { type: "group", id: "grp-proc", kind: "generic", label: "画像処理・AI", parent: "region" },
+    { type: "node", id: "lambda-proc", icon: "aws-lambda", name: "Image Processor", parent: "grp-proc" },
+    { type: "node", id: "rekognition", icon: "amazon-rekognition", parent: "grp-proc" },
+    { type: "node", id: "dynamodb", icon: "amazon-dynamodb", name: "Posts Table", parent: "region" },
+    { type: "edge", from: "user", to: "cf-frontend", label: "HTTPS", step: 1 },
+    { type: "edge", from: "cf-frontend", to: "s3-frontend" },
+    { type: "edge", from: "user", to: "cognito", label: "Sign In / Sign Up", step: 2 },
+    { type: "edge", from: "user", to: "appsync", label: "GraphQL (JWT)", step: 3 },
+    { type: "edge", from: "appsync", to: "lambda-api" },
+    { type: "edge", from: "lambda-api", to: "s3-images", label: "Presigned URL発行", step: 4 },
+    { type: "edge", from: "user", to: "s3-images", label: "直接アップロード", step: 5 },
+    { type: "edge", from: "s3-images", to: "lambda-proc", label: "S3 Eventトリガー", step: 6 },
+    { type: "edge", from: "lambda-proc", to: "rekognition", label: "犬種・ラベル検出", step: 7 },
+    { type: "edge", from: "lambda-proc", to: "dynamodb", label: "メタデータ保存", step: 8 },
+    { type: "edge", from: "lambda-api", to: "dynamodb", label: "投稿一覧取得" },
+    { type: "edge", from: "s3-images", to: "cf-images" },
+    { type: "edge", from: "cf-images", to: "user", label: "画像配信" },
+  ],
+  steps: [
+    "CloudFront経由でSPA（React等）にアクセス。S3静的ホスティングをオリジンとする",
+    "Cognito User PoolsでSign Up/Sign In。JWTトークンを取得してAPI認証に使用",
+    "AppSync GraphQL APIで投稿フィードを取得。CognitoのJWTで認可制御",
+    "画像投稿時: LambdaがS3 Presigned URLを発行し、フロントに返却",
+    "フロントエンドがPresigned URLを使いS3に直接アップロード（APIサーバーを経由しない）",
+    "S3アップロード完了イベントでImage Processor Lambdaをトリガー",
+    "Amazon RekognitionでAI犬種判定・ラベル検出（柴犬/トイプードル等）を実行",
+    "投稿メタデータ（投稿者・タイムスタンプ・犬種・S3キー等）をDynamoDBに保存",
+  ],
+};
+
 // シーケンス図デモ: user → ALB → ECS → DynamoDB の PutItem フロー。
 // alt フラグメント（成功/条件チェック失敗）・note・self メッセージを含む
 const DEMO_SEQ_SPEC: SequenceSpec = {
@@ -716,19 +765,19 @@ function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function runDemo(): Promise<void> {
+async function runDemo(spec: DiagramSpec): Promise<void> {
   setStreaming(true);
-  const all = DEMO_SPEC.elements;
+  const all = spec.elements;
   for (let i = 1; i <= all.length; i++) {
     // ストリーミングを模倣: 先頭 i 件をstrictバリデーションして描画
-    renderSpec(DEMO_SPEC.title, sanitizeElements(all.slice(0, i), true));
+    renderSpec(spec.title, sanitizeElements(all.slice(0, i), true));
     await sleep(300);
   }
   setStreaming(false);
   renderSpec(
-    DEMO_SPEC.title,
+    spec.title,
     sanitizeElements(all, false),
-    sanitizeSteps(DEMO_SPEC.steps),
+    sanitizeSteps(spec.steps),
   );
   showWarnings([]);
 }
@@ -759,11 +808,13 @@ async function runSeqDemo(): Promise<void> {
 const demoParam = new URLSearchParams(location.search).get("demo");
 const isSeqDemo = demoParam === "seq";
 const isDemo =
-  isSeqDemo || demoParam === "1" || location.protocol === "file:";
+  isSeqDemo || demoParam === "1" || demoParam === "2" || location.protocol === "file:";
 
 async function start(): Promise<void> {
   if (isDemo) {
-    void (isSeqDemo ? runSeqDemo() : runDemo());
+    void (isSeqDemo
+      ? runSeqDemo()
+      : runDemo(demoParam === "2" ? DEMO_SPEC2 : DEMO_SPEC));
     return;
   }
   try {

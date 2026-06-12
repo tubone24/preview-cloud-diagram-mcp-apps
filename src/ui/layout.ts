@@ -406,6 +406,27 @@ export function layoutDiagram(
       colW.push(Math.max(...arr.map((c) => c.w)));
       colH.push(arr.reduce((s, c) => s + c.h, 0) + (arr.length - 1) * V_GAP);
     }
+    // 列間ギャップ: 隣接列間を通るラベル付きエッジは、ラベルが線やアイコンを
+    // 覆い隠さないようガターをラベル幅分だけ広げる
+    const gapAfter: number[] = new Array(Math.max(0, colKeys.length - 1)).fill(H_GAP);
+    const keyIndex = new Map<number, number>(colKeys.map((k, i) => [k, i]));
+    for (const e of edges) {
+      const labelW = e.label ? textWidth(e.label, FONT_NAME) + 8 : 0;
+      const badgeW = typeof e.step === "number" && e.step >= 1 ? (e.label ? 28 : 18) : 0;
+      const need = labelW + badgeW;
+      if (need === 0) continue;
+      const fi = itemById.get(e.from);
+      const ti = itemById.get(e.to);
+      if (!fi || !ti || fi === ti) continue;
+      const a = repIn(container, fi);
+      const b = repIn(container, ti);
+      if (!a || !b || a === b || !colOf.has(a) || !colOf.has(b)) continue;
+      const ia = keyIndex.get(colOf.get(a)!);
+      const ib = keyIndex.get(colOf.get(b)!);
+      if (ia === undefined || ib === undefined || Math.abs(ia - ib) !== 1) continue;
+      const g = Math.min(ia, ib);
+      gapAfter[g] = Math.max(gapAfter[g], need + 24);
+    }
     const contentH = Math.max(...colH);
     let x = 0;
     colKeys.forEach((k, i) => {
@@ -416,9 +437,9 @@ export function layoutDiagram(
         c.relY = y;
         y += c.h + V_GAP;
       }
-      x += colW[i] + H_GAP;
+      x += colW[i] + (i < colKeys.length - 1 ? gapAfter[i] : 0);
     });
-    return { w: x - H_GAP, h: contentH };
+    return { w: x, h: contentH };
   }
 
   function sizeItem(item: Item): void {
@@ -590,6 +611,32 @@ export function layoutDiagram(
     }
   }
 
+  /**
+   * 迂回チャネルの候補座標。基本候補（両端ボックスの外側）に加えて、
+   * 各障害物の縁の少し外側（=行間/列間ガター）を候補にし、中央に近い順に試す
+   */
+  function detourCandidates(
+    base: number[],
+    obstacles: Box[],
+    axis: "y" | "x",
+    mid: number,
+  ): number[] {
+    const set = new Set<number>(base);
+    for (const ob of obstacles) {
+      if (axis === "y") {
+        set.add(ob.y - 12);
+        set.add(ob.y + ob.h + 12);
+      } else {
+        set.add(ob.x - 12);
+        set.add(ob.x + ob.w + 12);
+      }
+    }
+    return [...set]
+      .filter((v) => v >= 8)
+      .sort((a, b) => Math.abs(a - mid) - Math.abs(b - mid))
+      .slice(0, 48);
+  }
+
   type Side = "left" | "right" | "top" | "bottom";
   interface Pending {
     e: EdgeElement;
@@ -719,8 +766,13 @@ export function layoutDiagram(
     }
     const top = Math.min(p.aB.y, p.bB.y);
     const bot = Math.max(p.aB.y + p.aB.h, p.bB.y + p.bB.h);
-    for (const cy of [bot + 20, top - 20, bot + 44, top - 44, bot + 68, top - 68]) {
-      if (cy < 8) continue;
+    const cys = detourCandidates(
+      [bot + 20, top - 20],
+      obstacles,
+      "y",
+      (start.y + end.y) / 2,
+    );
+    for (const cy of cys) {
       for (const d of [12, 24, 36]) {
         const pts = [
           start,
@@ -758,8 +810,13 @@ export function layoutDiagram(
     }
     const top = Math.min(p.aB.y, p.bB.y);
     const bot = Math.max(p.aB.y + p.aB.h, p.bB.y + p.bB.h);
-    for (const cy of [bot + 20, top - 20, bot + 44, top - 44, bot + 68, top - 68]) {
-      if (cy < 8) continue;
+    const cys = detourCandidates(
+      [bot + 20, top - 20],
+      obstacles,
+      "y",
+      (start.y + end.y) / 2,
+    );
+    for (const cy of cys) {
       for (const d of [12, 24, 36]) {
         const pts = [
           start,
@@ -800,8 +857,13 @@ export function layoutDiagram(
     const left = Math.min(p.aB.x, p.bB.x);
     const right = Math.max(p.aB.x + p.aB.w, p.bB.x + p.bB.w);
     const sgn = down ? 1 : -1;
-    for (const cx of [right + 20, left - 20, right + 44, left - 44]) {
-      if (cx < 8) continue;
+    const cxs = detourCandidates(
+      [right + 20, left - 20],
+      obstacles,
+      "x",
+      (start.x + end.x) / 2,
+    );
+    for (const cx of cxs) {
       for (const d of [12, 24, 36]) {
         const pts = [
           start,
@@ -844,6 +906,11 @@ export function layoutDiagram(
 
   // ---- ラベル配置（白背景の重なり回避: 線に沿って位置をずらす） ----
   const labelBoxes: Box[] = [];
+  // ラベルが覆ってはいけないボックス（ノード・ノート）。グループ枠線への重なりは許容
+  const labelObstacles: Box[] = [];
+  for (const it of itemById.values()) {
+    if (it.type !== "group") labelObstacles.push(fullBox(it));
+  }
   function placeLabel(
     points: Pt[],
     label: string | null,
@@ -884,23 +951,27 @@ export function layoutDiagram(
       label
         ? { x: cx - lw / 2 - (step !== null ? 28 : 0), y: cy - 9, w: lw + (step !== null ? 28 : 0), h: 18 }
         : { x: cx - 9, y: cy - 9, w: 18, h: 18 };
-    const overlaps = (b: Box): boolean =>
-      labelBoxes.some(
+    const hit = (b: Box, list: Box[], pad: number): boolean =>
+      list.some(
         (o) =>
-          b.x < o.x + o.w + 2 &&
-          b.x + b.w > o.x - 2 &&
-          b.y < o.y + o.h + 2 &&
-          b.y + b.h > o.y - 2,
+          b.x < o.x + o.w + pad &&
+          b.x + b.w > o.x - pad &&
+          b.y < o.y + o.h + pad &&
+          b.y + b.h > o.y - pad,
       );
     const lo = horizontal ? Math.min(p0.x, p1.x) : Math.min(p0.y, p1.y);
     const hi = horizontal ? Math.max(p0.x, p1.x) : Math.max(p0.y, p1.y);
-    for (const off of [0, 14, -14, 28, -28, 42, -42]) {
-      const c = (horizontal ? baseX : baseY) + off;
-      if (off !== 0 && (c < lo + 8 || c > hi - 8)) continue;
-      const cx = horizontal ? c : baseX;
-      const cy = horizontal ? baseY : c;
-      const b = mkBox(cx, cy);
-      if (!overlaps(b)) {
+    const offsets = [0, 14, -14, 28, -28, 42, -42, 56, -56, 70, -70];
+    // 1パス目: 他ラベルにもノード/ノートにも重ならない位置、2パス目: 他ラベルだけ回避
+    for (const strict of [true, false]) {
+      for (const off of offsets) {
+        const c = (horizontal ? baseX : baseY) + off;
+        if (off !== 0 && (c < lo + 8 || c > hi - 8)) continue;
+        const cx = horizontal ? c : baseX;
+        const cy = horizontal ? baseY : c;
+        const b = mkBox(cx, cy);
+        if (hit(b, labelBoxes, 2)) continue;
+        if (strict && hit(b, labelObstacles, 0)) continue;
         labelBoxes.push(b);
         return { labelX: cx, labelY: cy };
       }
