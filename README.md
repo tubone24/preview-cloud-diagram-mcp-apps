@@ -4,6 +4,8 @@ An [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) server that rend
 
 When Claude explains or proposes a cloud architecture, calling the `render_diagram` tool displays the diagram inline in the conversation. Elements are ordered from the traffic ingress side, and the UI renders progressively from the top as tool arguments stream in.
 
+![Demo](docs/images/demo.gif)
+
 ## Quick Start
 
 A live instance is deployed at AWS Lambda Function URL. No setup required — just connect your MCP client.
@@ -19,6 +21,8 @@ https://ylomp4fr6ke2jrweklwzahf6gy0sryec.lambda-url.ap-northeast-1.on.aws/mcp
 2. Click **Add custom connector**
 3. Paste the MCP endpoint URL above (no authentication required)
 4. Ask Claude about a cloud architecture — it will call `render_diagram` and display the diagram inline
+
+![Claude.ai Custom Connector Setup](docs/images/claude-ai-connector-setup.png)
 
 ### Claude Code
 
@@ -42,6 +46,27 @@ curl -X POST https://ylomp4fr6ke2jrweklwzahf6gy0sryec.lambda-url.ap-northeast-1.
   -H 'accept: application/json, text/event-stream' \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"curl","version":"0"}}}'
 ```
+
+---
+
+## Examples
+
+Ask Claude to design an architecture and it generates diagrams for each cloud provider automatically.
+
+### AWS Architecture
+![AWS Architecture Diagram](docs/images/demo-aws-architecture.png)
+
+### GCP Architecture
+![GCP Architecture Diagram](docs/images/demo-gcp-architecture.png)
+
+### GCP Sequence Diagram
+![GCP Sequence Diagram](docs/images/demo-gcp-sequence.png)
+
+### Azure Architecture
+![Azure Architecture Diagram](docs/images/demo-azure-architecture.png)
+
+### Azure Sequence Diagram
+![Azure Sequence Diagram](docs/images/demo-azure-sequence.png)
 
 ---
 
