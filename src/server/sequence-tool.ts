@@ -1,8 +1,9 @@
-// MCPツール定義: render_aws_sequence（AWSアイコン付きUMLシーケンス図、UI付き）。
+// MCPツール定義: render_sequence（クラウドアイコン付きUMLシーケンス図、UI付き）。
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { registerAppTool } from "@modelcontextprotocol/ext-apps/server";
+import type { Provider } from "../shared/diagram-spec";
 import type { SequenceEvent, SequenceParticipant, SequenceSpec } from "../shared/sequence-spec";
 import { resolveIconId } from "./icons";
 import { UI_RESOURCE_URI } from "./tools";
@@ -14,7 +15,7 @@ const participantSchema = z.object({
   icon: z
     .string()
     .describe(
-      'AWS icon ID shown at the top of the lifeline (e.g. "amazon-ecs", "aws-lambda") or alias (e.g. "s3", "alb"). Non-AWS actors can use generic icons like "user", "client", "internet". Search with list_aws_icons',
+      'Cloud service icon ID or alias shown at the top of the lifeline. AWS: "amazon-ecs", "s3", "alb"; Azure: "azure-virtual-machine", "aks"; GCP: "gcp-gke", "bq". Non-cloud actors can use generic icons like "user", "client", "internet". Search with list_icons',
     ),
   name: z
     .string()
@@ -73,6 +74,7 @@ const sequenceEventSchema = z.discriminatedUnion("type", [
 ]);
 
 const sequenceInputShape = {
+  provider: z.enum(["aws", "azure", "gcp"]).describe("Cloud provider. MUST be specified first (for streaming rendering)"),
   title: z.string().optional().describe("Diagram title"),
   participants: z
     .array(participantSchema)
@@ -83,6 +85,7 @@ const sequenceInputShape = {
 const sequenceOutputShape = {
   kind: z.literal("sequence"),
   spec: z.object({
+    provider: z.enum(["aws", "azure", "gcp"]).optional(),
     title: z.string().optional(),
     participants: z.array(participantSchema),
     events: z.array(sequenceEventSchema),
@@ -90,10 +93,16 @@ const sequenceOutputShape = {
   warnings: z.array(z.string()),
 };
 
-const SEQUENCE_DESCRIPTION = `Render a UML-compliant sequence diagram with AWS service icons on the lifelines. Use this tool whenever you explain HOW a request or data flows between AWS services over time — e.g. "how does a request travel through this system", the order of writes and reads, sync vs. async interactions, retries, and error branches. It complements render_aws_diagram: use the architecture diagram for the static structure and this tool for the dynamic message flow; combining both is very effective.
+const SEQUENCE_DESCRIPTION = `Render a UML-compliant sequence diagram with cloud service icons (AWS / Azure / Google Cloud) on the lifelines. Use this tool whenever you explain HOW a request or data flows between cloud services over time — e.g. "how does a request travel through this system", the order of writes and reads, sync vs. async interactions, retries, and error branches.
+
+**IMPORTANT: Write the \`provider\` argument first.** This enables the UI to start rendering immediately as the arguments stream in.
+
+It complements render_diagram: use the architecture diagram for the static structure and this tool for the dynamic message flow; combining both is very effective.
 
 How to build the spec (CRITICAL):
-- \`participants\` are the lifelines, displayed left to right in array order. Put the traffic entry point (user/client) LEFTMOST and follow the request path. \`icon\` is an AWS icon ID such as "amazon-ecs" or "aws-lambda"; short aliases like "s3", "alb", "dynamodb" also work, and non-AWS actors can use generic icons ("user", "client", "internet"). If unsure of an icon ID, search with the list_aws_icons tool. The service name label is added automatically from the icon, so set \`name\` only for a resource-specific name (e.g. "orders-table").
+- \`participants\` are the lifelines, displayed left to right in array order. Put the traffic entry point (user/client) LEFTMOST and follow the request path.
+  - \`icon\` is a cloud service icon ID or alias: AWS ("amazon-ecs", "aws-lambda", "s3", "alb", "dynamodb"), Azure ("azure-virtual-machine", "azure-kubernetes-services", "aks"), GCP ("gcp-compute-engine", "gcp-gke", "gke", "gcs", "bq"). Non-cloud actors can use generic icons ("user", "client", "internet"). Search with list_icons if unsure.
+  - The service name label is added automatically, so set \`name\` only for a resource-specific name (e.g. "orders-table").
 - \`events\` are rendered top to bottom in array order, so list them in chronological order. The UI draws lifelines first, then messages progressively as you stream the arguments.
 
 Event types:
@@ -103,13 +112,14 @@ Event types:
   - "return": reply/response — dashed line, open arrowhead
   - "self": self message (set \`to\` = \`from\`) — loop-back arrow for internal processing
   By default a sync message activates the target's activation bar and a return deactivates the source; override with \`activate\` / \`deactivate\` when needed.
-- fragment / else / end: UML combined fragments. { type: "fragment", kind: "alt" | "opt" | "loop" | "par" | "break", label? } opens a frame around the following events until the matching { type: "end" }. Inside an alt, separate branches with { type: "else", label? }. Put the guard or loop condition in \`label\` (e.g. "cache hit", "retry up to 3 times"). Fragments may nest; every fragment needs its own end.
+- fragment / else / end: UML combined fragments. { type: "fragment", kind: "alt" | "opt" | "loop" | "par" | "break", label? } opens a frame around the following events until the matching { type: "end" }. Inside an alt, separate branches with { type: "else", label? }. Fragments may nest; every fragment needs its own end.
 - note: { type: "note", over: ["participantId", ...], text } — a supplementary note spanning one or more lifelines.
 
 Labels: write concrete operations, not vague verbs — e.g. "POST /api/orders", "PutItem (orders table)", "SendMessage (order-queue)".
 
-Example (user → ALB → ECS → DynamoDB write path):
+Example (AWS — user → ALB → ECS → DynamoDB write path):
 {
+  "provider": "aws",
   "title": "Order write path",
   "participants": [
     { "id": "user", "icon": "user" },
@@ -127,19 +137,19 @@ Example (user → ALB → ECS → DynamoDB write path):
   ]
 }`;
 
-/** render_aws_sequence を server に登録する */
+/** render_sequence を server に登録する */
 export function registerSequenceTool(server: McpServer): void {
   registerAppTool(
     server,
-    "render_aws_sequence",
+    "render_sequence",
     {
-      title: "Render AWS sequence diagram",
+      title: "Render cloud sequence diagram (AWS / Azure / GCP)",
       description: SEQUENCE_DESCRIPTION,
       inputSchema: sequenceInputShape,
       outputSchema: sequenceOutputShape,
       _meta: { ui: { resourceUri: UI_RESOURCE_URI } },
     },
-    async ({ title, participants, events }) => {
+    async ({ provider, title, participants, events }) => {
       const warnings: string[] = [];
 
       // 1. participant のアイコン正規化（解決不能は warnings、要素は残す）
@@ -149,10 +159,10 @@ export function registerSequenceTool(server: McpServer): void {
           warnings.push(`participant ID "${p.id}" が重複しています。`);
         }
         knownIds.add(p.id);
-        const resolved = resolveIconId(p.icon);
+        const resolved = resolveIconId(p.icon, provider as Provider);
         if (resolved === null) {
           warnings.push(
-            `participant "${p.id}" のアイコン "${p.icon}" が見つかりません。list_aws_icons で検索してください。`,
+            `participant "${p.id}" のアイコン "${p.icon}" が見つかりません。list_icons で検索してください。`,
           );
           return p;
         }
@@ -209,14 +219,16 @@ export function registerSequenceTool(server: McpServer): void {
       const spec: SequenceSpec = {
         participants: normalizedParticipants,
         events: events as SequenceEvent[],
+        provider: provider as Provider,
       };
       if (title !== undefined) spec.title = title;
 
       const messageCount = events.filter((ev) => ev.type === "message").length;
       const fragmentCount = events.filter((ev) => ev.type === "fragment").length;
       const noteCount = events.filter((ev) => ev.type === "note").length;
+      const providerLabel = provider === "aws" ? "AWS" : provider === "azure" ? "Azure" : "Google Cloud";
       const summaryLines = [
-        `AWSシーケンス図を描画しました${title ? `（${title}）` : ""}: 参加者 ${normalizedParticipants.length} 件、メッセージ ${messageCount} 件${fragmentCount > 0 ? `、フラグメント ${fragmentCount} 件` : ""}${noteCount > 0 ? `、ノート ${noteCount} 件` : ""}。`,
+        `${providerLabel}シーケンス図を描画しました${title ? `（${title}）` : ""}: 参加者 ${normalizedParticipants.length} 件、メッセージ ${messageCount} 件${fragmentCount > 0 ? `、フラグメント ${fragmentCount} 件` : ""}${noteCount > 0 ? `、ノート ${noteCount} 件` : ""}。`,
       ];
       if (warnings.length > 0) {
         summaryLines.push(`警告 ${warnings.length} 件:`, ...warnings.map((w) => `- ${w}`));

@@ -13,6 +13,7 @@ import {
   type GroupStyle,
   type NodeElement,
   type NoteElement,
+  type Provider,
 } from "../shared/diagram-spec";
 import { iconDataUri, resolveIcon, type ResolvedIcon } from "./icons";
 
@@ -37,11 +38,19 @@ const FONT_NAME = "11px Arial, sans-serif";
 // 同種グループ同士のエッジ（例: AZ間レプリケーション、サブネット間通信）は
 // 並列構造とみなし、列の前後関係の制約にしない（縦に揃えて積む）
 const PARALLEL_GROUP_KINDS = new Set<string>([
+  // AWS
   "availability-zone",
   "public-subnet",
   "private-subnet",
   "security-group",
   "auto-scaling-group",
+  // Azure
+  "azure-subnet",
+  "azure-availability-zone",
+  // GCP
+  "gcp-zone",
+  "gcp-region",
+  "gcp-subnet",
 ]);
 
 let measureCtx: CanvasRenderingContext2D | null = null;
@@ -207,6 +216,7 @@ interface Pt {
 export function layoutDiagram(
   elements: DiagramElement[],
   steps?: string[],
+  provider: Provider = "aws",
 ): DiagramLayout {
   const itemById = new Map<string, Item>();
   const edges: EdgeElement[] = [];
@@ -231,7 +241,7 @@ export function layoutDiagram(
       order: order++,
     };
     if (el.type === "node") {
-      const icon = resolveIcon(el.icon);
+      const icon = resolveIcon(el.icon, provider);
       itemById.set(el.id, {
         ...base,
         type: "node",

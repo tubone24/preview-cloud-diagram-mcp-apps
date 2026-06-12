@@ -1,0 +1,3759 @@
+{
+  "services": [
+    {
+      "id": "azure-maintenance-configuration",
+      "name": "Maintenance Configuration",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-host-pools",
+      "name": "Host Pools",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-application-group",
+      "name": "Application Group",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-workspaces",
+      "name": "Workspaces",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-disk-encryption-sets",
+      "name": "Disk Encryption Sets",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-automanaged-vm",
+      "name": "Automanaged Vm",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-service-fabric",
+      "name": "Managed Service Fabric",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-metrics-advisor",
+      "name": "Metrics Advisor",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-image-templates",
+      "name": "Image Templates",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-restore-points",
+      "name": "Restore Points",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-restore-points-collections",
+      "name": "Restore Points Collections",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-compute-galleries",
+      "name": "Compute Galleries",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-compute-fleet",
+      "name": "Compute Fleet",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-aks-automatic",
+      "name": "Aks Automatic",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-machine",
+      "name": "Virtual Machine",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-kubernetes-services",
+      "name": "Kubernetes Services",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-mesh-applications",
+      "name": "Mesh Applications",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-availability-sets",
+      "name": "Availability Sets",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-disks-snapshots",
+      "name": "Disks Snapshots",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-os-images",
+      "name": "Os Images",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-machines",
+      "name": "Virtual Machines",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-function-apps",
+      "name": "Function Apps",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cloud-services",
+      "name": "Cloud Services",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-batch-accounts",
+      "name": "Batch Accounts",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-disks",
+      "name": "Disks",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-images",
+      "name": "Images",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-vm-scale-sets",
+      "name": "Vm Scale Sets",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-services",
+      "name": "App Services",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-service-fabric-clusters",
+      "name": "Service Fabric Clusters",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-image-definitions",
+      "name": "Image Definitions",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-image-versions",
+      "name": "Image Versions",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-shared-image-galleries",
+      "name": "Shared Image Galleries",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-vm-images",
+      "name": "Vm Images",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-container-services",
+      "name": "Container Services",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-container-instances",
+      "name": "Container Instances",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-host-groups",
+      "name": "Host Groups",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-hosts",
+      "name": "Hosts",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-spring-apps",
+      "name": "Spring Apps",
+      "category": "Compute",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cdn-profiles",
+      "name": "Cdn Profiles",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-firewall-manager",
+      "name": "Firewall Manager",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-firewall-policy",
+      "name": "Firewall Policy",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-private-link",
+      "name": "Private Link",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ip-groups",
+      "name": "Ip Groups",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-wan-hub",
+      "name": "Virtual Wan Hub",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-private-link-service",
+      "name": "Private Link Service",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resource-management-private-link",
+      "name": "Resource Management Private Link",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-private-link-services",
+      "name": "Private Link Services",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-load-balancer-hub",
+      "name": "Load Balancer Hub",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-bastions",
+      "name": "Bastions",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-router",
+      "name": "Virtual Router",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-connected-cache",
+      "name": "Connected Cache",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-spot-vmss",
+      "name": "Spot Vmss",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-spot-vm",
+      "name": "Spot Vm",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-subnet",
+      "name": "Subnet",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dns-private-resolver",
+      "name": "Dns Private Resolver",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-communications-gateway",
+      "name": "Communications Gateway",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-application-gateway-containers",
+      "name": "Application Gateway Containers",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dns-security-policy",
+      "name": "Dns Security Policy",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dns-multistack",
+      "name": "Dns Multistack",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-atm-multistack",
+      "name": "Atm Multistack",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ip-address-manager",
+      "name": "Ip Address Manager",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-networks",
+      "name": "Virtual Networks",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-load-balancers",
+      "name": "Load Balancers",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-network-gateways",
+      "name": "Virtual Network Gateways",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dns-zones",
+      "name": "Dns Zones",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-traffic-manager-profiles",
+      "name": "Traffic Manager Profiles",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-watcher",
+      "name": "Network Watcher",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-security-groups",
+      "name": "Network Security Groups",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-public-ip-addresses",
+      "name": "Public Ip Addresses",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-on-premises-data-gateways",
+      "name": "On Premises Data Gateways",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-route-filters",
+      "name": "Route Filters",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ddos-protection-plans",
+      "name": "Ddos Protection Plans",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-front-door-and-cdn-profiles",
+      "name": "Front Door And Cdn Profiles",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-application-gateways",
+      "name": "Application Gateways",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-local-network-gateways",
+      "name": "Local Network Gateways",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-expressroute-circuits",
+      "name": "Expressroute Circuits",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-interfaces",
+      "name": "Network Interfaces",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-connections",
+      "name": "Connections",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-route-tables",
+      "name": "Route Tables",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-firewalls",
+      "name": "Firewalls",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-service-endpoint-policies",
+      "name": "Service Endpoint Policies",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-nat",
+      "name": "Nat",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-wans",
+      "name": "Virtual Wans",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-web-application-firewall-policies",
+      "name": "Web Application Firewall Policies",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-proximity-placement-groups",
+      "name": "Proximity Placement Groups",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-reserved-ip-addresses",
+      "name": "Reserved Ip Addresses",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-public-ip-prefixes",
+      "name": "Public Ip Prefixes",
+      "category": "Networking",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-data-warehouses",
+      "name": "Sql Data Warehouses",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-synapse-analytics",
+      "name": "Synapse Analytics",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql",
+      "name": "Sql",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ssis-lift-and-shift-ir",
+      "name": "Ssis Lift And Shift Ir",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-edge",
+      "name": "Sql Edge",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-database-postgresql-server-group",
+      "name": "Database Postgresql Server Group",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-oracle-database",
+      "name": "Oracle Database",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cosmos-db",
+      "name": "Cosmos Db",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-database-mysql-server",
+      "name": "Database Mysql Server",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-database-mariadb-server",
+      "name": "Database Mariadb Server",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-vm",
+      "name": "Sql Vm",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-factories",
+      "name": "Data Factories",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-clusters",
+      "name": "Virtual Clusters",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-elastic-job-agents",
+      "name": "Elastic Job Agents",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-database",
+      "name": "Sql Database",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-database-postgresql-server",
+      "name": "Database Postgresql Server",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-server",
+      "name": "Sql Server",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-database-migration-services",
+      "name": "Database Migration Services",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-elastic-pools",
+      "name": "Sql Elastic Pools",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-database",
+      "name": "Managed Database",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-managed-instance",
+      "name": "Sql Managed Instance",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-server-stretch-databases",
+      "name": "Sql Server Stretch Databases",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cache-redis",
+      "name": "Cache Redis",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-instance-pools",
+      "name": "Instance Pools",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-explorer-clusters",
+      "name": "Data Explorer Clusters",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-server-registries",
+      "name": "Sql Server Registries",
+      "category": "Databases",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-recovery-services-vaults",
+      "name": "Recovery Services Vaults",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-databox-gateway",
+      "name": "Databox Gateway",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-hcp-cache",
+      "name": "Hcp Cache",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-actions",
+      "name": "Storage Actions",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-file-shares",
+      "name": "Managed File Shares",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-accounts",
+      "name": "Storage Accounts",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storsimple-device-managers",
+      "name": "Storsimple Device Managers",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-lake-storage-gen1",
+      "name": "Data Lake Storage Gen1",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-explorer",
+      "name": "Storage Explorer",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storsimple-data-managers",
+      "name": "Storsimple Data Managers",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-sync-services",
+      "name": "Storage Sync Services",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-box",
+      "name": "Data Box",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-stack-edge",
+      "name": "Stack Edge",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-netapp-files",
+      "name": "Netapp Files",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-share-invitations",
+      "name": "Data Share Invitations",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-shares",
+      "name": "Data Shares",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-import-export-jobs",
+      "name": "Import Export Jobs",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-fileshares",
+      "name": "Fileshares",
+      "category": "Storage",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-service-plans",
+      "name": "App Service Plans",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-service-certificates",
+      "name": "App Service Certificates",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-service-domains",
+      "name": "App Service Domains",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-static-apps",
+      "name": "Static Apps",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-api-center",
+      "name": "Api Center",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-power-platform",
+      "name": "Power Platform",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-space",
+      "name": "App Space",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-space-component",
+      "name": "App Space Component",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-api-management-services",
+      "name": "Api Management Services",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cognitive-search",
+      "name": "Cognitive Search",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-service-environments",
+      "name": "App Service Environments",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-api-connections",
+      "name": "Api Connections",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-signalr",
+      "name": "Signalr",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-notification-hub-namespaces",
+      "name": "Notification Hub Namespaces",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cognitive-services",
+      "name": "Cognitive Services",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-media-service",
+      "name": "Media Service",
+      "category": "Web",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-red-hat-openshift",
+      "name": "Red Hat Openshift",
+      "category": "Containers",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-container-registries",
+      "name": "Container Registries",
+      "category": "Containers",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-batch-ai",
+      "name": "Batch Ai",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-machine-learning-studio-web-services",
+      "name": "Machine Learning Studio Web Services",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-genomics",
+      "name": "Genomics",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-computer-vision",
+      "name": "Computer Vision",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-custom-vision",
+      "name": "Custom Vision",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-face-apis",
+      "name": "Face Apis",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-content-moderators",
+      "name": "Content Moderators",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-personalizers",
+      "name": "Personalizers",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-speech-services",
+      "name": "Speech Services",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-qna-makers",
+      "name": "Qna Makers",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-translator-text",
+      "name": "Translator Text",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-language-understanding",
+      "name": "Language Understanding",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-immersive-readers",
+      "name": "Immersive Readers",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-anomaly-detector",
+      "name": "Anomaly Detector",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-form-recognizers",
+      "name": "Form Recognizers",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-experimentation-studio",
+      "name": "Experimentation Studio",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-object-understanding",
+      "name": "Object Understanding",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-applied-ai-services",
+      "name": "Applied Ai Services",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-language",
+      "name": "Language",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cognitive-services-decisions",
+      "name": "Cognitive Services Decisions",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-serverless-search",
+      "name": "Serverless Search",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-bonsai",
+      "name": "Bonsai",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-content-safety",
+      "name": "Content Safety",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-openai",
+      "name": "Openai",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ai-studio",
+      "name": "Ai Studio",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-genomics-accounts",
+      "name": "Genomics Accounts",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-bot-services",
+      "name": "Bot Services",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-machine-learning",
+      "name": "Machine Learning",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-machine-learning-studio-workspaces",
+      "name": "Machine Learning Studio Workspaces",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-machine-learning-studio-web-service-plans",
+      "name": "Machine Learning Studio Web Service Plans",
+      "category": "AI + Machine Learning",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-log-analytics-workspaces",
+      "name": "Log Analytics Workspaces",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-event-hubs",
+      "name": "Event Hubs",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-stream-analytics-jobs",
+      "name": "Stream Analytics Jobs",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-endpoint-analytics",
+      "name": "Endpoint Analytics",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-workbooks",
+      "name": "Workbooks",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-power-bi-embedded",
+      "name": "Power Bi Embedded",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-hd-insight-clusters",
+      "name": "Hd Insight Clusters",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-lake-analytics",
+      "name": "Data Lake Analytics",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-analysis-services",
+      "name": "Analysis Services",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-event-hub-clusters",
+      "name": "Event Hub Clusters",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-lake-store-gen1",
+      "name": "Data Lake Store Gen1",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-databricks",
+      "name": "Databricks",
+      "category": "Analytics",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-integration-service-environments",
+      "name": "Integration Service Environments",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-partner-topic",
+      "name": "Partner Topic",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-system-topic",
+      "name": "System Topic",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-partner-registration",
+      "name": "Partner Registration",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-partner-namespace",
+      "name": "Partner Namespace",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-logic-apps",
+      "name": "Logic Apps",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-integration-environments",
+      "name": "Integration Environments",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-business-process-tracking",
+      "name": "Business Process Tracking",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-event-grid-topics",
+      "name": "Event Grid Topics",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-relays",
+      "name": "Relays",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-api-for-fhir",
+      "name": "Api For Fhir",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-software-as-a-service",
+      "name": "Software As A Service",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-event-grid-domains",
+      "name": "Event Grid Domains",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-catalog",
+      "name": "Data Catalog",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-integration-accounts",
+      "name": "Integration Accounts",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-configuration",
+      "name": "App Configuration",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sendgrid-accounts",
+      "name": "Sendgrid Accounts",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-event-grid-subscriptions",
+      "name": "Event Grid Subscriptions",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-logic-apps-custom-connector",
+      "name": "Logic Apps Custom Connector",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-service-bus",
+      "name": "Service Bus",
+      "category": "Integration",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-detonation",
+      "name": "Detonation",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-microsoft-defender-for-iot",
+      "name": "Microsoft Defender For Iot",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-microsoft-defender-easm",
+      "name": "Microsoft Defender Easm",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-identity-secure-score",
+      "name": "Identity Secure Score",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-identity-risky-signins",
+      "name": "Entra Identity Risky Signins",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-identity-risky-users",
+      "name": "Entra Identity Risky Users",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-multifactor-authentication",
+      "name": "Multifactor Authentication",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-information-protection",
+      "name": "Information Protection",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-conditional-access",
+      "name": "Conditional Access",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-microsoft-defender-for-cloud",
+      "name": "Microsoft Defender For Cloud",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-application-security-groups",
+      "name": "Application Security Groups",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-key-vaults",
+      "name": "Key Vaults",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sentinel",
+      "name": "Sentinel",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-user-settings",
+      "name": "User Settings",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-extendedsecurityupdates",
+      "name": "Extendedsecurityupdates",
+      "category": "Security",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-security",
+      "name": "Security",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-administrative-units",
+      "name": "Administrative Units",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-verifiable-credentials",
+      "name": "Verifiable Credentials",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-privleged-identity-management",
+      "name": "Entra Privleged Identity Management",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-api-proxy",
+      "name": "Api Proxy",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-tenant-properties",
+      "name": "Tenant Properties",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-identity-custom-roles",
+      "name": "Entra Identity Custom Roles",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-identity-licenses",
+      "name": "Entra Identity Licenses",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-connect",
+      "name": "Entra Connect",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-verified-id",
+      "name": "Entra Verified Id",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-verification-as-a-service",
+      "name": "Verification As A Service",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-multi-factor-authentication",
+      "name": "Multi Factor Authentication",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-global-secure-access",
+      "name": "Entra Global Secure Access",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-external-identities",
+      "name": "External Identities",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-private-access",
+      "name": "Entra Private Access",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-internet-access",
+      "name": "Entra Internet Access",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-connect-sync",
+      "name": "Entra Connect Sync",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-domain-services",
+      "name": "Entra Domain Services",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-groups",
+      "name": "Groups",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-active-directory-connect-health",
+      "name": "Active Directory Connect Health",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-connect-health",
+      "name": "Entra Connect Health",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-enterprise-applications",
+      "name": "Enterprise Applications",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-managed-identities",
+      "name": "Entra Managed Identities",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-identities",
+      "name": "Managed Identities",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ad-b2c",
+      "name": "Ad B2c",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-users",
+      "name": "Users",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-id-protection",
+      "name": "Entra Id Protection",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-registrations",
+      "name": "App Registrations",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-identity-governance",
+      "name": "Identity Governance",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-entra-identity-roles-and-administrators",
+      "name": "Entra Identity Roles And Administrators",
+      "category": "Identity",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-application-insights",
+      "name": "Application Insights",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-change-analysis",
+      "name": "Change Analysis",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cloudtest",
+      "name": "Cloudtest",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-load-testing",
+      "name": "Load Testing",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-lab-accounts",
+      "name": "Lab Accounts",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-devops-starter",
+      "name": "Devops Starter",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-devops-pools",
+      "name": "Managed Devops Pools",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-code-optimization",
+      "name": "Code Optimization",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-workspace-gateway",
+      "name": "Workspace Gateway",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-devops",
+      "name": "Devops",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-devtest-labs",
+      "name": "Devtest Labs",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-lab-services",
+      "name": "Lab Services",
+      "category": "DevOps",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-digital-twins",
+      "name": "Digital Twins",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-industrial-iot",
+      "name": "Industrial Iot",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-stack-hci-sizer",
+      "name": "Stack Hci Sizer",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-stack-hci-premium",
+      "name": "Stack Hci Premium",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-iot-operations",
+      "name": "Iot Operations",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-notification-hubs",
+      "name": "Notification Hubs",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-stack",
+      "name": "Stack",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-time-series-insights-environments",
+      "name": "Time Series Insights Environments",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-iot-hub",
+      "name": "Iot Hub",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-iot-central-applications",
+      "name": "Iot Central Applications",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-maps-accounts",
+      "name": "Maps Accounts",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-iot-edge",
+      "name": "Iot Edge",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-time-series-insights-event-sources",
+      "name": "Time Series Insights Event Sources",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-time-series-insights-access-policies",
+      "name": "Time Series Insights Access Policies",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-time-series-data-sets",
+      "name": "Time Series Data Sets",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-windows10-core-services",
+      "name": "Windows10 Core Services",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-device-provisioning-services",
+      "name": "Device Provisioning Services",
+      "category": "IoT",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-collaborative-service",
+      "name": "Collaborative Service",
+      "category": "Azure Ecosystem",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-applens",
+      "name": "Applens",
+      "category": "Azure Ecosystem",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-hybrid-center",
+      "name": "Hybrid Center",
+      "category": "Azure Ecosystem",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-blockchain-applications",
+      "name": "Blockchain Applications",
+      "category": "Blockchain",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-outbound-connection",
+      "name": "Outbound Connection",
+      "category": "Blockchain",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-blockchain-service",
+      "name": "Blockchain Service",
+      "category": "Blockchain",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-token-service",
+      "name": "Token Service",
+      "category": "Blockchain",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-abs-member",
+      "name": "Abs Member",
+      "category": "Blockchain",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-consortium",
+      "name": "Consortium",
+      "category": "Blockchain",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-operator-5g-core",
+      "name": "Operator 5g Core",
+      "category": "Hybrid + Multicloud",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-operator-nexus",
+      "name": "Operator Nexus",
+      "category": "Hybrid + Multicloud",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-operator-insights",
+      "name": "Operator Insights",
+      "category": "Hybrid + Multicloud",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-operator-service-manager",
+      "name": "Operator Service Manager",
+      "category": "Hybrid + Multicloud",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-programmable-connectivity",
+      "name": "Programmable Connectivity",
+      "category": "Hybrid + Multicloud",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-monitor-pipeline",
+      "name": "Monitor Pipeline",
+      "category": "Hybrid + Multicloud",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-device-security-apple",
+      "name": "Device Security Apple",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-device-security-google",
+      "name": "Device Security Google",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-device-security-windows",
+      "name": "Device Security Windows",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-intune",
+      "name": "Intune",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ebooks",
+      "name": "Ebooks",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-client-apps",
+      "name": "Client Apps",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-devices",
+      "name": "Devices",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-device-compliance",
+      "name": "Device Compliance",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-software-updates",
+      "name": "Software Updates",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-security-baselines",
+      "name": "Security Baselines",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-device-enrollment",
+      "name": "Device Enrollment",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-device-configuration",
+      "name": "Device Configuration",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-exchange-access",
+      "name": "Exchange Access",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-tenant-status",
+      "name": "Tenant Status",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-intune-for-education",
+      "name": "Intune For Education",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-intune-app-protection",
+      "name": "Intune App Protection",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-mindaro",
+      "name": "Mindaro",
+      "category": "Intune",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-monitor",
+      "name": "Monitor",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-alerts",
+      "name": "Alerts",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-advisor",
+      "name": "Advisor",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cost-management-and-billing",
+      "name": "Cost Management And Billing",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-blueprints",
+      "name": "Blueprints",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-activity-log",
+      "name": "Activity Log",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-diagnostics-settings",
+      "name": "Diagnostics Settings",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-scheduler-job-collections",
+      "name": "Scheduler Job Collections",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-compliance",
+      "name": "Compliance",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-my-customers",
+      "name": "My Customers",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-metrics",
+      "name": "Metrics",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-solutions",
+      "name": "Solutions",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-automation-accounts",
+      "name": "Automation Accounts",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-operation-log",
+      "name": "Operation Log",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-service-providers",
+      "name": "Service Providers",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-education",
+      "name": "Education",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-service-catalog-mad",
+      "name": "Service Catalog Mad",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-intune-trends",
+      "name": "Intune Trends",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-monitors-for-sap-solutions",
+      "name": "Monitors For Sap Solutions",
+      "category": "Monitor",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-lighthouse",
+      "name": "Lighthouse",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-universal-print",
+      "name": "Universal Print",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-remote-rendering",
+      "name": "Remote Rendering",
+      "category": "Mixed Reality",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-arc",
+      "name": "Arc",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-arc-machines",
+      "name": "Arc Machines",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resources-provider",
+      "name": "Resources Provider",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-migrate",
+      "name": "Migrate",
+      "category": "Migrate",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-user-privacy",
+      "name": "User Privacy",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-desktop",
+      "name": "Managed Desktop",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-applications-center",
+      "name": "Managed Applications Center",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-customer-lockbox-for-microsoft-azure",
+      "name": "Customer Lockbox For Microsoft Azure",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-policy",
+      "name": "Policy",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resource-graph-explorer",
+      "name": "Resource Graph Explorer",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-spatial-anchor-accounts",
+      "name": "Spatial Anchor Accounts",
+      "category": "Mixed Reality",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-machinesazurearc",
+      "name": "Machinesazurearc",
+      "category": "Management + Governance",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-auto-scale",
+      "name": "Auto Scale",
+      "category": "Monitor",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-preview-features",
+      "name": "Preview Features",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-all-resources",
+      "name": "All Resources",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-subscriptions",
+      "name": "Subscriptions",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-reservations",
+      "name": "Reservations",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-service-health",
+      "name": "Service Health",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-information",
+      "name": "Information",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-recent",
+      "name": "Recent",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resource-groups",
+      "name": "Resource Groups",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-marketplace",
+      "name": "Marketplace",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-templates",
+      "name": "Templates",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-quickstart-center",
+      "name": "Quickstart Center",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-management-groups",
+      "name": "Management Groups",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-help-and-support",
+      "name": "Help And Support",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-tag",
+      "name": "Tag",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dashboard",
+      "name": "Dashboard",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-free-services",
+      "name": "Free Services",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cost-management",
+      "name": "Cost Management",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-marketplace-management",
+      "name": "Marketplace Management",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-region-management",
+      "name": "Region Management",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-troubleshoot",
+      "name": "Troubleshoot",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resource-explorer",
+      "name": "Resource Explorer",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-biz-talk",
+      "name": "Biz Talk",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-blob-block",
+      "name": "Blob Block",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-blob-page",
+      "name": "Blob Page",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-branch",
+      "name": "Branch",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-browser",
+      "name": "Browser",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-bug",
+      "name": "Bug",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-builds",
+      "name": "Builds",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cache",
+      "name": "Cache",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-code",
+      "name": "Code",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-commit",
+      "name": "Commit",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-controls",
+      "name": "Controls",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-controls-horizontal",
+      "name": "Controls Horizontal",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cost-alerts",
+      "name": "Cost Alerts",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cost-analysis",
+      "name": "Cost Analysis",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cost-budgets",
+      "name": "Cost Budgets",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-counter",
+      "name": "Counter",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cubes",
+      "name": "Cubes",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dev-console",
+      "name": "Dev Console",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-download",
+      "name": "Download",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-error",
+      "name": "Error",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-extensions",
+      "name": "Extensions",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-file",
+      "name": "File",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-files",
+      "name": "Files",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-folder-blank",
+      "name": "Folder Blank",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-folder-website",
+      "name": "Folder Website",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ftp",
+      "name": "Ftp",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-gear",
+      "name": "Gear",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-globe-error",
+      "name": "Globe Error",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-globe-success",
+      "name": "Globe Success",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-globe-warning",
+      "name": "Globe Warning",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-guide",
+      "name": "Guide",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-heart",
+      "name": "Heart",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-image",
+      "name": "Image",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-input-output",
+      "name": "Input Output",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-journey-hub",
+      "name": "Journey Hub",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-launch-portal",
+      "name": "Launch Portal",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-learn",
+      "name": "Learn",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-load-test",
+      "name": "Load Test",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-location",
+      "name": "Location",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-log-streaming",
+      "name": "Log Streaming",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-management-portal",
+      "name": "Management Portal",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-media-file",
+      "name": "Media File",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-mobile",
+      "name": "Mobile",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-mobile-engagement",
+      "name": "Mobile Engagement",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-power",
+      "name": "Power",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-powershell",
+      "name": "Powershell",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-power-up",
+      "name": "Power Up",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-feature-previews",
+      "name": "Feature Previews",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-process-explorer",
+      "name": "Process Explorer",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-production-ready-database",
+      "name": "Production Ready Database",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resource-group-list",
+      "name": "Resource Group List",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resource-linked",
+      "name": "Resource Linked",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-scheduler",
+      "name": "Scheduler",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-search",
+      "name": "Search",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-server-farm",
+      "name": "Server Farm",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ssd",
+      "name": "Ssd",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-azure-files",
+      "name": "Storage Azure Files",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-container",
+      "name": "Storage Container",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-queue",
+      "name": "Storage Queue",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-table",
+      "name": "Table",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-tags",
+      "name": "Tags",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-tfs-vc-repository",
+      "name": "Tfs Vc Repository",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-toolbox",
+      "name": "Toolbox",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-versions",
+      "name": "Versions",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-website-power",
+      "name": "Website Power",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-website-staging",
+      "name": "Website Staging",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-web-slots",
+      "name": "Web Slots",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-web-test",
+      "name": "Web Test",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-workflow",
+      "name": "Workflow",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-backlog",
+      "name": "Backlog",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-media",
+      "name": "Media",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-module",
+      "name": "Module",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-search-grid",
+      "name": "Search Grid",
+      "category": "General",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-multi-tenancy",
+      "name": "Multi Tenancy",
+      "category": "Azure Stack",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-infrastructure-backup",
+      "name": "Infrastructure Backup",
+      "category": "Azure Stack",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-capacity",
+      "name": "Capacity",
+      "category": "Azure Stack",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-offers",
+      "name": "Offers",
+      "category": "Azure Stack",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-user-subscriptions",
+      "name": "User Subscriptions",
+      "category": "Azure Stack",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-plans",
+      "name": "Plans",
+      "category": "Azure Stack",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-updates",
+      "name": "Updates",
+      "category": "Azure Stack",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-desktop",
+      "name": "Virtual Desktop",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ssh-keys",
+      "name": "Ssh Keys",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-internet-analyzer-profiles",
+      "name": "Internet Analyzer Profiles",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cloud-shell",
+      "name": "Cloud Shell",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-video-analyzers",
+      "name": "Video Analyzers",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-expressroute-direct",
+      "name": "Expressroute Direct",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-cost-export",
+      "name": "Cost Export",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-communication-services",
+      "name": "Communication Services",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-peering-service",
+      "name": "Peering Service",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-function-manager-functions",
+      "name": "Network Function Manager Functions",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-log-analytics-query-pack",
+      "name": "Log Analytics Query Pack",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-arc-kubernetes",
+      "name": "Arc Kubernetes",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-vmware-solution",
+      "name": "Vmware Solution",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-peerings",
+      "name": "Peerings",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dashboard-hub",
+      "name": "Dashboard Hub",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-video-indexer",
+      "name": "Video Indexer",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-avs-vm",
+      "name": "Avs Vm",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-arc-postgresql",
+      "name": "Arc Postgresql",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-arc-sql-managed-instance",
+      "name": "Arc Sql Managed Instance",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-arc-sql-server",
+      "name": "Arc Sql Server",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-collection-rules",
+      "name": "Data Collection Rules",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resource-mover",
+      "name": "Resource Mover",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-chaos-studio",
+      "name": "Chaos Studio",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-managers",
+      "name": "Network Managers",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dedicated-hsm",
+      "name": "Dedicated Hsm",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-modular-data-center",
+      "name": "Modular Data Center",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-template-specs",
+      "name": "Template Specs",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-arc-data-services",
+      "name": "Arc Data Services",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-backup-center",
+      "name": "Backup Center",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-backup-vault",
+      "name": "Backup Vault",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-device-update-iot-hub",
+      "name": "Device Update Iot Hub",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-fiji",
+      "name": "Fiji",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-monitor-dashboard",
+      "name": "Monitor Dashboard",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-scvmm-management-servers",
+      "name": "Scvmm Management Servers",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-support-center-blue",
+      "name": "Support Center Blue",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-web-app-database",
+      "name": "Web App Database",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-hpc-workbenches",
+      "name": "Hpc Workbenches",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-disk-pool",
+      "name": "Disk Pool",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-bare-metal-infrastructure",
+      "name": "Bare Metal Infrastructure",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-connected-vehicle-platform",
+      "name": "Connected Vehicle Platform",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-private-endpoints",
+      "name": "Private Endpoints",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-open-supply-chain-platform",
+      "name": "Open Supply Chain Platform",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-aquila",
+      "name": "Aquila",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-reserved-capacity",
+      "name": "Reserved Capacity",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-custom-ip-prefix",
+      "name": "Custom Ip Prefix",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-fhir-service",
+      "name": "Fhir Service",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-medtech-service",
+      "name": "Medtech Service",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-instance-apache-cassandra",
+      "name": "Managed Instance Apache Cassandra",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-confidential-ledgers",
+      "name": "Confidential Ledgers",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-test-base",
+      "name": "Test Base",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-orbital",
+      "name": "Orbital",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-capacity-reservation-groups",
+      "name": "Capacity Reservation Groups",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-windows-notification-services",
+      "name": "Windows Notification Services",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-function-manager",
+      "name": "Network Function Manager",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-mission-landing-zone",
+      "name": "Mission Landing Zone",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-mobile-networks",
+      "name": "Mobile Networks",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-vm-app-definitions",
+      "name": "Vm App Definitions",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-vm-app-versions",
+      "name": "Vm App Versions",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-edge-hardware-center",
+      "name": "Edge Hardware Center",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-resource-guard",
+      "name": "Resource Guard",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ceres",
+      "name": "Ceres",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-azurite",
+      "name": "Azurite",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-update-management-center",
+      "name": "Update Management Center",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-community-images",
+      "name": "Community Images",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-vm-image-version",
+      "name": "Vm Image Version",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-savings-plans",
+      "name": "Savings Plans",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-worker-container-app",
+      "name": "Worker Container App",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-grafana",
+      "name": "Managed Grafana",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-targets-management",
+      "name": "Targets Management",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-functions",
+      "name": "Storage Functions",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sonic-dash",
+      "name": "Sonic Dash",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-compliance-center",
+      "name": "Compliance Center",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-security-perimeters",
+      "name": "Network Security Perimeters",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-visits-builder",
+      "name": "Virtual Visits Builder",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-quotas",
+      "name": "Quotas",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-container-apps-environments",
+      "name": "Container Apps Environments",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-compliance-automation",
+      "name": "App Compliance Automation",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-instance-for-sap",
+      "name": "Virtual Instance For Sap",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-center-for-sap",
+      "name": "Center For Sap",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-mover",
+      "name": "Storage Mover",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-central-service-instance-for-sap",
+      "name": "Central Service Instance For Sap",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-kubernetes-fleet-manager",
+      "name": "Kubernetes Fleet Manager",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-express-route-traffic-collector",
+      "name": "Express Route Traffic Collector",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-database-instance-for-sap",
+      "name": "Database Instance For Sap",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-elastic-san",
+      "name": "Elastic San",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-microsoft-dev-box",
+      "name": "Microsoft Dev Box",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-deployment-environments",
+      "name": "Deployment Environments",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-dev-tunnels",
+      "name": "Dev Tunnels",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sustainability",
+      "name": "Sustainability",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-icm-troubleshooting",
+      "name": "Icm Troubleshooting",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-osconfig",
+      "name": "Osconfig",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-virtual-enclaves",
+      "name": "Virtual Enclaves",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-aks-istio",
+      "name": "Aks Istio",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-cm-local-manager",
+      "name": "Defender Cm Local Manager",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-external-management",
+      "name": "Defender External Management",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-freezer-monitor",
+      "name": "Defender Freezer Monitor",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-historian",
+      "name": "Defender Historian",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-hmi",
+      "name": "Defender Hmi",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-marquee",
+      "name": "Defender Marquee",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-robot-controller",
+      "name": "Defender Robot Controller",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-sensor",
+      "name": "Defender Sensor",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-slot",
+      "name": "Defender Slot",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-web-guiding-system",
+      "name": "Defender Web Guiding System",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-dcs-controller",
+      "name": "Defender Dcs Controller",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-distributer-control-system",
+      "name": "Defender Distributer Control System",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-engineering-station",
+      "name": "Defender Engineering Station",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-industrial-packaging-system",
+      "name": "Defender Industrial Packaging System",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-industrial-printer",
+      "name": "Defender Industrial Printer",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-industrial-scale-system",
+      "name": "Defender Industrial Scale System",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-industrial-robot",
+      "name": "Defender Industrial Robot",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-meter",
+      "name": "Defender Meter",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-plc",
+      "name": "Defender Plc",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-pneumatic-device",
+      "name": "Defender Pneumatic Device",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-programable-board",
+      "name": "Defender Programable Board",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-relay",
+      "name": "Defender Relay",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-defender-rtu",
+      "name": "Defender Rtu",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-hdi-aks-cluster",
+      "name": "Hdi Aks Cluster",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-monitor-health-models",
+      "name": "Monitor Health Models",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-wac-installer",
+      "name": "Wac Installer",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-a",
+      "name": "A",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-edge-management",
+      "name": "Edge Management",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sphere",
+      "name": "Sphere",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-exchange-on-premises-access",
+      "name": "Exchange On Premises Access",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-wac",
+      "name": "Wac",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-azureattestation",
+      "name": "Azureattestation",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-rtos",
+      "name": "Rtos",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-web-jobs",
+      "name": "Web Jobs",
+      "category": "Other",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-keys",
+      "name": "Keys",
+      "category": "Menu",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-toolchain-orchestrator",
+      "name": "Toolchain Orchestrator",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-workload-orchestration",
+      "name": "Workload Orchestration",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-data-virtualization",
+      "name": "Data Virtualization",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-edge-actions",
+      "name": "Edge Actions",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-frd-qa",
+      "name": "Frd Qa",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-landing-zone",
+      "name": "Landing Zone",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-service-groups",
+      "name": "Service Groups",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-engage-center-connect",
+      "name": "Engage Center Connect",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-pubsub",
+      "name": "Pubsub",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-storage-hubs",
+      "name": "Storage Hubs",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-030777508-icon-service-service-group-relationships",
+      "name": "030777508 Icon Service Service Group Relationships",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-stage-maps",
+      "name": "Stage Maps",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-logic-apps-template",
+      "name": "Logic Apps Template",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-aks-network-policy",
+      "name": "Aks Network Policy",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-microsoft-discovery",
+      "name": "Microsoft Discovery",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-scheduled-actions",
+      "name": "Scheduled Actions",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-promethus",
+      "name": "Promethus",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-kubernetes-hub",
+      "name": "Kubernetes Hub",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-local",
+      "name": "Local",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-app-testing",
+      "name": "App Testing",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-container-storage",
+      "name": "Container Storage",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-external-id",
+      "name": "External Id",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-external-id-modified",
+      "name": "External Id Modified",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-vnet-appliance",
+      "name": "Vnet Appliance",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-monitor-issues",
+      "name": "Monitor Issues",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-consumption-commitment",
+      "name": "Consumption Commitment",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-edge-storage-accelerator",
+      "name": "Edge Storage Accelerator",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-operation-center",
+      "name": "Operation Center",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-sql-database-fleet-manager",
+      "name": "Sql Database Fleet Manager",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-breeze",
+      "name": "Breeze",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-foundation-hub",
+      "name": "Network Foundation Hub",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-linux",
+      "name": "Linux",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-network-security-hub",
+      "name": "Network Security Hub",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-hybrid-connectivity-hub",
+      "name": "Hybrid Connectivity Hub",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-managed-redis",
+      "name": "Managed Redis",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-ai-at-edge",
+      "name": "Ai At Edge",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-vpnclientwindows",
+      "name": "Vpnclientwindows",
+      "category": "New Icons",
+      "color": "#0078D4"
+    },
+    {
+      "id": "azure-planetary-computer-pro",
+      "name": "Planetary Computer Pro",
+      "category": "New Icons",
+      "color": "#0078D4"
+    }
+  ],
+  "resources": [],
+  "groups": [],
+  "aliases": {
+    "vm": "azure-virtual-machine",
+    "vmss": "azure-vm-scale-sets",
+    "aks": "azure-kubernetes-services",
+    "functions": "azure-function-apps",
+    "app-service": "azure-app-services",
+    "sql": "azure-sql-database",
+    "cosmos": "azure-cosmos-db",
+    "cosmosdb": "azure-cosmos-db",
+    "storage-account": "azure-storage-accounts",
+    "blob": "azure-blob-block",
+    "vnet": "azure-virtual-networks",
+    "nsg": "azure-network-security-groups",
+    "lb": "azure-load-balancers",
+    "app-gateway": "azure-application-gateways",
+    "agw": "azure-application-gateways",
+    "front-door": "azure-front-door-and-cdn-profiles",
+    "apim": "azure-api-management-services",
+    "acr": "azure-container-registries",
+    "aci": "azure-container-instances",
+    "key-vault": "azure-key-vaults",
+    "keyvault": "azure-key-vaults",
+    "entra-id": "azure-entra-domain-services",
+    "aad": "azure-entra-domain-services",
+    "active-directory": "azure-entra-domain-services",
+    "event-hub": "azure-event-hubs",
+    "service-bus": "azure-service-bus",
+    "event-grid": "azure-event-grid-topics",
+    "log-analytics": "azure-log-analytics-workspaces",
+    "app-insights": "azure-application-insights",
+    "synapse": "azure-synapse-analytics",
+    "databricks": "azure-databricks",
+    "openai": "azure-openai",
+    "firewall": "azure-firewalls",
+    "bastion": "azure-bastions",
+    "expressroute": "azure-expressroute-circuits",
+    "devops": "azure-devops",
+    "monitor": "azure-monitor"
+  }
+}

@@ -1,7 +1,10 @@
-// AWS構成図の宣言的スペック。
-// render_aws_diagram ツールの入力契約であり、UI側プログレッシブレンダリングの契約でもある。
+// クラウド構成図の宣言的スペック（AWS / Azure / GCP 対応）。
+// render_diagram ツールの入力契約であり、UI側プログレッシブレンダリングの契約でもある。
 // elements は「ユーザー/入口側から処理の流れの順」に並べる。
 // ホストがツール引数をストリーミングする間、UIは配列の先頭から順に描画していく。
+
+/** クラウドプロバイダー種別 */
+export type Provider = "aws" | "azure" | "gcp";
 
 /** AWS公式アイコンデッキで定義されているグループ枠の種類 */
 export type GroupKind =
@@ -19,7 +22,24 @@ export type GroupKind =
   | "corporate-data-center"
   | "spot-fleet"
   | "step-functions-workflow"
-  | "generic";
+  | "generic"
+  // Azure
+  | "azure-cloud"
+  | "azure-subscription"
+  | "azure-resource-group"
+  | "azure-vnet"
+  | "azure-subnet"
+  | "azure-availability-zone"
+  | "azure-management-group"
+  | "azure-app-service-plan"
+  // GCP
+  | "gcp-cloud"
+  | "gcp-project"
+  | "gcp-vpc"
+  | "gcp-region"
+  | "gcp-zone"
+  | "gcp-subnet"
+  | "gcp-shared-vpc";
 
 export interface GroupElement {
   type: "group";
@@ -36,7 +56,7 @@ export interface NodeElement {
   type: "node";
   /** 図内で一意なID */
   id: string;
-  /** アイコンID（例: "amazon-ec2", "aws-lambda", "user"）。list_aws_icons で検索可能 */
+  /** アイコンID（例: "amazon-ec2", "aws-lambda", "user"）。list_icons で検索可能 */
   icon: string;
   /** リソース固有名（例: "web-server-01"）。サービス名ラベルはアイコンから自動付与される */
   name?: string;
@@ -79,6 +99,8 @@ export type DiagramElement = GroupElement | NodeElement | EdgeElement | NoteElem
 export interface DiagramSpec {
   /** 図のタイトル */
   title?: string;
+  /** クラウドプロバイダー。省略時は "aws" 扱い（後方互換） */
+  provider?: Provider;
   /** 入口側（ユーザー/クライアント）から順に並べた図の構成要素 */
   elements: DiagramElement[];
   /**
@@ -116,6 +138,69 @@ export const GROUP_STYLES: Record<GroupKind, GroupStyle> = {
   "spot-fleet": { label: "Spot Fleet", color: "#ED7100", border: "solid", iconId: "spot-fleet" },
   "step-functions-workflow": { label: "AWS Step Functions workflow", color: "#E7157B", border: "solid", iconId: null },
   generic: { label: "", color: "#7D8998", border: "dashed", iconId: null },
+  // Azure (ブランドカラー #0078D4 基調)
+  "azure-cloud":             { label: "Microsoft Azure",   color: "#0078D4", border: "solid",  iconId: null },
+  "azure-subscription":      { label: "Subscription",      color: "#0078D4", border: "dashed", iconId: "azure-subscriptions" },
+  "azure-resource-group":    { label: "Resource group",    color: "#7D8998", border: "dashed", iconId: "azure-resource-groups" },
+  "azure-vnet":              { label: "Virtual network",   color: "#0078D4", border: "solid",  iconId: "azure-virtual-networks" },
+  "azure-subnet":            { label: "Subnet",            color: "#00B7C3", border: "solid",  iconId: null },
+  "azure-availability-zone": { label: "Availability Zone", color: "#00A4A6", border: "dashed", iconId: null },
+  "azure-management-group":  { label: "Management group",  color: "#0078D4", border: "dotted", iconId: "azure-management-groups" },
+  "azure-app-service-plan":  { label: "App Service plan",  color: "#0078D4", border: "dashed", iconId: null },
+  // GCP (ブランドカラー #4285F4 基調 + Google緑)
+  "gcp-cloud":      { label: "Google Cloud", color: "#4285F4", border: "solid",  iconId: "gcp-my-cloud" },
+  "gcp-project":    { label: "Project",      color: "#4285F4", border: "solid",  iconId: "gcp-project" },
+  "gcp-vpc":        { label: "VPC network",  color: "#4285F4", border: "solid",  iconId: "gcp-virtual-private-cloud" },
+  "gcp-region":     { label: "Region",       color: "#00A4A6", border: "dotted", iconId: null },
+  "gcp-zone":       { label: "Zone",         color: "#00A4A6", border: "dashed", iconId: null },
+  "gcp-subnet":     { label: "Subnet",       color: "#34A853", border: "solid",  iconId: null },
+  "gcp-shared-vpc": { label: "Shared VPC",   color: "#4285F4", border: "dashed", iconId: "gcp-virtual-private-cloud" },
+};
+
+/** プロバイダーごとに使用可能なグループ種別の一覧 */
+export const GROUP_KINDS_BY_PROVIDER: Record<Provider, GroupKind[]> = {
+  aws: [
+    "aws-cloud",
+    "region",
+    "availability-zone",
+    "vpc",
+    "public-subnet",
+    "private-subnet",
+    "security-group",
+    "auto-scaling-group",
+    "aws-account",
+    "ec2-instance-contents",
+    "server-contents",
+    "corporate-data-center",
+    "spot-fleet",
+    "step-functions-workflow",
+    "generic",
+  ],
+  azure: [
+    "azure-cloud",
+    "azure-subscription",
+    "azure-resource-group",
+    "azure-vnet",
+    "azure-subnet",
+    "azure-availability-zone",
+    "azure-management-group",
+    "azure-app-service-plan",
+    "generic",
+    "corporate-data-center",
+    "server-contents",
+  ],
+  gcp: [
+    "gcp-cloud",
+    "gcp-project",
+    "gcp-vpc",
+    "gcp-region",
+    "gcp-zone",
+    "gcp-subnet",
+    "gcp-shared-vpc",
+    "generic",
+    "corporate-data-center",
+    "server-contents",
+  ],
 };
 
 /** アイコンマニフェストの1エントリ */

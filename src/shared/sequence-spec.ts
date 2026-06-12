@@ -1,15 +1,17 @@
-// AWSアイコン付きシーケンス図の宣言的スペック。
-// render_aws_sequence ツールの入力契約であり、UI側プログレッシブレンダリングの契約でもある。
+// クラウドアイコン付きシーケンス図の宣言的スペック（AWS / Azure / GCP 対応）。
+// render_sequence ツールの入力契約であり、UI側プログレッシブレンダリングの契約でもある。
 // participants（ライフライン）を先に宣言し、events は上から時系列順に並べる。
 // ホストがツール引数をストリーミングする間、UIはライフラインを立ててから
 // メッセージを1本ずつ上から順に描画していく。
+
+import type { Provider } from "./diagram-spec.js";
 
 export interface SequenceParticipant {
   /** 図内で一意なID */
   id: string;
   /**
-   * ライフライン上部に表示するAWSアイコンID（構成図と同じ解決規則、エイリアス可）。
-   * AWS以外の登場者は汎用アイコン（"user", "client", "internet" 等）を使う
+   * ライフライン上部に表示するアイコンID（構成図と同じ解決規則、エイリアス可）。
+   * AWS/Azure/GCP のアイコンに対応。汎用アイコン（"user", "client", "internet" 等）も使用可
    */
   icon: string;
   /** リソース固有名（例: "orders-table"）。サービス名ラベルはアイコンから自動付与される */
@@ -80,6 +82,8 @@ export type SequenceEvent =
 export interface SequenceSpec {
   /** 図のタイトル */
   title?: string;
+  /** クラウドプロバイダー。省略時は "aws" 扱い（後方互換） */
+  provider?: Provider;
   /** ライフライン。左から順に表示される（トラフィックの入口側を左に） */
   participants: SequenceParticipant[];
   /** 上から時系列順のイベント列 */

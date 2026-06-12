@@ -5,3 +5,10 @@ dist/
 .dev.vars
 *.log
 .DS_Store
+
+# Terraform
+terraform/.terraform/
+*.tfstate
+*.tfstate.*
+lambda.zip
+.terraform.tfstate.lock.info

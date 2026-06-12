@@ -10,6 +10,7 @@ import type {
   SequenceEvent,
   SequenceParticipant,
 } from "../shared/sequence-spec";
+import type { Provider } from "../shared/diagram-spec";
 import { resolveIcon, type ResolvedIcon } from "./icons";
 import { ellipsize, textWidth, wrapLabel } from "./layout";
 
@@ -144,10 +145,11 @@ export function fragmentTabWidth(kind: string): number {
 export function layoutSequence(
   participants: SequenceParticipant[],
   events: SequenceEvent[],
+  provider: Provider = "aws",
 ): SequenceLayout {
   // ---- 1. ライフラインヘッダの寸法 ----
   const heads = participants.map((p) => {
-    const icon = resolveIcon(p.icon);
+    const icon = resolveIcon(p.icon, provider);
     const labelLines = wrapLabel(icon.name, HEAD_LABEL_MAX_W, FONT_LABEL);
     const nameText = p.name ? ellipsize(p.name, HEAD_LABEL_MAX_W, FONT_SMALL) : null;
     const widths = [

@@ -1,0 +1,1534 @@
+{
+  "services": [
+    {
+      "id": "gcp-ai-hypercomputer",
+      "name": "AI Hypercomputer",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-alloydb",
+      "name": "AlloyDB",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-anthos",
+      "name": "Anthos",
+      "category": "Hybrid & Multicloud",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-apigee",
+      "name": "Apigee",
+      "category": "API Management",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-bigquery",
+      "name": "BigQuery",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-run",
+      "name": "Cloud Run",
+      "category": "Serverless",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-sql",
+      "name": "Cloud SQL",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-spanner",
+      "name": "Cloud Spanner",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-storage",
+      "name": "Cloud Storage",
+      "category": "Storage",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-compute-engine",
+      "name": "Compute Engine",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-distributed-cloud",
+      "name": "Distributed Cloud",
+      "category": "Hybrid & Multicloud",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-gke",
+      "name": "GKE",
+      "category": "Containers",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-hyperdisk",
+      "name": "Hyperdisk",
+      "category": "Storage",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-looker",
+      "name": "Looker",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-mandiant",
+      "name": "Mandiant",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-security-command-center",
+      "name": "Security Command Center",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-security-operations",
+      "name": "Security Operations",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-threat-intelligence",
+      "name": "Threat Intelligence",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-vertex-ai",
+      "name": "Vertex AI",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-access-context-manager",
+      "name": "Access Context Manager",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-administration",
+      "name": "Administration",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-advanced-agent-modeling",
+      "name": "Advanced Agent Modeling",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-advanced-solutions-lab",
+      "name": "Advanced Solutions Lab",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-agent-assist",
+      "name": "Agent Assist",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-ai-hub",
+      "name": "Ai Hub",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-ai-platform",
+      "name": "Ai Platform",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-ai-platform-unified",
+      "name": "Ai Platform Unified",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-analytics-hub",
+      "name": "Analytics Hub",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-anthos-config-management",
+      "name": "Anthos Config Management",
+      "category": "Hybrid & Multicloud",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-anthos-service-mesh",
+      "name": "Anthos Service Mesh",
+      "category": "Hybrid & Multicloud",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-api",
+      "name": "Api",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-api-analytics",
+      "name": "Api Analytics",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-api-monetization",
+      "name": "Api Monetization",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-apigee-sense",
+      "name": "Apigee Sense",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-app-engine",
+      "name": "App Engine",
+      "category": "Serverless",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-artifact-registry",
+      "name": "Artifact Registry",
+      "category": "Containers",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-asset-inventory",
+      "name": "Asset Inventory",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-assured-workloads",
+      "name": "Assured Workloads",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-automl",
+      "name": "Automl",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-automl-natural-language",
+      "name": "Automl Natural Language",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-automl-tables",
+      "name": "Automl Tables",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-automl-translation",
+      "name": "Automl Translation",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-automl-video-intelligence",
+      "name": "Automl Video Intelligence",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-automl-vision",
+      "name": "Automl Vision",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-bare-metal-solutions",
+      "name": "Bare Metal Solutions",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-batch",
+      "name": "Batch",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-beyondcorp",
+      "name": "Beyondcorp",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-bigtable",
+      "name": "Bigtable",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-billing",
+      "name": "Billing",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-binary-authorization",
+      "name": "Binary Authorization",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-catalog",
+      "name": "Catalog",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-certificate-authority-service",
+      "name": "Certificate Authority Service",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-certificate-manager",
+      "name": "Certificate Manager",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-api-gateway",
+      "name": "Cloud Api Gateway",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-apis",
+      "name": "Cloud Apis",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-armor",
+      "name": "Cloud Armor",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-asset-inventory",
+      "name": "Cloud Asset Inventory",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-audit-logs",
+      "name": "Cloud Audit Logs",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-build",
+      "name": "Cloud Build",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-cdn",
+      "name": "Cloud Cdn",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-code",
+      "name": "Cloud Code",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-composer",
+      "name": "Cloud Composer",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-data-fusion",
+      "name": "Cloud Data Fusion",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-deploy",
+      "name": "Cloud Deploy",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-deployment-manager",
+      "name": "Cloud Deployment Manager",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-dns",
+      "name": "Cloud Dns",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-domains",
+      "name": "Cloud Domains",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-ekm",
+      "name": "Cloud Ekm",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-endpoints",
+      "name": "Cloud Endpoints",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-external-ip-addresses",
+      "name": "Cloud External Ip Addresses",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-firewall-rules",
+      "name": "Cloud Firewall Rules",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-for-marketing",
+      "name": "Cloud For Marketing",
+      "category": "Business",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-functions",
+      "name": "Cloud Functions",
+      "category": "Serverless",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-generic",
+      "name": "Cloud Generic",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-gpu",
+      "name": "Cloud Gpu",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-healthcare-api",
+      "name": "Cloud Healthcare Api",
+      "category": "Healthcare",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-healthcare-marketplace",
+      "name": "Cloud Healthcare Marketplace",
+      "category": "Healthcare",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-hsm",
+      "name": "Cloud Hsm",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-ids",
+      "name": "Cloud Ids",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-inference-api",
+      "name": "Cloud Inference Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-interconnect",
+      "name": "Cloud Interconnect",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-jobs-api",
+      "name": "Cloud Jobs Api",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-load-balancing",
+      "name": "Cloud Load Balancing",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-logging",
+      "name": "Cloud Logging",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-media-edge",
+      "name": "Cloud Media Edge",
+      "category": "Media",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-monitoring",
+      "name": "Cloud Monitoring",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-nat",
+      "name": "Cloud Nat",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-natural-language-api",
+      "name": "Cloud Natural Language Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-network",
+      "name": "Cloud Network",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-ops",
+      "name": "Cloud Ops",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-optimization-ai",
+      "name": "Cloud Optimization Ai",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-optimization-ai-fleet-routing-api",
+      "name": "Cloud Optimization Ai - Fleet Routing Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-router",
+      "name": "Cloud Router",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-routes",
+      "name": "Cloud Routes",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-run-for-anthos",
+      "name": "Cloud Run For Anthos",
+      "category": "Serverless",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-scheduler",
+      "name": "Cloud Scheduler",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-security-scanner",
+      "name": "Cloud Security Scanner",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-shell",
+      "name": "Cloud Shell",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-tasks",
+      "name": "Cloud Tasks",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-test-lab",
+      "name": "Cloud Test Lab",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-tpu",
+      "name": "Cloud Tpu",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-translation-api",
+      "name": "Cloud Translation Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-vision-api",
+      "name": "Cloud Vision Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-cloud-vpn",
+      "name": "Cloud Vpn",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-configuration-management",
+      "name": "Configuration Management",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-connectivity-test",
+      "name": "Connectivity Test",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-connectors",
+      "name": "Connectors",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-contact-center-ai",
+      "name": "Contact Center Ai",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-container-optimized-os",
+      "name": "Container Optimized Os",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-container-registry",
+      "name": "Container Registry",
+      "category": "Containers",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-data-catalog",
+      "name": "Data Catalog",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-data-labeling",
+      "name": "Data Labeling",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-data-layers",
+      "name": "Data Layers",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-data-loss-prevention-api",
+      "name": "Data Loss Prevention Api",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-data-qna",
+      "name": "Data Qna",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-data-studio",
+      "name": "Data Studio",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-data-transfer",
+      "name": "Data Transfer",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-database-migration-service",
+      "name": "Database Migration Service",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-dataflow",
+      "name": "Dataflow",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-datalab",
+      "name": "Datalab",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-dataplex",
+      "name": "Dataplex",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-datapol",
+      "name": "Datapol",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-dataprep",
+      "name": "Dataprep",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-dataproc",
+      "name": "Dataproc",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-dataproc-metastore",
+      "name": "Dataproc Metastore",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-datashare",
+      "name": "Datashare",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-datastore",
+      "name": "Datastore",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-datastream",
+      "name": "Datastream",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-debugger",
+      "name": "Debugger",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-developer-portal",
+      "name": "Developer Portal",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-dialogflow",
+      "name": "Dialogflow",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-dialogflow-cx",
+      "name": "Dialogflow Cx",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-dialogflow-insights",
+      "name": "Dialogflow Insights",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-document-ai",
+      "name": "Document Ai",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-early-access-center",
+      "name": "Early Access Center",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-error-reporting",
+      "name": "Error Reporting",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-eventarc",
+      "name": "Eventarc",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-filestore",
+      "name": "Filestore",
+      "category": "Storage",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-financial-services-marketplace",
+      "name": "Financial Services Marketplace",
+      "category": "Business",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-firestore",
+      "name": "Firestore",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-fleet-engine",
+      "name": "Fleet Engine",
+      "category": "Maps & Geospatial",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-free-trial",
+      "name": "Free Trial",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-game-servers",
+      "name": "Game Servers",
+      "category": "Gaming",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-gce-systems-management",
+      "name": "Gce Systems Management",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-genomics",
+      "name": "Genomics",
+      "category": "Healthcare",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-gke-on-prem",
+      "name": "Gke On-prem",
+      "category": "Containers",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-google-cloud-marketplace",
+      "name": "Google Cloud Marketplace",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-google-maps-platform",
+      "name": "Google Maps Platform",
+      "category": "Maps & Geospatial",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-healthcare-nlp-api",
+      "name": "Healthcare Nlp Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-home",
+      "name": "Home",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-identity-aware-proxy",
+      "name": "Identity-aware Proxy",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-identity-and-access-management",
+      "name": "Identity And Access Management",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-identity-platform",
+      "name": "Identity Platform",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-iot-core",
+      "name": "Iot Core",
+      "category": "IoT",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-iot-edge",
+      "name": "Iot Edge",
+      "category": "IoT",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-key-access-justifications",
+      "name": "Key Access Justifications",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-key-management-service",
+      "name": "Key Management Service",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-kuberun",
+      "name": "Kuberun",
+      "category": "Containers",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-launcher",
+      "name": "Launcher",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-local-ssd",
+      "name": "Local Ssd",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-managed-service-for-microsoft-active-directory",
+      "name": "Managed Service For Microsoft Active Directory",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-media-translation-api",
+      "name": "Media Translation Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-memorystore",
+      "name": "Memorystore",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-migrate-for-anthos",
+      "name": "Migrate For Anthos",
+      "category": "Hybrid & Multicloud",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-migrate-for-compute-engine",
+      "name": "Migrate For Compute Engine",
+      "category": "Hybrid & Multicloud",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-my-cloud",
+      "name": "My Cloud",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-network-connectivity-center",
+      "name": "Network Connectivity Center",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-network-intelligence-center",
+      "name": "Network Intelligence Center",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-network-security",
+      "name": "Network Security",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-network-tiers",
+      "name": "Network Tiers",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-network-topology",
+      "name": "Network Topology",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-onboarding",
+      "name": "Onboarding",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-os-configuration-management",
+      "name": "Os Configuration Management",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-os-inventory-management",
+      "name": "Os Inventory Management",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-os-patch-management",
+      "name": "Os Patch Management",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-partner-interconnect",
+      "name": "Partner Interconnect",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-partner-portal",
+      "name": "Partner Portal",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-performance-dashboard",
+      "name": "Performance Dashboard",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-permissions",
+      "name": "Permissions",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-persistent-disk",
+      "name": "Persistent Disk",
+      "category": "Storage",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-phishing-protection",
+      "name": "Phishing Protection",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-policy-analyzer",
+      "name": "Policy Analyzer",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-premium-network-tier",
+      "name": "Premium Network Tier",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-private-connectivity",
+      "name": "Private Connectivity",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-private-service-connect",
+      "name": "Private Service Connect",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-producer-portal",
+      "name": "Producer Portal",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-profiler",
+      "name": "Profiler",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-project",
+      "name": "Project",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-pubsub",
+      "name": "Pubsub",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-quantum-engine",
+      "name": "Quantum Engine",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-quotas",
+      "name": "Quotas",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-real-world-insights",
+      "name": "Real-world Insights",
+      "category": "Maps & Geospatial",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-recommendations-ai",
+      "name": "Recommendations Ai",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-release-notes",
+      "name": "Release Notes",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-retail-api",
+      "name": "Retail Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-risk-manager",
+      "name": "Risk Manager",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-runtime-config",
+      "name": "Runtime Config",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-secret-manager",
+      "name": "Secret Manager",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-security",
+      "name": "Security",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-security-health-advisor",
+      "name": "Security Health Advisor",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-security-key-enforcement",
+      "name": "Security Key Enforcement",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-service-discovery",
+      "name": "Service Discovery",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-speech-to-text",
+      "name": "Speech-to-text",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-stackdriver",
+      "name": "Stackdriver",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-standard-network-tier",
+      "name": "Standard Network Tier",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-stream-suite",
+      "name": "Stream Suite",
+      "category": "Media",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-support",
+      "name": "Support",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-tensorflow-enterprise",
+      "name": "Tensorflow Enterprise",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-text-to-speech",
+      "name": "Text-to-speech",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-tools-for-powershell",
+      "name": "Tools For Powershell",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-trace",
+      "name": "Trace",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-traffic-director",
+      "name": "Traffic Director",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-transfer",
+      "name": "Transfer",
+      "category": "Storage",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-transfer-appliance",
+      "name": "Transfer Appliance",
+      "category": "Storage",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-user-preferences",
+      "name": "User Preferences",
+      "category": "Management & Governance",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-video-intelligence-api",
+      "name": "Video Intelligence Api",
+      "category": "AI + ML",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-virtual-private-cloud",
+      "name": "Virtual Private Cloud",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-visual-inspection",
+      "name": "Visual Inspection",
+      "category": "Other",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-vmware-engine",
+      "name": "Vmware Engine",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-web-risk",
+      "name": "Web Risk",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-web-security-scanner",
+      "name": "Web Security Scanner",
+      "category": "Security",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-workflows",
+      "name": "Workflows",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-workload-identity-pool",
+      "name": "Workload Identity Pool",
+      "category": "Security",
+      "color": "#4285F4"
+    }
+  ],
+  "resources": [],
+  "groups": [
+    {
+      "id": "gcp-category-ai-machine-learning",
+      "name": "AI _ Machine Learning",
+      "category": "AI _ Machine Learning",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-agents",
+      "name": "Agents",
+      "category": "Agents",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-business-intelligence",
+      "name": "Business Intelligence",
+      "category": "Business Intelligence",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-collaboration",
+      "name": "Collaboration",
+      "category": "Collaboration",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-compute",
+      "name": "Compute",
+      "category": "Compute",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-containers",
+      "name": "Containers",
+      "category": "Containers",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-data-analytics",
+      "name": "Data Analytics",
+      "category": "Data Analytics",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-databases",
+      "name": "Databases",
+      "category": "Databases",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-devops",
+      "name": "DevOps",
+      "category": "DevOps",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-developer-tools",
+      "name": "Developer Tools",
+      "category": "Developer Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-hybrid-multicloud",
+      "name": "Hybrid & Multicloud",
+      "category": "Hybrid & Multicloud",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-integration-services",
+      "name": "Integration Services",
+      "category": "Integration Services",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-management-tools",
+      "name": "Management Tools",
+      "category": "Management Tools",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-maps-geospatial",
+      "name": "Maps & Geospatial",
+      "category": "Maps & Geospatial",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-marketplace",
+      "name": "Marketplace",
+      "category": "Marketplace",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-media-services",
+      "name": "Media Services",
+      "category": "Media Services",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-migration",
+      "name": "Migration",
+      "category": "Migration",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-mixed-reality",
+      "name": "Mixed Reality",
+      "category": "Mixed Reality",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-networking",
+      "name": "Networking",
+      "category": "Networking",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-observability",
+      "name": "Observability",
+      "category": "Observability",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-operations",
+      "name": "Operations",
+      "category": "Operations",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-security-identity",
+      "name": "Security Identity",
+      "category": "Security Identity",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-serverless-computing",
+      "name": "Serverless Computing",
+      "category": "Serverless Computing",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-storage",
+      "name": "Storage",
+      "category": "Storage",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-web-mobile",
+      "name": "Web & Mobile",
+      "category": "Web & Mobile",
+      "color": "#4285F4"
+    },
+    {
+      "id": "gcp-category-web3",
+      "name": "Web3",
+      "category": "Web3",
+      "color": "#4285F4"
+    }
+  ],
+  "aliases": {
+    "gke": "gcp-gke",
+    "gce": "gcp-compute-engine",
+    "compute-engine": "gcp-compute-engine",
+    "gcs": "gcp-cloud-storage",
+    "bq": "gcp-bigquery",
+    "pubsub": "gcp-pubsub",
+    "pub-sub": "gcp-pubsub",
+    "cloud-functions": "gcp-cloud-functions",
+    "run": "gcp-cloud-run",
+    "spanner": "gcp-cloud-spanner",
+    "cloud-sql": "gcp-cloud-sql",
+    "firestore": "gcp-firestore",
+    "bigtable": "gcp-bigtable",
+    "dataflow": "gcp-dataflow",
+    "dataproc": "gcp-dataproc",
+    "vertex-ai": "gcp-vertex-ai",
+    "gae": "gcp-app-engine",
+    "app-engine": "gcp-app-engine",
+    "gcp-google-kubernetes-engine": "gcp-gke",
+    "gcp-alloydb-for-postgresql": "gcp-alloydb",
+    "gcp-apigee-api-platform": "gcp-apigee",
+    "gcp-anthos": "gcp-anthos",
+    "gcp-bigquery": "gcp-bigquery",
+    "gcp-cloud-run": "gcp-cloud-run",
+    "gcp-cloud-sql": "gcp-cloud-sql",
+    "gcp-cloud-spanner": "gcp-cloud-spanner",
+    "gcp-cloud-storage": "gcp-cloud-storage",
+    "gcp-compute-engine": "gcp-compute-engine",
+    "gcp-looker": "gcp-looker",
+    "gcp-security-command-center": "gcp-security-command-center",
+    "gcp-vertexai": "gcp-vertex-ai"
+  }
+}

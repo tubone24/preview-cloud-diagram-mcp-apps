@@ -12,6 +12,7 @@
 import { mkdir, readdir, readFile, writeFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { minifySvg, validateAliases, writeGeneratedJson } from './lib/icon-build-common.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '..');
@@ -30,7 +31,7 @@ const GENERAL_RESOURCE_ICONS_DIR = path.join(
 );
 
 const OUT_ASSETS_DIR = path.join(PROJECT_ROOT, 'assets', 'aws-icons');
-const OUT_GENERATED_DIR = path.join(PROJECT_ROOT, 'src', 'generated');
+const OUT_GENERATED_DIR = path.join(PROJECT_ROOT, 'src', 'generated', 'aws');
 
 // フォルダ名 (Arch_ プレフィックス除去後) → { 表示名, AWS公式カテゴリ色 }
 const CATEGORY_MAP = {
@@ -151,17 +152,6 @@ const ALIASES = {
   'route53-hosted-zone': 'amazon-route-53-hosted-zone',
   'eventbridge-event': 'amazon-eventbridge-event',
 };
-
-/** SVG軽量ミニファイ。id属性やurl(#...)参照は壊さない。 */
-function minifySvg(svg) {
-  return svg
-    .replace(/<\?xml[\s\S]*?\?>/g, '') // XML宣言除去
-    .replace(/<!--[\s\S]*?-->/g, '') // コメント除去
-    .replace(/<title>[\s\S]*?<\/title>/g, '') // title除去
-    .replace(/>\s+</g, '><') // タグ間の改行・空白を圧縮
-    .replace(/\s{2,}/g, ' ') // 連続空白を1つに
-    .trim();
-}
 
 /** 名前部分（例: "Amazon-EC2" / "Amazon-Elastic-Container-Service_Task"）→ 表示名（"Amazon EC2" / "Amazon Elastic Container Service Task"） */
 function toDisplayName(namePart) {
@@ -349,7 +339,6 @@ async function main() {
   };
   await Promise.all([
     ...Object.values(dirs).map((d) => mkdir(d, { recursive: true })),
-    mkdir(OUT_GENERATED_DIR, { recursive: true }),
   ]);
 
   // SVG読み込み・ミニファイ・コピー
@@ -369,15 +358,7 @@ async function main() {
 
   // エイリアス検証
   console.log('Validating aliases...');
-  const validIds = new Set(takenIds);
-  const missing = Object.entries(ALIASES).filter(([, target]) => !validIds.has(target));
-  if (missing.length > 0) {
-    console.error('ERROR: the following aliases resolve to non-existent icon IDs:');
-    for (const [alias, target] of missing) {
-      console.error(`  ${alias} -> ${target} (not found in manifest)`);
-    }
-    process.exit(1);
-  }
+  validateAliases(ALIASES, takenIds);
 
   // manifest / svgs JSON 出力
   const stripSrc = ({ srcPath, ...rest }) => rest;
@@ -387,12 +368,7 @@ async function main() {
     groups: groups.map(stripSrc),
     aliases: ALIASES,
   };
-  const manifestPath = path.join(OUT_GENERATED_DIR, 'icon-manifest.json');
-  const svgsPath = path.join(OUT_GENERATED_DIR, 'icon-svgs.json');
-  const manifestJson = JSON.stringify(manifest, null, 2);
-  const svgsJson = JSON.stringify(svgMap);
-  await writeFile(manifestPath, manifestJson, 'utf8');
-  await writeFile(svgsPath, svgsJson, 'utf8');
+  writeGeneratedJson(OUT_GENERATED_DIR, manifest, svgMap);
 
   // サマリ出力
   console.log('');
@@ -424,9 +400,6 @@ async function main() {
   }
   console.log('');
   console.log(`Aliases: ${Object.keys(ALIASES).length} (all validated)`);
-  console.log('');
-  console.log(`icon-manifest.json: ${Buffer.byteLength(manifestJson)} bytes`);
-  console.log(`icon-svgs.json    : ${Buffer.byteLength(svgsJson)} bytes`);
   console.log('Done.');
 }
 

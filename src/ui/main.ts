@@ -8,6 +8,7 @@ import {
   type DiagramElement,
   type DiagramSpec,
   type GroupKind,
+  type Provider,
 } from "../shared/diagram-spec";
 import type {
   MessageKind,
@@ -360,26 +361,31 @@ function renderSpec(
   title: string | undefined,
   elements: DiagramElement[],
   steps: string[] = [],
+  provider: Provider = "aws",
 ): void {
   titleEl.textContent = title ?? "";
   titleEl.hidden = !title;
   const hasContent = elements.some((e) => e.type !== "edge");
   emptyEl.hidden = hasContent;
   if (!hasContent) return;
-  const layout = layoutDiagram(elements, steps);
+  const layout = layoutDiagram(elements, steps, provider);
   currentLayout = layout;
   renderer.render(layout);
   panZoom.setBase(layout.width, layout.height);
   svg.style.aspectRatio = `${layout.width} / ${layout.height}`;
 }
 
-function renderSequenceSpec(title: string | undefined, clean: CleanSequence): void {
+function renderSequenceSpec(
+  title: string | undefined,
+  clean: CleanSequence,
+  provider: Provider = "aws",
+): void {
   titleEl.textContent = title ?? "";
   titleEl.hidden = !title;
   const hasContent = clean.participants.length > 0;
   emptyEl.hidden = hasContent;
   if (!hasContent) return;
-  const layout = layoutSequence(clean.participants, clean.events);
+  const layout = layoutSequence(clean.participants, clean.events, provider);
   currentSeqLayout = layout;
   seqRenderer.render(layout);
   seqPanZoom.setBase(layout.width, layout.height);
@@ -404,24 +410,34 @@ function applyTheme(theme: string | undefined): void {
 }
 
 // ---- App ライフサイクル ----
-const app = new App({ name: "aws-diagram", version: "0.1.0" }, {});
+const app = new App({ name: "cloud-diagram", version: "0.2.0" }, {});
+
+/** args.provider を抽出し、不正値は "aws" にフォールバック（ストリーミング中に未着でも安全） */
+function extractProvider(args: Record<string, unknown>): Provider {
+  const p = args.provider;
+  if (p === "aws" || p === "azure" || p === "gcp") return p;
+  return "aws";
+}
 
 // 入力がDiagramSpec形（elements）なら構成図、SequenceSpec形（participants+events）なら
 // シーケンス図として描画する。どちらとも判定できない段階（titleのみ等）は何もしない
 function handleToolArgs(args: Record<string, unknown>, strict: boolean): void {
   const kind = detectKind(args);
+  const provider = extractProvider(args);
   if (kind === "architecture") {
     setMode("architecture");
     renderSpec(
       typeof args.title === "string" ? args.title : undefined,
       sanitizeElements(args.elements, strict),
       sanitizeSteps(args.steps),
+      provider,
     );
   } else if (kind === "sequence") {
     setMode("sequence");
     renderSequenceSpec(
       typeof args.title === "string" ? args.title : undefined,
       sanitizeSequence(args.participants, args.events, strict),
+      provider,
     );
   }
 }
@@ -452,12 +468,17 @@ app.addEventListener("toolresult", (params) => {
       sc.kind === "sequence" ||
       (sc.kind !== "architecture" && Array.isArray(spec.participants));
     const title = typeof spec.title === "string" ? spec.title : undefined;
+    // spec.provider が "aws"|"azure"|"gcp" でなければ "aws" フォールバック
+    const provider: Provider =
+      spec.provider === "aws" || spec.provider === "azure" || spec.provider === "gcp"
+        ? spec.provider
+        : "aws";
     if (isSequence) {
       setMode("sequence");
-      renderSequenceSpec(title, sanitizeSequence(spec.participants, spec.events, false));
+      renderSequenceSpec(title, sanitizeSequence(spec.participants, spec.events, false), provider);
     } else {
       setMode("architecture");
-      renderSpec(title, sanitizeElements(spec.elements, false), sanitizeSteps(spec.steps));
+      renderSpec(title, sanitizeElements(spec.elements, false), sanitizeSteps(spec.steps), provider);
     }
   }
   showWarnings(
@@ -543,7 +564,7 @@ async function downloadSvg(): Promise<void> {
           {
             type: "resource",
             resource: {
-              uri: "file:///aws-diagram.svg",
+              uri: "file:///cloud-diagram.svg",
               mimeType: "image/svg+xml",
               text,
             },
@@ -556,7 +577,7 @@ async function downloadSvg(): Promise<void> {
     }
   }
   const url = URL.createObjectURL(new Blob([text], { type: "image/svg+xml" }));
-  fallbackDownload(url, "aws-diagram.svg");
+  fallbackDownload(url, "cloud-diagram.svg");
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
@@ -600,7 +621,7 @@ async function downloadPng(): Promise<void> {
           {
             type: "resource",
             resource: {
-              uri: "file:///aws-diagram.png",
+              uri: "file:///cloud-diagram.png",
               mimeType: "image/png",
               blob: dataUrl.slice(dataUrl.indexOf(",") + 1),
             },
@@ -612,7 +633,7 @@ async function downloadPng(): Promise<void> {
       // ホスト未対応 → フォールバック
     }
   }
-  fallbackDownload(dataUrl, "aws-diagram.png");
+  fallbackDownload(dataUrl, "cloud-diagram.png");
 }
 
 async function toggleFullscreen(): Promise<void> {
