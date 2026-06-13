@@ -74,7 +74,7 @@ const sequenceEventSchema = z.discriminatedUnion("type", [
 ]);
 
 const sequenceInputShape = {
-  provider: z.enum(["aws", "azure", "gcp"]).describe("Cloud provider. MUST be specified first (for streaming rendering)"),
+  provider: z.enum(["aws", "azure", "gcp", "saas", "generic", "multi"]).describe("Cloud provider. MUST be specified first (for streaming rendering). Use \"generic\" for vendor-neutral participants (server, database, user…). Use \"multi\" for diagrams that mix participants from multiple providers."),
   title: z.string().optional().describe("Diagram title"),
   participants: z
     .array(participantSchema)
@@ -85,7 +85,7 @@ const sequenceInputShape = {
 const sequenceOutputShape = {
   kind: z.literal("sequence"),
   spec: z.object({
-    provider: z.enum(["aws", "azure", "gcp"]).optional(),
+    provider: z.enum(["aws", "azure", "gcp", "saas", "generic", "multi"]).optional(),
     title: z.string().optional(),
     participants: z.array(participantSchema),
     events: z.array(sequenceEventSchema),
@@ -116,6 +116,8 @@ Event types:
 - note: { type: "note", over: ["participantId", ...], text } — a supplementary note spanning one or more lifelines.
 
 Labels: write concrete operations, not vague verbs — e.g. "POST /api/orders", "PutItem (orders table)", "SendMessage (order-queue)".
+
+**Generic provider** (\`provider: "generic"\`): use vendor-neutral monochrome participants for on-prem / conceptual flows. Icon aliases: \`user\`, \`client\`, \`server\`, \`database\` (\`db\`), \`load-balancer\` (\`lb\`), \`router\`, \`firewall\`, \`mobile-client\`, \`iot-sensor\`, etc.
 
 Example (AWS — user → ALB → ECS → DynamoDB write path):
 {
@@ -226,7 +228,13 @@ export function registerSequenceTool(server: McpServer): void {
       const messageCount = events.filter((ev) => ev.type === "message").length;
       const fragmentCount = events.filter((ev) => ev.type === "fragment").length;
       const noteCount = events.filter((ev) => ev.type === "note").length;
-      const providerLabel = provider === "aws" ? "AWS" : provider === "azure" ? "Azure" : "Google Cloud";
+      const providerLabel =
+        provider === "aws" ? "AWS" :
+        provider === "azure" ? "Azure" :
+        provider === "gcp" ? "Google Cloud" :
+        provider === "saas" ? "SaaS" :
+        provider === "generic" ? "汎用" :
+        "マルチクラウド";
       const summaryLines = [
         `${providerLabel}シーケンス図を描画しました${title ? `（${title}）` : ""}: 参加者 ${normalizedParticipants.length} 件、メッセージ ${messageCount} 件${fragmentCount > 0 ? `、フラグメント ${fragmentCount} 件` : ""}${noteCount > 0 ? `、ノート ${noteCount} 件` : ""}。`,
       ];

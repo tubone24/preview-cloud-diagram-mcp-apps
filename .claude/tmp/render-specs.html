@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Render Custom Specs</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .spec-container { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        iframe { width: 100%; height: 600px; border: 1px solid #999; }
+    </style>
+</head>
+<body>
+    <h1>Rendering Custom Specs</h1>
+    <p>This page renders 3 custom diagram specs by injecting them into the main app.</p>
+    
+    <div id="container"></div>
+    
+    <script>
+        const specs = [
+            {
+                key: 'spec1',
+                name: 'C4風 システム構成',
+                data: {
+                    "title": "C4風 システム構成",
+                    "provider": "multi",
+                    "elements": [
+                        {"type": "group", "id": "boundary", "kind": "c4-system-boundary", "label": "System Boundary"},
+                        {"type": "node", "id": "spa", "icon": "saas-vercel", "name": "Web App", "parent": "boundary"},
+                        {"type": "node", "id": "api", "icon": "aws-lambda", "name": "API", "parent": "boundary"},
+                        {"type": "node", "id": "db", "icon": "saas-supabase", "name": "DB", "parent": "boundary"},
+                        {"type": "edge", "from": "spa", "to": "api", "label": "Reads data [HTTPS/JSON]"},
+                        {"type": "edge", "from": "api", "to": "db", "label": "SQL"}
+                    ]
+                }
+            },
+            {
+                key: 'spec2',
+                name: 'CI/CD パイプライン',
+                data: {
+                    "title": "CI/CD パイプライン",
+                    "provider": "multi",
+                    "elements": [
+                        {"type": "node", "id": "github", "icon": "saas-github"},
+                        {"type": "group", "id": "build-stage", "kind": "pipeline-stage", "label": "Build"},
+                        {"type": "node", "id": "actions", "icon": "saas-github-actions", "parent": "build-stage"},
+                        {"type": "group", "id": "deploy-stage", "kind": "pipeline-stage", "label": "Deploy"},
+                        {"type": "node", "id": "vercel", "icon": "saas-vercel", "parent": "deploy-stage"},
+                        {"type": "edge", "from": "github", "to": "actions"},
+                        {"type": "edge", "from": "actions", "to": "vercel", "style": "dashed"}
+                    ]
+                }
+            },
+            {
+                key: 'spec3',
+                name: 'マルチクラウド',
+                data: {
+                    "title": "マルチクラウド",
+                    "provider": "multi",
+                    "elements": [
+                        {"type": "node", "id": "lambda", "icon": "aws-lambda", "name": "Lambda"},
+                        {"type": "node", "id": "azure", "icon": "azure-functions", "name": "Azure Functions"},
+                        {"type": "node", "id": "gcp", "icon": "gcp-cloud-run", "name": "Cloud Run"},
+                        {"type": "node", "id": "saas", "icon": "saas-vercel", "name": "Vercel"},
+                        {"type": "edge", "from": "lambda", "to": "azure"},
+                        {"type": "edge", "from": "azure", "to": "gcp"},
+                        {"type": "edge", "from": "gcp", "to": "saas"}
+                    ]
+                }
+            }
+        ];
+        
+        const container = document.getElementById('container');
+        
+        specs.forEach(spec => {
+            const div = document.createElement('div');
+            div.className = 'spec-container';
+            
+            const title = document.createElement('h2');
+            title.textContent = spec.name;
+            div.appendChild(title);
+            
+            // Create URL with base64-encoded spec
+            const specUrl = 'http://localhost:9876/index.html?custom-spec=' + encodeURIComponent(JSON.stringify(spec.data));
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = specUrl;
+            div.appendChild(iframe);
+            
+            container.appendChild(div);
+        });
+    </script>
+</body>
+</html>

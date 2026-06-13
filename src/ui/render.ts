@@ -299,6 +299,15 @@ export class DiagramRenderer {
       fill: "#687078",
     });
     inner.appendChild(name);
+    const desc = svgEl("text", {
+      class: "desc",
+      "text-anchor": "middle",
+      "font-family": "Arial, sans-serif",
+      "font-size": "11",
+      fill: "#545B64",
+      display: "none",
+    });
+    inner.appendChild(desc);
     const hit = svgEl("rect", { class: "hit", x: "0", y: "0", fill: "transparent" });
     inner.appendChild(hit);
     const sel = svgEl("rect", {
@@ -377,15 +386,63 @@ export class DiagramRenderer {
       tspan.textContent = line;
       svc.appendChild(tspan);
     });
+    svc.style.fontWeight = nl.c4 ? "bold" : "";
 
     const name = inner.querySelector<SVGTextElement>(".rname")!;
-    if (nl.nameText) {
-      name.textContent = nl.nameText;
-      name.setAttribute("x", String(nl.w / 2));
-      name.setAttribute("y", String(ICON_SIZE + 16 + nl.labelLines.length * 14));
-      name.removeAttribute("display");
+    if (nl.c4) {
+      // C4 mode: reuse .rname for tech text (shown as "[Tech]" in italic gray)
+      if (nl.techText) {
+        name.textContent = nl.techText;
+        name.setAttribute("x", String(nl.w / 2));
+        name.setAttribute("y", String(ICON_SIZE + 16 + nl.labelLines.length * 14));
+        name.setAttribute("fill", "#687078");
+        name.style.fontStyle = "italic";
+        name.removeAttribute("display");
+      } else {
+        name.setAttribute("display", "none");
+        name.style.fontStyle = "";
+      }
+      // C4 description lines
+      let descEl = inner.querySelector<SVGTextElement>(".desc");
+      if (!descEl) {
+        descEl = svgEl("text", {
+          class: "desc",
+          "text-anchor": "middle",
+          "font-family": "Arial, sans-serif",
+          "font-size": "11",
+          fill: "#545B64",
+        });
+        inner.insertBefore(descEl, inner.querySelector(".hit"));
+      }
+      if (nl.descLines.length > 0) {
+        descEl.innerHTML = "";
+        const techOffset = nl.techText ? 1 : 0;
+        nl.descLines.forEach((line, i) => {
+          const tspan = svgEl("tspan", {
+            x: String(nl.w / 2),
+            y: String(ICON_SIZE + 16 + (nl.labelLines.length + techOffset) * 14 + 4 + i * 14),
+          });
+          tspan.textContent = line;
+          descEl!.appendChild(tspan);
+        });
+        descEl.removeAttribute("display");
+      } else {
+        descEl.setAttribute("display", "none");
+      }
     } else {
-      name.setAttribute("display", "none");
+      // Non-C4: existing behavior
+      name.style.fontStyle = "";
+      if (nl.nameText) {
+        name.textContent = nl.nameText;
+        name.setAttribute("x", String(nl.w / 2));
+        name.setAttribute("y", String(ICON_SIZE + 16 + nl.labelLines.length * 14));
+        name.setAttribute("fill", "#687078");
+        name.removeAttribute("display");
+      } else {
+        name.setAttribute("display", "none");
+      }
+      const descEl = inner.querySelector<SVGTextElement>(".desc");
+      if (descEl) descEl.setAttribute("display", "none");
     }
 
     // 番号コールアウト（アイコン左上角）
@@ -503,6 +560,13 @@ export class DiagramRenderer {
       }
       if (el.direction === "both") path.setAttribute("marker-start", "url(#arrow-open)");
       else path.removeAttribute("marker-start");
+
+      // Line style
+      if (el.style === "dashed") {
+        path.setAttribute("stroke-dasharray", "6 4");
+      } else {
+        path.removeAttribute("stroke-dasharray");
+      }
 
       // ラベルと番号コールアウトは最前面レイヤー（gEdgeLabels）に描く
       let lg = this.edgeLabelEls.get(el.key);

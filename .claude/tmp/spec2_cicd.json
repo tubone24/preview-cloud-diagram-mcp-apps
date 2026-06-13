@@ -1,0 +1,13 @@
+{
+  "title": "CI/CD パイプライン",
+  "provider": "multi",
+  "elements": [
+    {"type": "node", "id": "github", "icon": "saas-github"},
+    {"type": "group", "id": "build-stage", "kind": "pipeline-stage", "label": "Build"},
+    {"type": "node", "id": "actions", "icon": "saas-github-actions", "parent": "build-stage"},
+    {"type": "group", "id": "deploy-stage", "kind": "pipeline-stage", "label": "Deploy"},
+    {"type": "node", "id": "vercel", "icon": "saas-vercel", "parent": "deploy-stage"},
+    {"type": "edge", "from": "github", "to": "actions"},
+    {"type": "edge", "from": "actions", "to": "vercel", "style": "dashed"}
+  ]
+}

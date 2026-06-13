@@ -1,6 +1,6 @@
-# Cloud Diagram MCP App (AWS / Azure / Google Cloud)
+# Cloud Diagram MCP App (AWS / Azure / GCP / SaaS)
 
-An [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) server that renders interactive cloud architecture diagrams using official AWS, Azure, and Google Cloud icons. Runs on Cloudflare Workers and is accessible from MCP clients such as Claude.ai and Claude Code.
+An [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) server that renders interactive cloud architecture diagrams using official AWS, Azure, Google Cloud, and SaaS service icons. Runs on Cloudflare Workers and is accessible from MCP clients such as Claude.ai and Claude Code.
 
 When Claude explains or proposes a cloud architecture, calling the `render_diagram` tool displays the diagram inline in the conversation. Elements are ordered from the traffic ingress side, and the UI renders progressively from the top as tool arguments stream in.
 
@@ -104,15 +104,16 @@ flowchart LR
 - `src/shared/diagram-spec.ts` — DiagramSpec type (shared contract between server and UI)
 - `src/server/` — MCP server (Worker entry point)
 - `src/ui/` — Diagram renderer (built into a single HTML by Vite → `public/index.html`)
-- `src/generated/{aws,azure,gcp}/icon-manifest.json` — Icon catalogs (AWS: 796, Azure: 619, GCP: 249)
+- `src/generated/{aws,azure,gcp,saas}/icon-manifest.json` — Icon catalogs (AWS: 796, Azure: 619, GCP: 249, SaaS: 30)
 
 ## Setup
 
 ```bash
 npm install
 
-# Generate icon manifests (from assets/aws-icons to src/generated/)
-npm run build:icons
+# Generate icon manifests (from assets/ to src/generated/)
+npm run build:icons        # all providers: aws + azure + gcp + saas
+npm run build:icons:saas   # SaaS icons only (30 services via simple-icons v15.7.0)
 
 # Build UI (vite → public/index.html)
 npm run build:ui
@@ -166,7 +167,10 @@ Example: "Show me a typical web architecture with CloudFront + ALB + ECS"
 
 ## Tool Specification
 
-All tools require a **`provider`** argument (`"aws"` / `"azure"` / `"gcp"`). Write it first in the arguments for streaming rendering.
+All tools require a **`provider`** argument (`"aws"` / `"azure"` / `"gcp"` / `"saas"` / `"multi"`). Write it first in the arguments for streaming rendering.
+
+- `"saas"` — SaaS service icons (Vercel, Supabase, Firebase, Cloudflare, Stripe, GitHub, Docker, Kubernetes, etc. — 30 services)
+- `"multi"` — mix icons from multiple providers in one diagram using prefixed IDs (`aws-lambda`, `azure-functions`, `gcp-cloud-run`, `saas-vercel`)
 
 ### render_diagram (UI-enabled tool)
 
@@ -176,7 +180,7 @@ Input:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `provider` | `"aws"\|"azure"\|"gcp"` | Cloud provider (**write first**) |
+| `provider` | `"aws"\|"azure"\|"gcp"\|"saas"\|"multi"` | Cloud/SaaS provider (**write first**) |
 | `title` | `string?` | Diagram title |
 | `elements` | `DiagramElement[]` | Components. **Order from ingress (user/client) following the traffic flow.** Declare groups before their children |
 
@@ -186,16 +190,22 @@ Input:
   - AWS `kind`: `aws-cloud` / `region` / `vpc` / `availability-zone` / `public-subnet` / `private-subnet` / `security-group` / `auto-scaling-group` etc.
   - Azure `kind`: `azure-cloud` / `azure-subscription` / `azure-resource-group` / `azure-vnet` / `azure-subnet` etc.
   - GCP `kind`: `gcp-cloud` / `gcp-project` / `gcp-vpc` / `gcp-region` / `gcp-zone` / `gcp-subnet` etc.
+  - Cross-provider `kind`: `c4-system-boundary` / `c4-container-boundary` (C4 model-style dashed boundary) / `pipeline-stage` (CI/CD pipeline stage)
   - Nesting example (Azure): `azure-subscription > azure-resource-group > azure-vnet > azure-subnet`
   - Nesting example (GCP): `gcp-project > gcp-vpc > gcp-region > gcp-zone`
-- **node** — `{ type: "node", id, icon, name?, parent? }`
+- **node** — `{ type: "node", id, icon, name?, tech?, description?, parent? }`
   - `icon`: icon ID or alias
     - AWS: `amazon-ec2`, `aws-lambda`, aliases `s3` / `alb` / `rds` etc.
     - Azure: `azure-virtual-machine`, aliases `vm` / `aks` / `cosmos` etc.
     - GCP: `gcp-compute-engine`, aliases `gke` / `gcs` / `bq` / `pubsub` etc.
+    - SaaS: `saas-vercel`, `saas-supabase`, aliases `vercel` / `stripe` / `github` / `k8s` etc.
+    - Multi: use prefixed IDs (`aws-lambda`, `azure-functions`, `gcp-cloud-run`, `saas-vercel`)
   - `name`: resource-specific name (optional). Service label is auto-applied from the icon
-- **edge** — `{ type: "edge", from, to, label?, direction? }`
+  - `tech`: C4-style technology label shown as `[Tech]` under the name (e.g. `"React"`, `"Node.js"`)
+  - `description`: C4-style short description shown in small text (up to 4 lines)
+- **edge** — `{ type: "edge", from, to, label?, direction?, style? }`
   - `direction`: `forward` (default) / `both` / `none`
+  - `style`: `"solid"` (default) / `"dashed"` — use `"dashed"` for webhooks, triggers, and async flows
 
 Output: `content` contains a summary, `structuredContent` contains `{ kind: "architecture", spec: normalizedDiagramSpec, warnings: string[] }`. Icon IDs are normalized via alias resolution, prefix completion, and partial matching. Unresolvable icons or edges referencing non-existent IDs are recorded in `warnings` (elements themselves are preserved).
 
@@ -207,7 +217,7 @@ Input:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `provider` | `"aws"\|"azure"\|"gcp"` | Cloud provider (**write first**) |
+| `provider` | `"aws"\|"azure"\|"gcp"\|"saas"\|"multi"` | Cloud/SaaS provider (**write first**) |
 | `title` | `string?` | Diagram title |
 | `participants` | `SequenceParticipant[]` | Lifelines. **Order from left to right, traffic ingress first** (user/client at far left) |
 | `events` | `SequenceEvent[]` | Event sequence **in chronological order from top** |
@@ -228,15 +238,82 @@ Output: `content` contains a summary (participant count, message count, warnings
 
 ### list_icons
 
-Searches for icon IDs usable in `render_diagram` / `render_sequence` `icon` fields. Includes catalogs of AWS (796), Azure (619), and GCP (249) icons.
+Searches for icon IDs usable in `render_diagram` / `render_sequence` `icon` fields. Includes catalogs of AWS (796), Azure (619), GCP (249), and SaaS (30) icons.
 
 | Argument | Type | Description |
 |----------|------|-------------|
-| `provider` | `"aws"\|"azure"\|"gcp"` | Cloud provider to search |
+| `provider` | `"aws"\|"azure"\|"gcp"\|"saas"` | Provider to search |
 | `query` | `string?` | Partial match on ID, name, or alias (case-insensitive) |
-| `category` | `string?` | Filter by category (e.g. `Compute`, `Database`) |
+| `category` | `string?` | Filter by category (e.g. `Compute`, `Database`, `DevOps & CI/CD`) |
 
 Returns up to 50 results as `{id, name, category}`. Calling without `query`/`category` returns a category list with counts.
+
+## Usage Examples
+
+### Multi-cloud diagram
+
+Use `provider: "multi"` to mix AWS, Azure, GCP, and SaaS icons in one diagram. Prefer prefixed IDs to avoid ambiguity. Unprefixed names resolve in order: aws → azure → gcp → saas.
+
+```json
+{
+  "provider": "multi",
+  "title": "SaaS + AWS backend",
+  "elements": [
+    { "type": "node", "id": "fe",  "icon": "saas-vercel",   "name": "Frontend" },
+    { "type": "node", "id": "api", "icon": "aws-lambda",    "name": "API" },
+    { "type": "node", "id": "db",  "icon": "saas-supabase", "name": "Database" },
+    { "type": "edge", "from": "fe",  "to": "api", "label": "HTTPS" },
+    { "type": "edge", "from": "api", "to": "db",  "label": "SQL" }
+  ]
+}
+```
+
+### C4 model-style diagram
+
+Use `c4-system-boundary` / `c4-container-boundary` groups and the `tech` / `description` node fields to draw C4 context or container diagrams.
+
+```json
+{
+  "provider": "multi",
+  "title": "C4 Container View",
+  "elements": [
+    { "type": "group",  "id": "sys", "kind": "c4-system-boundary", "label": "E-Commerce System" },
+    { "type": "node",   "id": "web", "icon": "saas-vercel",  "name": "Web App",
+      "tech": "Next.js", "description": "Server-side rendered storefront", "parent": "sys" },
+    { "type": "node",   "id": "api", "icon": "aws-lambda",   "name": "Order API",
+      "tech": "Node.js", "description": "Handles orders and payments",     "parent": "sys" },
+    { "type": "node",   "id": "pay", "icon": "saas-stripe",  "name": "Stripe" },
+    { "type": "edge", "from": "web", "to": "api", "label": "REST" },
+    { "type": "edge", "from": "api", "to": "pay", "label": "Charge" }
+  ]
+}
+```
+
+### CI/CD pipeline diagram
+
+Use `pipeline-stage` groups for pipeline stages and `style: "dashed"` edges for webhook or trigger flows.
+
+```json
+{
+  "provider": "saas",
+  "title": "CI/CD Pipeline",
+  "elements": [
+    { "type": "group", "id": "ci",  "kind": "pipeline-stage", "label": "CI" },
+    { "type": "group", "id": "cd",  "kind": "pipeline-stage", "label": "CD" },
+    { "type": "node",  "id": "gh",  "icon": "saas-github",         "name": "GitHub",         "parent": "ci" },
+    { "type": "node",  "id": "gha", "icon": "saas-github-actions",  "name": "GitHub Actions", "parent": "ci" },
+    { "type": "node",  "id": "reg", "icon": "saas-docker",          "name": "Container Registry", "parent": "cd" },
+    { "type": "node",  "id": "k8s", "icon": "saas-kubernetes",      "name": "Kubernetes",     "parent": "cd" },
+    { "type": "edge", "from": "gh",  "to": "gha", "label": "push",   "style": "dashed" },
+    { "type": "edge", "from": "gha", "to": "reg", "label": "push image" },
+    { "type": "edge", "from": "reg", "to": "k8s", "label": "deploy",  "style": "dashed" }
+  ]
+}
+```
+
+## SaaS Icon License
+
+SaaS logos are used **for identification purposes only**. Trademarks belong to their respective owners. This project is not affiliated with any of the listed services. Official SVGs are sourced from each service's brand guidelines; remaining icons are from [simple-icons](https://github.com/simple-icons/simple-icons) v15.7.0 (CC0-1.0). See [`assets/saas-icons/SOURCES.md`](assets/saas-icons/SOURCES.md) for a full per-icon attribution table.
 
 ## Development
 

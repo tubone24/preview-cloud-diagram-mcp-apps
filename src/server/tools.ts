@@ -35,6 +35,8 @@ const nodeSchema = z.object({
   name: z.string().optional().describe("Resource-specific name only (e.g. \"web-server-01\"). The service name label is added automatically"),
   parent: z.string().optional().describe("ID of the enclosing group"),
   step: z.number().int().min(1).optional().describe("Numbered callout (black circle, white number). 1-based index into the top-level `steps` legend"),
+  tech: z.string().optional().describe('C4-style technology label shown as "[...]" under the name (e.g. "Spring Boot", "Node.js + Express")'),
+  description: z.string().optional().describe("C4-style short description shown in small text under the label (wrapped, max 4 lines)"),
 });
 
 const edgeSchema = z.object({
@@ -45,6 +47,7 @@ const edgeSchema = z.object({
   label: z.string().optional().describe("Label shown on the line (e.g. \"HTTPS\")"),
   direction: z.enum(["forward", "both", "none"]).optional().describe("Arrow direction. Defaults to forward"),
   step: z.number().int().min(1).optional().describe("Numbered callout (black circle, white number) shown at the line midpoint. 1-based index into the top-level `steps` legend"),
+  style: z.enum(["solid", "dashed"]).optional().describe('Line style. Use "dashed" for triggers/webhooks/async flows. Defaults to solid'),
 });
 
 const noteSchema = z.object({
@@ -58,7 +61,7 @@ const noteSchema = z.object({
 const elementSchema = z.discriminatedUnion("type", [groupSchema, nodeSchema, edgeSchema, noteSchema]);
 
 const renderInputShape = {
-  provider: z.enum(["aws", "azure", "gcp"]).describe("Cloud provider. MUST be specified first (for streaming rendering)"),
+  provider: z.enum(["aws", "azure", "gcp", "saas", "generic", "multi"]).describe("Cloud provider. MUST be specified first (for streaming rendering). Use \"generic\" for vendor-neutral on-prem / conceptual diagrams (server, database, router, user…). Use \"multi\" for diagrams that mix AWS, Azure, GCP, and SaaS services together."),
   title: z.string().optional().describe("Diagram title"),
   elements: z
     .array(elementSchema)
@@ -72,7 +75,7 @@ const renderInputShape = {
 const renderOutputShape = {
   kind: z.literal("architecture"),
   spec: z.object({
-    provider: z.enum(["aws", "azure", "gcp"]).optional(),
+    provider: z.enum(["aws", "azure", "gcp", "saas", "generic", "multi"]).optional(),
     title: z.string().optional(),
     elements: z.array(elementSchema),
     steps: z.array(z.string()).optional(),
@@ -129,9 +132,19 @@ Example (AWS — user → CloudFront → ALB → EC2):
     { "type": "edge", "from": "alb", "to": "web", "step": 3 }
   ],
   "steps": ["User requests the page over HTTPS", "CloudFront forwards cache misses to the ALB", "ALB routes the request to the EC2 web server"]
-}`;
+}
 
-const LIST_ICONS_DESCRIPTION = `Search the catalog of cloud service icon IDs usable in the \`icon\` field of render_diagram nodes. Supports AWS, Azure, and Google Cloud icons. Performs a case-insensitive partial match against icon IDs, display names, and aliases (so short aliases like "s3", "vm", "gke" also match). Optionally filter by category (e.g. "Compute", "Database", "Networking"). Returns up to 50 results as {id, name, category}. Pass \`provider\` to search the correct cloud catalog. Call with no query/category to get the category list with icon counts for the selected provider.`;
+C4-style diagrams: add \`tech\` (e.g. "Spring Boot") and \`description\` to nodes; use \`c4-system-boundary\` / \`c4-container-boundary\` group kinds for boundaries. Edge labels follow C4 convention: "Reads data [HTTPS/JSON]".
+
+CI/CD pipeline diagrams: use \`pipeline-stage\` groups (e.g. Source, Build, Test, Deploy) connected by edges; use \`style: "dashed"\` for webhook/trigger connections.
+
+**SaaS provider** (\`provider: "saas"\`): Use for diagrams that primarily use third-party SaaS services. Icon IDs use the \`saas-\` prefix (e.g. \`saas-vercel\`, \`saas-supabase\`, \`saas-stripe\`). Aliases without prefix also work: \`vercel\`, \`supabase\`, \`stripe\`, \`auth0\`, \`github\`, \`docker\`, \`kubernetes\`, \`openai\`, \`anthropic\`.
+
+**Generic provider** (\`provider: "generic"\`): Use for vendor-neutral / on-prem / conceptual diagrams that should NOT show cloud-vendor branding. All icons are monochrome line art. Icon IDs use the \`generic-\` prefix; short aliases without prefix also work: \`server\`, \`servers\`, \`instance\`, \`container\`, \`client\`, \`database\` (\`db\`), \`relational-database\`, \`disk\`, \`volume\`, \`object-storage\`, \`backup\`, \`router\`, \`load-balancer\` (\`lb\`), \`nlb\`, \`firewall\`, \`nat-gateway\`, \`internet-gateway\`, \`vpn-gateway\`, \`transit-gateway\`, \`user\`, \`users\`, \`mobile-client\`, \`iot-thing\`, \`iot-sensor\`. Supported group kinds: generic, corporate-data-center, server-contents, c4-system-boundary, c4-container-boundary, pipeline-stage. Combine with render_sequence (provider: "generic") for neutral sequence diagrams.
+
+**Multi-cloud mode** (\`provider: "multi"\`): Use when combining services from multiple providers (AWS + Azure + GCP + SaaS) in one diagram. In multi mode, prefer prefixed icon IDs to avoid ambiguity: \`aws-lambda\`, \`azure-functions\`, \`gcp-cloud-run\`, \`saas-vercel\`. Unprefixed names are resolved in order: aws → azure → gcp → saas (first match wins). All group kinds from all providers are available. Example: \`aws-cloud\` and \`azure-cloud\` can coexist in the same diagram.`;
+
+const LIST_ICONS_DESCRIPTION = `Search the catalog of cloud service icon IDs usable in the \`icon\` field of render_diagram nodes. Supports AWS, Azure, Google Cloud, SaaS, and multi-cloud icons. Performs a case-insensitive partial match against icon IDs, display names, and aliases (so short aliases like "s3", "vm", "gke", "vercel" also match). Optionally filter by category (e.g. "Compute", "Database", "Networking"). Returns up to 50 results as {id, name, category}. Pass \`provider\` to search the correct cloud catalog. Use \`provider: "saas"\` for SaaS services (Vercel, Supabase, Stripe, etc.), \`provider: "generic"\` for vendor-neutral on-prem icons (server, database, router, user, etc.), or \`provider: "multi"\` to search across all providers at once. Call with no query/category to get the category list with icon counts for the selected provider.`;
 
 /** render_diagram と list_icons を server に登録する */
 export function registerTools(server: McpServer): void {
@@ -202,7 +215,13 @@ export function registerTools(server: McpServer): void {
       const groupCount = normalized.filter((el) => el.type === "group").length;
       const edgeCount = normalized.filter((el) => el.type === "edge").length;
       const noteCount = normalized.filter((el) => el.type === "note").length;
-      const providerLabel = provider === "aws" ? "AWS" : provider === "azure" ? "Azure" : "Google Cloud";
+      const providerLabel =
+        provider === "aws" ? "AWS" :
+        provider === "azure" ? "Azure" :
+        provider === "gcp" ? "Google Cloud" :
+        provider === "saas" ? "SaaS" :
+        provider === "generic" ? "汎用" :
+        "マルチクラウド";
       const summaryLines = [
         `${providerLabel}構成図を描画しました${title ? `（${title}）` : ""}: ノード ${nodeCount} 件、グループ ${groupCount} 件、エッジ ${edgeCount} 件${noteCount > 0 ? `、ノート ${noteCount} 件` : ""}。`,
       ];
@@ -220,25 +239,24 @@ export function registerTools(server: McpServer): void {
   server.registerTool(
     "list_icons",
     {
-      title: "List cloud service icons (AWS / Azure / GCP)",
+      title: "List cloud service icons (AWS / Azure / GCP / SaaS)",
       description: LIST_ICONS_DESCRIPTION,
       inputSchema: {
-        provider: z.enum(["aws", "azure", "gcp"]).describe("Cloud provider to search icons for"),
+        provider: z.enum(["aws", "azure", "gcp", "saas", "generic", "multi"]).describe("Cloud provider to search icons for. Use \"saas\" for SaaS services, \"generic\" for vendor-neutral on-prem icons, \"multi\" to search all providers at once"),
         query: z.string().optional().describe("Partial match against icon ID, name, or alias (case-insensitive)"),
         category: z.string().optional().describe("Filter by category (e.g. \"Compute\", \"Database\", \"Networking\")"),
       },
     },
     async ({ provider, query, category }) => {
       if (!query && !category) {
-        const catalog = provider as Provider;
-        const entries = catalog === "aws" ? allIconEntries : [];
+        const p = provider as Provider;
+        const catSummary = categorySummary(p);
         const summary = {
           provider,
-          totalIcons: catalog === "aws" ? allIconEntries.length : categorySummary(catalog).reduce((s, c) => s + c.count, 0),
-          aliases: catalog === "aws" ? aliasCount : 0,
-          categories: categorySummary(catalog),
+          totalIcons: catSummary.reduce((s, c) => s + c.count, 0),
+          aliases: p === "aws" ? aliasCount : 0,
+          categories: catSummary,
         };
-        void entries;
         return {
           content: [
             {

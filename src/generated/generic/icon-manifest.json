@@ -1,0 +1,237 @@
+{
+  "services": [],
+  "resources": [
+    {
+      "id": "generic-server",
+      "name": "Server",
+      "category": "Compute",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-servers",
+      "name": "Servers",
+      "category": "Compute",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-instance",
+      "name": "Instance",
+      "category": "Compute",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-container",
+      "name": "Container",
+      "category": "Compute",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-client",
+      "name": "Client",
+      "category": "Compute",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-disk",
+      "name": "Disk",
+      "category": "Storage",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-volume",
+      "name": "Volume",
+      "category": "Storage",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-cold-storage",
+      "name": "Cold Storage",
+      "category": "Storage",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-tape",
+      "name": "Tape",
+      "category": "Storage",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-object-storage",
+      "name": "Object Storage",
+      "category": "Storage",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-backup",
+      "name": "Backup",
+      "category": "Storage",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-database",
+      "name": "Database",
+      "category": "Database",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-relational-database",
+      "name": "Relational Database",
+      "category": "Database",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-router",
+      "name": "Router",
+      "category": "Network",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-load-balancer",
+      "name": "Load Balancer",
+      "category": "Network",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-nlb",
+      "name": "Network Load Balancer",
+      "category": "Network",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-firewall",
+      "name": "Firewall",
+      "category": "Network",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-nat-gateway",
+      "name": "NAT Gateway",
+      "category": "Network",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-internet-gateway",
+      "name": "Internet Gateway",
+      "category": "Network",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-vpn-gateway",
+      "name": "VPN Gateway",
+      "category": "Network",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-transit-gateway",
+      "name": "Transit Gateway",
+      "category": "Network",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-user",
+      "name": "User",
+      "category": "People & Devices",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-users",
+      "name": "Users",
+      "category": "People & Devices",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-authenticated-user",
+      "name": "Authenticated User",
+      "category": "People & Devices",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-mobile-client",
+      "name": "Mobile Client",
+      "category": "People & Devices",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-iot-thing",
+      "name": "IoT Thing",
+      "category": "People & Devices",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-iot-sensor",
+      "name": "IoT Sensor",
+      "category": "People & Devices",
+      "color": "#232F3D"
+    }
+  ],
+  "groups": [
+    {
+      "id": "generic-corporate-data-center",
+      "name": "Corporate Data Center",
+      "category": "Group",
+      "color": "#232F3D"
+    },
+    {
+      "id": "generic-server-contents",
+      "name": "Server Contents",
+      "category": "Group",
+      "color": "#232F3D"
+    }
+  ],
+  "aliases": {
+    "server": "generic-server",
+    "servers": "generic-servers",
+    "instance": "generic-instance",
+    "vm": "generic-instance",
+    "virtual-machine": "generic-instance",
+    "container": "generic-container",
+    "client": "generic-client",
+    "disk": "generic-disk",
+    "volume": "generic-volume",
+    "cold-storage": "generic-cold-storage",
+    "archive": "generic-cold-storage",
+    "tape": "generic-tape",
+    "tape-storage": "generic-tape",
+    "object-storage": "generic-object-storage",
+    "bucket": "generic-object-storage",
+    "blob-storage": "generic-object-storage",
+    "backup": "generic-backup",
+    "database": "generic-database",
+    "db": "generic-database",
+    "relational-database": "generic-relational-database",
+    "rdbms": "generic-relational-database",
+    "sql-database": "generic-relational-database",
+    "router": "generic-router",
+    "load-balancer": "generic-load-balancer",
+    "lb": "generic-load-balancer",
+    "alb": "generic-load-balancer",
+    "nlb": "generic-nlb",
+    "firewall": "generic-firewall",
+    "nat-gateway": "generic-nat-gateway",
+    "nat": "generic-nat-gateway",
+    "internet-gateway": "generic-internet-gateway",
+    "igw": "generic-internet-gateway",
+    "vpn-gateway": "generic-vpn-gateway",
+    "vpn": "generic-vpn-gateway",
+    "transit-gateway": "generic-transit-gateway",
+    "tgw": "generic-transit-gateway",
+    "user": "generic-user",
+    "users": "generic-users",
+    "authenticated-user": "generic-authenticated-user",
+    "auth-user": "generic-authenticated-user",
+    "mobile-client": "generic-mobile-client",
+    "mobile": "generic-mobile-client",
+    "smartphone": "generic-mobile-client",
+    "iot-thing": "generic-iot-thing",
+    "iot": "generic-iot-thing",
+    "thing": "generic-iot-thing",
+    "iot-sensor": "generic-iot-sensor",
+    "sensor": "generic-iot-sensor",
+    "corporate-data-center": "generic-corporate-data-center",
+    "data-center": "generic-corporate-data-center",
+    "datacenter": "generic-corporate-data-center",
+    "on-premises": "generic-corporate-data-center",
+    "on-prem": "generic-corporate-data-center",
+    "server-contents": "generic-server-contents"
+  }
+}

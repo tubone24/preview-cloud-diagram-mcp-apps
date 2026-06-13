@@ -5,6 +5,7 @@
 import { App } from "@modelcontextprotocol/ext-apps";
 import {
   GROUP_STYLES,
+  isProvider,
   type DiagramElement,
   type DiagramSpec,
   type GroupKind,
@@ -415,7 +416,7 @@ const app = new App({ name: "cloud-diagram", version: "0.2.0" }, {});
 /** args.provider を抽出し、不正値は "aws" にフォールバック（ストリーミング中に未着でも安全） */
 function extractProvider(args: Record<string, unknown>): Provider {
   const p = args.provider;
-  if (p === "aws" || p === "azure" || p === "gcp") return p;
+  if (isProvider(p)) return p;
   return "aws";
 }
 
@@ -468,11 +469,8 @@ app.addEventListener("toolresult", (params) => {
       sc.kind === "sequence" ||
       (sc.kind !== "architecture" && Array.isArray(spec.participants));
     const title = typeof spec.title === "string" ? spec.title : undefined;
-    // spec.provider が "aws"|"azure"|"gcp" でなければ "aws" フォールバック
-    const provider: Provider =
-      spec.provider === "aws" || spec.provider === "azure" || spec.provider === "gcp"
-        ? spec.provider
-        : "aws";
+    // spec.provider が有効な Provider 値でなければ "aws" フォールバック
+    const provider: Provider = isProvider(spec.provider) ? spec.provider : "aws";
     if (isSequence) {
       setMode("sequence");
       renderSequenceSpec(title, sanitizeSequence(spec.participants, spec.events, false), provider);
@@ -829,13 +827,23 @@ async function runSeqDemo(): Promise<void> {
 const demoParam = new URLSearchParams(location.search).get("demo");
 const isSeqDemo = demoParam === "seq";
 const isDemo =
-  isSeqDemo || demoParam === "1" || demoParam === "2" || location.protocol === "file:";
+  isSeqDemo || demoParam === "1" || demoParam === "2" || demoParam === "3" || demoParam === "4" || demoParam === "5" || location.protocol === "file:";
 
 async function start(): Promise<void> {
   if (isDemo) {
-    void (isSeqDemo
-      ? runSeqDemo()
-      : runDemo(demoParam === "2" ? DEMO_SPEC2 : DEMO_SPEC));
+    if (isSeqDemo) {
+      void runSeqDemo();
+    } else if (demoParam === "2") {
+      void runDemo(DEMO_SPEC2);
+    } else if (demoParam === "3") {
+      void runDemo(CUSTOM_SPEC_1);
+    } else if (demoParam === "4") {
+      void runDemo(CUSTOM_SPEC_2);
+    } else if (demoParam === "5") {
+      void runDemo(CUSTOM_SPEC_3);
+    } else {
+      void runDemo(DEMO_SPEC);
+    }
     return;
   }
   try {
@@ -849,3 +857,47 @@ async function start(): Promise<void> {
 }
 
 void start();
+
+// カスタム spec 1: C4風システム構成
+const CUSTOM_SPEC_1: DiagramSpec = {
+  title: "C4風 システム構成",
+  provider: "multi",
+  elements: [
+    { type: "group", id: "boundary", kind: "c4-system-boundary", label: "System Boundary" },
+    { type: "node", id: "spa", icon: "saas-vercel", name: "Web App", parent: "boundary" },
+    { type: "node", id: "api", icon: "aws-lambda", name: "API", parent: "boundary" },
+    { type: "node", id: "db", icon: "saas-supabase", name: "DB", parent: "boundary" },
+    { type: "edge", from: "spa", to: "api", label: "Reads data [HTTPS/JSON]" },
+    { type: "edge", from: "api", to: "db", label: "SQL" },
+  ],
+};
+
+// カスタム spec 2: CI/CDパイプライン
+const CUSTOM_SPEC_2: DiagramSpec = {
+  title: "CI/CD パイプライン",
+  provider: "multi",
+  elements: [
+    { type: "node", id: "github", icon: "saas-github" },
+    { type: "group", id: "build-stage", kind: "pipeline-stage", label: "Build" },
+    { type: "node", id: "actions", icon: "saas-github-actions", parent: "build-stage" },
+    { type: "group", id: "deploy-stage", kind: "pipeline-stage", label: "Deploy" },
+    { type: "node", id: "vercel", icon: "saas-vercel", parent: "deploy-stage" },
+    { type: "edge", from: "github", to: "actions" },
+    { type: "edge", from: "actions", to: "vercel", style: "dashed" },
+  ],
+};
+
+// カスタム spec 3: マルチクラウド
+const CUSTOM_SPEC_3: DiagramSpec = {
+  title: "マルチクラウド",
+  provider: "multi",
+  elements: [
+    { type: "node", id: "lambda", icon: "aws-lambda", name: "Lambda" },
+    { type: "node", id: "azure", icon: "azure-functions", name: "Azure Functions" },
+    { type: "node", id: "gcp", icon: "gcp-cloud-run", name: "Cloud Run" },
+    { type: "node", id: "saas", icon: "saas-vercel", name: "Vercel" },
+    { type: "edge", from: "lambda", to: "azure" },
+    { type: "edge", from: "azure", to: "gcp" },
+    { type: "edge", from: "gcp", to: "saas" },
+  ],
+};

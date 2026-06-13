@@ -1,0 +1,13 @@
+{
+  "title": "マルチクラウド",
+  "provider": "multi",
+  "elements": [
+    {"type": "node", "id": "lambda", "icon": "aws-lambda", "name": "Lambda"},
+    {"type": "node", "id": "azure", "icon": "azure-functions", "name": "Azure Functions"},
+    {"type": "node", "id": "gcp", "icon": "gcp-cloud-run", "name": "Cloud Run"},
+    {"type": "node", "id": "saas", "icon": "saas-vercel", "name": "Vercel"},
+    {"type": "edge", "from": "lambda", "to": "azure"},
+    {"type": "edge", "from": "azure", "to": "gcp"},
+    {"type": "edge", "from": "gcp", "to": "saas"}
+  ]
+}

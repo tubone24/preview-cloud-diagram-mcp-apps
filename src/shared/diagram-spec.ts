@@ -1,10 +1,25 @@
-// クラウド構成図の宣言的スペック（AWS / Azure / GCP 対応）。
+// クラウド構成図の宣言的スペック（AWS / Azure / GCP / SaaS / Multi 対応）。
 // render_diagram ツールの入力契約であり、UI側プログレッシブレンダリングの契約でもある。
 // elements は「ユーザー/入口側から処理の流れの順」に並べる。
 // ホストがツール引数をストリーミングする間、UIは配列の先頭から順に描画していく。
 
-/** クラウドプロバイダー種別 */
-export type Provider = "aws" | "azure" | "gcp";
+/** 単一クラウドプロバイダー種別（SaaS / 汎用含む） */
+export type BaseProvider = "aws" | "azure" | "gcp" | "saas" | "generic";
+
+/** クラウドプロバイダー種別（multi は複数プロバイダー混在モード） */
+export type Provider = BaseProvider | "multi";
+
+/** 型ガード: 文字列が有効な Provider かを判定する */
+export function isProvider(p: unknown): p is Provider {
+  return (
+    p === "aws" ||
+    p === "azure" ||
+    p === "gcp" ||
+    p === "saas" ||
+    p === "generic" ||
+    p === "multi"
+  );
+}
 
 /** AWS公式アイコンデッキで定義されているグループ枠の種類 */
 export type GroupKind =
@@ -39,7 +54,10 @@ export type GroupKind =
   | "gcp-region"
   | "gcp-zone"
   | "gcp-subnet"
-  | "gcp-shared-vpc";
+  | "gcp-shared-vpc"
+  | "c4-system-boundary"
+  | "c4-container-boundary"
+  | "pipeline-stage";
 
 export interface GroupElement {
   type: "group";
@@ -64,6 +82,10 @@ export interface NodeElement {
   parent?: string;
   /** 番号コールアウト（黒丸＋白太字番号）。spec.steps の凡例と対応する1始まりの番号 */
   step?: number;
+  /** C4-style technology label shown as "[Tech]" under the name */
+  tech?: string;
+  /** C4-style short description shown in small text under the label */
+  description?: string;
 }
 
 export interface EdgeElement {
@@ -79,6 +101,8 @@ export interface EdgeElement {
   direction?: "forward" | "both" | "none";
   /** 番号コールアウト（黒丸＋白太字番号）を線の中点に表示。spec.steps と対応する1始まりの番号 */
   step?: number;
+  /** Line style. Use "dashed" for triggers/webhooks/async flows. Defaults to solid */
+  style?: "solid" | "dashed";
 }
 
 /** アイコンで表現できない補足説明を載せる注釈ボックス */
@@ -155,6 +179,10 @@ export const GROUP_STYLES: Record<GroupKind, GroupStyle> = {
   "gcp-zone":       { label: "Zone",         color: "#00A4A6", border: "dashed", iconId: null },
   "gcp-subnet":     { label: "Subnet",       color: "#34A853", border: "solid",  iconId: null },
   "gcp-shared-vpc": { label: "Shared VPC",   color: "#4285F4", border: "dashed", iconId: "gcp-virtual-private-cloud" },
+  // C4 / CI-CD (provider-agnostic)
+  "c4-system-boundary":    { label: "System boundary",    color: "#444B53", border: "dashed", iconId: null },
+  "c4-container-boundary": { label: "Container boundary", color: "#7D8998", border: "dashed", iconId: null },
+  "pipeline-stage":        { label: "Stage",              color: "#7D8998", border: "solid",  iconId: null },
 };
 
 /** プロバイダーごとに使用可能なグループ種別の一覧 */
@@ -175,6 +203,9 @@ export const GROUP_KINDS_BY_PROVIDER: Record<Provider, GroupKind[]> = {
     "spot-fleet",
     "step-functions-workflow",
     "generic",
+    "c4-system-boundary",
+    "c4-container-boundary",
+    "pipeline-stage",
   ],
   azure: [
     "azure-cloud",
@@ -188,6 +219,9 @@ export const GROUP_KINDS_BY_PROVIDER: Record<Provider, GroupKind[]> = {
     "generic",
     "corporate-data-center",
     "server-contents",
+    "c4-system-boundary",
+    "c4-container-boundary",
+    "pipeline-stage",
   ],
   gcp: [
     "gcp-cloud",
@@ -200,8 +234,32 @@ export const GROUP_KINDS_BY_PROVIDER: Record<Provider, GroupKind[]> = {
     "generic",
     "corporate-data-center",
     "server-contents",
+    "c4-system-boundary",
+    "c4-container-boundary",
+    "pipeline-stage",
   ],
+  saas: [
+    "generic",
+    "corporate-data-center",
+    "server-contents",
+    "c4-system-boundary",
+    "c4-container-boundary",
+    "pipeline-stage",
+  ],
+  generic: [
+    "generic",
+    "corporate-data-center",
+    "server-contents",
+    "c4-system-boundary",
+    "c4-container-boundary",
+    "pipeline-stage",
+  ],
+  // multi は全 GroupKind を許容（全プロバイダーのグループを混在可能）
+  multi: [],
 };
+
+// multi は GROUP_STYLES の全キーを動的に設定（循環参照を避けるため定義後に代入）
+GROUP_KINDS_BY_PROVIDER.multi = Object.keys(GROUP_STYLES) as GroupKind[];
 
 /** アイコンマニフェストの1エントリ */
 export interface IconEntry {

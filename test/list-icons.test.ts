@@ -34,4 +34,63 @@ describe("list_icons", () => {
     });
     expect(text(result)).toContain("No icons matched");
   });
+
+  // ---- SaaS / Multi プロバイダー対応テスト ----
+
+  it("provider:saas でカテゴリサマリを返す", async () => {
+    const { statusCode, result } = await callTool(handler, "list_icons", { provider: "saas" });
+    expect(statusCode).toBe(200);
+    expect(text(result)).toContain("Icon catalog summary for saas");
+    const t = text(result);
+    // SaaS カタログにカテゴリが含まれる
+    expect(t).toContain("categories");
+    expect(t).toContain("count");
+  });
+
+  it("provider:multi でカタログ横断ヒット（vercel は saas カタログにある）", async () => {
+    const { result } = await callTool(handler, "list_icons", {
+      provider: "multi",
+      query: "vercel",
+    });
+    const t = text(result);
+    expect(t).toContain("found for multi");
+    expect(t.toLowerCase()).toContain("vercel");
+  });
+
+  it("provider:multi で query なしはマージドカタログ要約を返す", async () => {
+    const { result } = await callTool(handler, "list_icons", { provider: "multi" });
+    expect(text(result)).toContain("Icon catalog summary for multi");
+  });
+
+  // ---- Generic（汎用）プロバイダー対応テスト ----
+
+  it("provider:generic でカテゴリサマリを返す", async () => {
+    const { statusCode, result } = await callTool(handler, "list_icons", { provider: "generic" });
+    expect(statusCode).toBe(200);
+    const t = text(result);
+    expect(t).toContain("Icon catalog summary for generic");
+    // 汎用カタログのカテゴリ（Compute / Network 等）が含まれる
+    expect(t).toContain("categories");
+    expect(t).toContain("Network");
+  });
+
+  it("provider:generic で alias 'router' がヒットする", async () => {
+    const { result } = await callTool(handler, "list_icons", {
+      provider: "generic",
+      query: "router",
+    });
+    const t = text(result);
+    expect(t).toContain("found for generic");
+    expect(t.toLowerCase()).toContain("generic-router");
+  });
+
+  it("provider:generic で 'server' がヒットする", async () => {
+    const { result } = await callTool(handler, "list_icons", {
+      provider: "generic",
+      query: "server",
+    });
+    const t = text(result);
+    expect(t).toContain("found for generic");
+    expect(t.toLowerCase()).toContain("generic-server");
+  });
 });

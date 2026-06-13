@@ -1,0 +1,12 @@
+{
+  "title": "C4風 システム構成",
+  "provider": "multi",
+  "elements": [
+    {"type": "group", "id": "boundary", "kind": "c4-system-boundary", "label": "System Boundary"},
+    {"type": "node", "id": "spa", "icon": "saas-vercel", "name": "Web App", "parent": "boundary"},
+    {"type": "node", "id": "api", "icon": "aws-lambda", "name": "API", "parent": "boundary"},
+    {"type": "node", "id": "db", "icon": "saas-supabase", "name": "DB", "parent": "boundary"},
+    {"type": "edge", "from": "spa", "to": "api", "label": "Reads data [HTTPS/JSON]"},
+    {"type": "edge", "from": "api", "to": "db", "label": "SQL"}
+  ]
+}

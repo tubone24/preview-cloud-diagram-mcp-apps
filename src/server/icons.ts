@@ -1,10 +1,12 @@
 // アイコンID解決・検索ユーティリティ。
-// src/generated/{aws,azure,gcp}/icon-manifest.json（build:icons の生成物）を唯一のソースとする。
+// src/generated/{aws,azure,gcp,saas}/icon-manifest.json（build:icons の生成物）を唯一のソースとする。
 
 import awsManifest from "../generated/aws/icon-manifest.json";
 import azureManifest from "../generated/azure/icon-manifest.json";
 import gcpManifest from "../generated/gcp/icon-manifest.json";
-import type { IconEntry, IconManifest, Provider } from "../shared/diagram-spec";
+import saasManifest from "../generated/saas/icon-manifest.json";
+import genericManifest from "../generated/generic/icon-manifest.json";
+import type { BaseProvider, IconEntry, IconManifest, Provider } from "../shared/diagram-spec";
 
 // ---- プロバイダーカタログ ----
 
@@ -32,11 +34,16 @@ function buildCatalog(manifest: IconManifest): ProviderCatalog {
   return { entries, entryById, aliasTable, aliasCount: aliasTable.size };
 }
 
-const CATALOGS: Record<Provider, ProviderCatalog> = {
+const CATALOGS: Record<BaseProvider, ProviderCatalog> = {
   aws: buildCatalog(awsManifest as IconManifest),
   azure: buildCatalog(azureManifest as IconManifest),
   gcp: buildCatalog(gcpManifest as IconManifest),
+  saas: buildCatalog(saasManifest as IconManifest),
+  generic: buildCatalog(genericManifest as IconManifest),
 };
+
+/** multi モードの探索順序（generic は末尾＝first-wins で既存解決を不変に保つ） */
+const MULTI_PROVIDER_ORDER: BaseProvider[] = ["aws", "azure", "gcp", "saas", "generic"];
 
 /** AWS の "General" カテゴリリソース（汎用アイコン）をフォールバック用に保持 */
 const awsGeneralEntries: IconEntry[] = (awsManifest as IconManifest).resources.filter(
@@ -76,24 +83,39 @@ function lookupInGeneralPool(candidate: string): string | undefined {
 }
 
 /** プロバイダー別のプレフィックス候補リスト */
-const PROVIDER_PREFIXES: Record<Provider, string[]> = {
+const PROVIDER_PREFIXES: Record<BaseProvider, string[]> = {
   aws: ["amazon-", "aws-"],
   azure: ["azure-"],
   gcp: ["gcp-", "google-"],
+  saas: ["saas-"],
+  generic: ["generic-"],
 };
 
 /**
- * アイコンIDを正規IDに解決する。解決順:
- * 1. そのまま（manifestのid / alias）
+ * プレフィックスからプロバイダーを検出する（multi モードの委譲用）
+ * 正規化済み文字列を受け取り、対応する BaseProvider を返す。未検出は null。
+ */
+function detectProviderByPrefix(normalized: string): BaseProvider | null {
+  if (normalized.startsWith("azure-")) return "azure";
+  if (normalized.startsWith("gcp-") || normalized.startsWith("google-")) return "gcp";
+  if (normalized.startsWith("saas-")) return "saas";
+  if (normalized.startsWith("generic-")) return "generic";
+  if (normalized.startsWith("amazon-") || normalized.startsWith("aws-")) return "aws";
+  return null;
+}
+
+/**
+ * 単一プロバイダー内でアイコンIDを解決する（multi 以外用）。
+ * 解決順:
+ * 1. そのまま（id / alias）
  * 2. 小文字化・空白→ハイフン化して再試行
  * 3. プロバイダー別プレフィックスを付与して再試行
- *    （gcp: "google-" → "gcp-" への読み替えも試行）
  * 4. プレフィックスを剥がして再試行
  * 5. id・name への部分一致（最初の候補）
- * 6. [azure/gcp のみ] AWS General カテゴリへのフォールバック
+ * 6. AWS General カテゴリへのフォールバック
  * 解決できなければ null を返す。
  */
-export function resolveIconId(icon: string, provider: Provider = "aws"): string | null {
+function resolveInSingleProvider(icon: string, provider: BaseProvider): string | null {
   const catalog = CATALOGS[provider];
   const prefixes = PROVIDER_PREFIXES[provider];
 
@@ -135,7 +157,7 @@ export function resolveIconId(icon: string, provider: Provider = "aws"): string 
     catalog.entries.find((e) => e.name.toLowerCase().includes(normalized));
   if (partial) return partial.id;
 
-  // 6. AWS General カテゴリへのフォールバック（azure / gcp のみ、自プロバイダーで未解決の場合）
+  // 6. AWS General カテゴリへのフォールバック（aws 以外のみ、自プロバイダーで未解決の場合）
   if (provider !== "aws") {
     const generalHit = lookupInGeneralPool(normalized);
     if (generalHit) return generalHit;
@@ -148,11 +170,116 @@ export function resolveIconId(icon: string, provider: Provider = "aws"): string 
   return null;
 }
 
+/**
+ * multi モードでアイコンIDを解決する。解決順:
+ * 1. プレフィックス検出による委譲（azure- → azure のみ、など）
+ * 2. 完全一致フェーズ（全カタログ横断、MULTI_PROVIDER_ORDER 順）
+ * 3. 部分一致フェーズ（MULTI_PROVIDER_ORDER 順）
+ * 4. AWS General フォールバック
+ */
+function resolveInMulti(icon: string): string | null {
+  const normalized = icon.trim().toLowerCase().replace(/[\s_]+/g, "-");
+
+  // 1. プレフィックス検出による委譲
+  const detectedProvider = detectProviderByPrefix(normalized);
+  if (detectedProvider !== null) {
+    return resolveInSingleProvider(icon, detectedProvider);
+  }
+
+  // 2. 完全一致フェーズ（全カタログ横断、部分一致より先に全カタログをスキャン）
+  for (const provider of MULTI_PROVIDER_ORDER) {
+    const catalog = CATALOGS[provider];
+    // 直接一致
+    const direct = lookupExact(normalized, catalog);
+    if (direct) return direct;
+    // 元の文字列でも試行（大文字小文字等）
+    const directOrig = lookupExact(icon, catalog);
+    if (directOrig) return directOrig;
+    // プレフィックス付与一致
+    for (const prefix of PROVIDER_PREFIXES[provider]) {
+      if (!normalized.startsWith(prefix)) {
+        const prefixed = lookupExact(prefix + normalized, catalog);
+        if (prefixed) return prefixed;
+      }
+    }
+    // プレフィックス除去一致
+    for (const prefix of PROVIDER_PREFIXES[provider]) {
+      if (normalized.startsWith(prefix)) {
+        const stripped = normalized.slice(prefix.length);
+        const hit = lookupExact(stripped, catalog);
+        if (hit) return hit;
+      }
+    }
+    // GCP 限定: "google-" → "gcp-" 読み替え
+    if (provider === "gcp" && normalized.startsWith("google-")) {
+      const replaced = "gcp-" + normalized.slice("google-".length);
+      const hit = lookupExact(replaced, catalog);
+      if (hit) return hit;
+    }
+  }
+
+  // 3. 部分一致フェーズ（MULTI_PROVIDER_ORDER 順）
+  for (const provider of MULTI_PROVIDER_ORDER) {
+    const catalog = CATALOGS[provider];
+    const partial =
+      catalog.entries.find((e) => e.id.includes(normalized)) ??
+      catalog.entries.find((e) => e.name.toLowerCase().includes(normalized));
+    if (partial) return partial.id;
+  }
+
+  // 4. AWS General フォールバック
+  const generalHit = lookupInGeneralPool(normalized);
+  if (generalHit) return generalHit;
+  const generalPartial =
+    awsGeneralEntries.find((e) => e.id.includes(normalized)) ??
+    awsGeneralEntries.find((e) => e.name.toLowerCase().includes(normalized));
+  if (generalPartial) return generalPartial.id;
+
+  return null;
+}
+
+/**
+ * アイコンIDを正規IDに解決する。
+ * provider が "multi" の場合は resolveInMulti を使用。
+ * それ以外は resolveInSingleProvider を使用。
+ */
+export function resolveIconId(icon: string, provider: Provider = "aws"): string | null {
+  if (provider === "multi") {
+    return resolveInMulti(icon);
+  }
+  return resolveInSingleProvider(icon, provider);
+}
+
 export interface IconSearchResult {
   id: string;
   name: string;
   category: string;
 }
+
+// ---- multi モード用マージドカタログ（alias は先勝ちマージ） ----
+function buildMultiCatalog(): ProviderCatalog {
+  const entries: IconEntry[] = [];
+  const entryById = new Map<string, IconEntry>();
+  const aliasTable = new Map<string, string>();
+
+  for (const provider of MULTI_PROVIDER_ORDER) {
+    const cat = CATALOGS[provider];
+    for (const e of cat.entries) {
+      if (!entryById.has(e.id)) {
+        entries.push(e);
+        entryById.set(e.id, e);
+      }
+    }
+    for (const [alias, id] of cat.aliasTable) {
+      if (!aliasTable.has(alias)) {
+        aliasTable.set(alias, id);
+      }
+    }
+  }
+  return { entries, entryById, aliasTable, aliasCount: aliasTable.size };
+}
+
+const MULTI_CATALOG: ProviderCatalog = buildMultiCatalog();
 
 /** 大文字小文字無視の部分一致でアイコンを検索する（最大 limit 件） */
 export function searchIcons(
@@ -161,7 +288,7 @@ export function searchIcons(
   limit = 50,
   provider: Provider = "aws",
 ): IconSearchResult[] {
-  const catalog = CATALOGS[provider];
+  const catalog = provider === "multi" ? MULTI_CATALOG : CATALOGS[provider];
   let entries = catalog.entries;
 
   if (category) {
@@ -192,7 +319,7 @@ export function searchIcons(
 export function categorySummary(
   provider: Provider = "aws",
 ): { category: string; count: number }[] {
-  const catalog = CATALOGS[provider];
+  const catalog = provider === "multi" ? MULTI_CATALOG : CATALOGS[provider];
   const counts = new Map<string, number>();
   for (const e of catalog.entries) {
     counts.set(e.category, (counts.get(e.category) ?? 0) + 1);

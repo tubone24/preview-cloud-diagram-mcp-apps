@@ -81,4 +81,45 @@ describe("render_sequence", () => {
     const warnings = warningsOf(result);
     expect(warnings.some((w) => w.includes("end"))).toBe(true);
   });
+
+  // ---- SaaS / Multi プロバイダー対応テスト ----
+
+  it("provider:multi で participants のアイコン混在が全て解決され警告ゼロ", async () => {
+    const { statusCode, result } = await callTool(handler, "render_sequence", {
+      provider: "multi",
+      participants: [
+        { id: "user", icon: "user" },
+        { id: "lambda", icon: "aws-lambda" },
+        { id: "fn", icon: "azure-functions" },
+        { id: "vercel", icon: "saas-vercel" },
+      ],
+      events: [
+        { type: "message", from: "user", to: "lambda", label: "invoke", kind: "sync" },
+        { type: "message", from: "lambda", to: "fn", label: "call", kind: "async" },
+        { type: "message", from: "fn", to: "vercel", label: "deploy", kind: "async" },
+      ],
+    });
+
+    expect(statusCode).toBe(200);
+    expect(result.structuredContent.kind).toBe("sequence");
+    expect(warningsOf(result)).toEqual([]);
+  });
+
+  it("provider:saas で alias supabase が解決され警告ゼロ", async () => {
+    const { result } = await callTool(handler, "render_sequence", {
+      provider: "saas",
+      participants: [
+        { id: "client", icon: "user" },
+        { id: "db", icon: "supabase" },
+      ],
+      events: [
+        { type: "message", from: "client", to: "db", label: "query", kind: "sync" },
+      ],
+    });
+
+    expect(warningsOf(result)).toEqual([]);
+    const participants = result.structuredContent.spec.participants;
+    const dbParticipant = participants.find((p: { id: string }) => p.id === "db");
+    expect(dbParticipant.icon).toBe("saas-supabase");
+  });
 });

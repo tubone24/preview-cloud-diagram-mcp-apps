@@ -1,0 +1,223 @@
+{
+  "services": [
+    {
+      "id": "saas-vercel",
+      "name": "Vercel",
+      "category": "Hosting & Edge",
+      "color": "#000000"
+    },
+    {
+      "id": "saas-netlify",
+      "name": "Netlify",
+      "category": "Hosting & Edge",
+      "color": "#00C7B7"
+    },
+    {
+      "id": "saas-cloudflare",
+      "name": "Cloudflare",
+      "category": "Hosting & Edge",
+      "color": "#F38020"
+    },
+    {
+      "id": "saas-cloudflare-workers",
+      "name": "Cloudflare Workers",
+      "category": "Hosting & Edge",
+      "color": "#F38020"
+    },
+    {
+      "id": "saas-render",
+      "name": "Render",
+      "category": "Hosting & Edge",
+      "color": "#000000"
+    },
+    {
+      "id": "saas-flyio",
+      "name": "Fly.io",
+      "category": "Hosting & Edge",
+      "color": "#24175B"
+    },
+    {
+      "id": "saas-heroku",
+      "name": "Heroku",
+      "category": "Hosting & Edge",
+      "color": "#430098"
+    },
+    {
+      "id": "saas-supabase",
+      "name": "Supabase",
+      "category": "BaaS / mBaaS",
+      "color": "#3FCF8E"
+    },
+    {
+      "id": "saas-firebase",
+      "name": "Firebase",
+      "category": "BaaS / mBaaS",
+      "color": "#DD2C00"
+    },
+    {
+      "id": "saas-appwrite",
+      "name": "Appwrite",
+      "category": "BaaS / mBaaS",
+      "color": "#FD366E"
+    },
+    {
+      "id": "saas-planetscale",
+      "name": "PlanetScale",
+      "category": "Database",
+      "color": "#000000"
+    },
+    {
+      "id": "saas-upstash",
+      "name": "Upstash",
+      "category": "Database",
+      "color": "#00E9A3"
+    },
+    {
+      "id": "saas-mongodb",
+      "name": "MongoDB",
+      "category": "Database",
+      "color": "#47A248"
+    },
+    {
+      "id": "saas-redis",
+      "name": "Redis",
+      "category": "Database",
+      "color": "#FF4438"
+    },
+    {
+      "id": "saas-auth0",
+      "name": "Auth0",
+      "category": "Auth & Identity",
+      "color": "#EB5424"
+    },
+    {
+      "id": "saas-okta",
+      "name": "Okta",
+      "category": "Auth & Identity",
+      "color": "#007DC1"
+    },
+    {
+      "id": "saas-clerk",
+      "name": "Clerk",
+      "category": "Auth & Identity",
+      "color": "#6C47FF"
+    },
+    {
+      "id": "saas-stripe",
+      "name": "Stripe",
+      "category": "Payments",
+      "color": "#635BFF"
+    },
+    {
+      "id": "saas-twilio",
+      "name": "Twilio",
+      "category": "Messaging",
+      "color": "#F22F46"
+    },
+    {
+      "id": "saas-slack",
+      "name": "Slack",
+      "category": "Messaging",
+      "color": "#4A154B"
+    },
+    {
+      "id": "saas-datadog",
+      "name": "Datadog",
+      "category": "Observability",
+      "color": "#632CA6"
+    },
+    {
+      "id": "saas-sentry",
+      "name": "Sentry",
+      "category": "Observability",
+      "color": "#362D59"
+    },
+    {
+      "id": "saas-github",
+      "name": "GitHub",
+      "category": "DevOps & CI/CD",
+      "color": "#181717"
+    },
+    {
+      "id": "saas-github-actions",
+      "name": "GitHub Actions",
+      "category": "DevOps & CI/CD",
+      "color": "#2088FF"
+    },
+    {
+      "id": "saas-gitlab",
+      "name": "GitLab",
+      "category": "DevOps & CI/CD",
+      "color": "#FC6D26"
+    },
+    {
+      "id": "saas-docker",
+      "name": "Docker",
+      "category": "DevOps & CI/CD",
+      "color": "#2496ED"
+    },
+    {
+      "id": "saas-kubernetes",
+      "name": "Kubernetes",
+      "category": "DevOps & CI/CD",
+      "color": "#326CE5"
+    },
+    {
+      "id": "saas-terraform",
+      "name": "Terraform",
+      "category": "DevOps & CI/CD",
+      "color": "#844FBA"
+    },
+    {
+      "id": "saas-openai",
+      "name": "OpenAI",
+      "category": "AI",
+      "color": "#412991"
+    },
+    {
+      "id": "saas-anthropic",
+      "name": "Anthropic",
+      "category": "AI",
+      "color": "#191919"
+    }
+  ],
+  "resources": [],
+  "groups": [],
+  "aliases": {
+    "vercel": "saas-vercel",
+    "netlify": "saas-netlify",
+    "cloudflare": "saas-cloudflare",
+    "workers": "saas-cloudflare-workers",
+    "cf-workers": "saas-cloudflare-workers",
+    "render": "saas-render",
+    "fly": "saas-flyio",
+    "flyio": "saas-flyio",
+    "heroku": "saas-heroku",
+    "supabase": "saas-supabase",
+    "appwrite": "saas-appwrite",
+    "planetscale": "saas-planetscale",
+    "upstash": "saas-upstash",
+    "mongodb": "saas-mongodb",
+    "mongo": "saas-mongodb",
+    "redis": "saas-redis",
+    "auth0": "saas-auth0",
+    "okta": "saas-okta",
+    "clerk": "saas-clerk",
+    "stripe": "saas-stripe",
+    "twilio": "saas-twilio",
+    "slack": "saas-slack",
+    "datadog": "saas-datadog",
+    "sentry": "saas-sentry",
+    "github": "saas-github",
+    "github-actions": "saas-github-actions",
+    "gha": "saas-github-actions",
+    "gitlab": "saas-gitlab",
+    "docker": "saas-docker",
+    "kubernetes": "saas-kubernetes",
+    "k8s": "saas-kubernetes",
+    "terraform": "saas-terraform",
+    "openai": "saas-openai",
+    "anthropic": "saas-anthropic",
+    "claude": "saas-anthropic"
+  }
+}

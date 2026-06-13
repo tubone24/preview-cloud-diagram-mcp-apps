@@ -34,6 +34,9 @@ const LEGEND_LINE_H = 20;
 
 const FONT_LABEL = "12px Arial, sans-serif";
 const FONT_NAME = "11px Arial, sans-serif";
+const C4_LABEL_MAX_W = 140;
+const FONT_LABEL_BOLD = "bold 12px Arial, sans-serif";
+const FONT_DESC = "11px Arial, sans-serif";
 
 // 同種グループ同士のエッジ（例: AZ間レプリケーション、サブネット間通信）は
 // 並列構造とみなし、列の前後関係の制約にしない（縦に揃えて積む）
@@ -117,6 +120,12 @@ export interface NodeLayout {
   labelLines: string[];
   /** リソース固有名（グレー小文字）。なければ null */
   nameText: string | null;
+  /** C4 tech label (e.g. "[Spring Boot]"). null if not C4 */
+  techText: string | null;
+  /** C4 description lines. Empty array if not C4 */
+  descLines: string[];
+  /** Whether this node uses C4 3-layer rendering */
+  c4: boolean;
   /** 番号コールアウト */
   step: number | null;
 }
@@ -150,6 +159,7 @@ export interface EdgeLayout {
   step: number | null;
   labelX: number;
   labelY: number;
+  style: "solid" | "dashed";
 }
 
 export interface LegendLayout {
@@ -188,6 +198,9 @@ interface NodeItem extends BaseItem {
   icon: ResolvedIcon;
   labelLines: string[];
   nameText: string | null;
+  techText: string | null;
+  descLines: string[];
+  c4: boolean;
 }
 interface GroupItem extends BaseItem {
   type: "group";
@@ -242,13 +255,25 @@ export function layoutDiagram(
     };
     if (el.type === "node") {
       const icon = resolveIcon(el.icon, provider);
+      const c4 = !!(el.tech || el.description);
+      const labelLines = c4
+        ? wrapLabel(el.name ?? icon.name, C4_LABEL_MAX_W, FONT_LABEL_BOLD)
+        : wrapLabel(icon.name, NODE_LABEL_MAX_W, FONT_LABEL);
+      const techText = c4 && el.tech ? ellipsize("[" + el.tech + "]", C4_LABEL_MAX_W, FONT_DESC) : null;
+      const descLines = c4 && el.description
+        ? wrapLabel(el.description, C4_LABEL_MAX_W, FONT_DESC, 4)
+        : [];
+      const nameText = c4 ? null : (el.name ? ellipsize(el.name, NODE_LABEL_MAX_W, FONT_NAME) : null);
       itemById.set(el.id, {
         ...base,
         type: "node",
         el,
         icon,
-        labelLines: wrapLabel(icon.name, NODE_LABEL_MAX_W, FONT_LABEL),
-        nameText: el.name ? ellipsize(el.name, NODE_LABEL_MAX_W, FONT_NAME) : null,
+        labelLines,
+        nameText,
+        techText,
+        descLines,
+        c4,
       });
     } else if (el.type === "group") {
       itemById.set(el.id, { ...base, type: "group", el, children: [], depth: 0 });
@@ -454,15 +479,22 @@ export function layoutDiagram(
 
   function sizeItem(item: Item): void {
     if (item.type === "node") {
+      const labelFont = item.c4 ? FONT_LABEL_BOLD : FONT_LABEL;
       const widths = [
         NODE_MIN_W,
         ICON_SIZE,
-        ...item.labelLines.map((l) => textWidth(l, FONT_LABEL) + 8),
+        ...item.labelLines.map((l) => textWidth(l, labelFont) + 8),
       ];
+      if (item.techText) widths.push(textWidth(item.techText, FONT_DESC) + 8);
+      for (const dl of item.descLines) widths.push(textWidth(dl, FONT_DESC) + 8);
       if (item.nameText) widths.push(textWidth(item.nameText, FONT_NAME) + 8);
       item.w = Math.ceil(Math.max(...widths));
       item.h =
-        ICON_SIZE + 6 + item.labelLines.length * LINE_H + (item.nameText ? LINE_H : 0);
+        ICON_SIZE + 6 +
+        item.labelLines.length * LINE_H +
+        (item.techText ? LINE_H : 0) +
+        (item.descLines.length > 0 ? item.descLines.length * LINE_H + 4 : 0) +
+        (item.nameText ? LINE_H : 0);
       return;
     }
     if (item.type === "note") {
@@ -1021,6 +1053,7 @@ export function layoutDiagram(
       step,
       labelX,
       labelY,
+      style: e.style ?? "solid",
     });
   }
 
@@ -1046,6 +1079,9 @@ export function layoutDiagram(
         icon: item.icon,
         labelLines: item.labelLines,
         nameText: item.nameText,
+        techText: item.techText,
+        descLines: item.descLines,
+        c4: item.c4,
         step:
           typeof item.el.step === "number" && item.el.step >= 1
             ? Math.floor(item.el.step)
